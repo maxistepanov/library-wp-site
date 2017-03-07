@@ -1,0 +1,23 @@
+{
+  "name": "library",
+  "homepage": "https://github.com/maxistepanov/library",
+  "authors": [
+    "Maksym Stepanov <stepanovonline@gmail.com>"
+  ],
+  "description": "new library site",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.0.0",
+    "opn": "^4.0.2"
+  }
+}

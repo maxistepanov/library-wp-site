@@ -1,0 +1,1024 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: GeneratePress v1.3.40\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-11-25 00:17:14+0000\n"
+"Last-Translator: lib_admin <stepanovonline@gmaill.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%100/10==1 ? 2 : n%10==1 ? 0 : (n+9)%10>3 ? 2 : 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Ukrainian\n"
+"X-Poedit-Country: UKRAINE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: 404.php:20
+#@ generatepress
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: 404.php:25
+#@ generatepress
+msgid "It looks like nothing was found at this location. Maybe try searching?"
+msgstr ""
+
+#: comments.php:32
+#, php-format
+#@ generatepress
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: comments.php:41
+#: comments.php:63
+#@ generatepress
+msgid "Comment navigation"
+msgstr ""
+
+#: comments.php:42
+#: comments.php:64
+#@ generatepress
+msgid "&larr; Older Comments"
+msgstr ""
+
+#: comments.php:43
+#: comments.php:65
+#@ generatepress
+msgid "Newer Comments &rarr;"
+msgstr ""
+
+#: comments.php:75
+#@ generatepress
+msgid "Comments are closed."
+msgstr ""
+
+#: comments.php:80
+#@ generatepress
+msgid "Name"
+msgstr ""
+
+#: comments.php:81
+#@ generatepress
+msgid "Email"
+msgstr ""
+
+#: comments.php:82
+#@ generatepress
+msgid "Website"
+msgstr ""
+
+#: comments.php:87
+#, php-format
+#@ generatepress
+msgid "You must be <a href=\"%1$s\">logged in</a> to post a comment."
+msgstr ""
+
+#: comments.php:88
+#, php-format
+#@ generatepress
+msgid "Logged in as <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" class=\"comment-logout\" title=\"Log out of this account\">Log out?</a>"
+msgstr ""
+
+#: comments.php:93
+#@ generatepress
+msgid "Leave a Comment"
+msgstr ""
+
+#: comments.php:94
+#, php-format
+#@ generatepress
+msgid "Leave a Reply to %s"
+msgstr ""
+
+#: comments.php:95
+#@ generatepress
+msgid "Cancel reply"
+msgstr ""
+
+#: comments.php:96
+#@ generatepress
+msgid "Post Comment"
+msgstr ""
+
+#: content-link.php:29
+#: content-page.php:27
+#: content-single.php:27
+#: content.php:28
+#@ generatepress
+msgid "Pages:"
+msgstr ""
+
+#: footer.php:40
+#: functions.php:272
+#@ generatepress
+msgid "Footer Widget 1"
+msgstr ""
+
+#: footer.php:42
+#: footer.php:56
+#: footer.php:70
+#: footer.php:84
+#: footer.php:98
+#, php-format
+#@ generatepress
+msgid "Replace this widget content by going to <a href=\"%1$s\"><strong>Appearance / Widgets</strong></a> and dragging widgets into this widget area."
+msgstr ""
+
+#: footer.php:43
+#: footer.php:57
+#: footer.php:71
+#: footer.php:85
+#: footer.php:99
+#, php-format
+#@ generatepress
+msgid "To remove or choose the number of footer widgets, go to <a href=\"%1$s\"><strong>Appearance / Customize / Layout / Footer Widgets</strong></a>."
+msgstr ""
+
+#: footer.php:54
+#: functions.php:275
+#@ generatepress
+msgid "Footer Widget 2"
+msgstr ""
+
+#: footer.php:68
+#: functions.php:278
+#@ generatepress
+msgid "Footer Widget 3"
+msgstr ""
+
+#: footer.php:82
+#: functions.php:281
+#@ generatepress
+msgid "Footer Widget 4"
+msgstr ""
+
+#: footer.php:96
+#: functions.php:284
+#@ generatepress
+msgid "Footer Widget 5"
+msgstr ""
+
+#: functions.php:146
+#@ generatepress
+msgid "Primary Menu"
+msgstr ""
+
+#: functions.php:263
+#: inc/customizer.php:397
+#: inc/metaboxes.php:56
+#@ generatepress
+msgid "Right Sidebar"
+msgstr ""
+
+#: functions.php:266
+#: inc/customizer.php:396
+#: inc/metaboxes.php:60
+#@ generatepress
+msgid "Left Sidebar"
+msgstr ""
+
+#: functions.php:269
+#: inc/customizer.php:274
+#@ generatepress
+msgid "Header"
+msgstr ""
+
+#: functions.php:554
+#@ generatepress
+msgid "Бібліотека «ХНЕУ»"
+msgstr "  "
+
+#: header.php:28
+#@ generatepress
+msgid "Skip to content"
+msgstr ""
+
+#: inc/add-ons/controls.php:28
+#@ generatepress
+msgid "Default fonts"
+msgstr ""
+
+#: inc/add-ons/controls.php:29
+#@ generatepress
+msgid "Google fonts"
+msgstr ""
+
+#: inc/add-ons/controls.php:30
+#@ generatepress
+msgid "Font family"
+msgstr ""
+
+#: inc/add-ons/disable-elements.php:62
+#@ generatepress
+msgid "Disable Elements"
+msgstr ""
+
+#: inc/add-ons/disable-elements.php:85
+#: inc/add-ons/disable-elements.php:87
+#@ generatepress
+msgid "Content Title"
+msgstr ""
+
+#: inc/add-ons/disable-elements.php:91
+#: inc/controls.php:93
+#@ generatepress
+msgid "Add-on available"
+msgstr ""
+
+#: inc/add-ons/typography.php:354
+#@ generatepress
+msgid "Typography"
+msgstr ""
+
+#: inc/add-ons/typography.php:376
+#: inc/customizer.php:124
+#@ generatepress
+msgid "Body"
+msgstr ""
+
+#: inc/add-ons/typography.php:440
+#@ generatepress
+msgid "Font weight"
+msgstr ""
+
+#: inc/add-ons/typography.php:478
+#@ generatepress
+msgid "Text transform"
+msgstr ""
+
+#: inc/add-ons/typography.php:508
+#@ generatepress
+msgid "Font size"
+msgstr ""
+
+#: inc/add-ons/typography.php:526
+#: inc/customizer.php:206
+#: inc/customizer.php:755
+#@ generatepress
+msgid "More Settings"
+msgstr ""
+
+#: inc/add-ons/typography.php:529
+#, php-format
+#@ generatepress
+msgid "Looking to add more typography settings?<br /> %s."
+msgstr ""
+
+#: inc/add-ons/typography.php:533
+#@ generatepress
+msgid "Check out Generate Typography"
+msgstr ""
+
+#: inc/customizer.php:47
+#@ generatepress
+msgid "Add-ons Available! Take a look"
+msgstr ""
+
+#: inc/customizer.php:71
+#@ generatepress
+msgid "Hide site title"
+msgstr ""
+
+#: inc/customizer.php:90
+#@ generatepress
+msgid "Hide site tagline"
+msgstr ""
+
+#: inc/customizer.php:112
+#@ generatepress
+msgid "Logo"
+msgstr ""
+
+#: inc/customizer.php:134
+#@ generatepress
+msgid "Colors"
+msgstr ""
+
+#: inc/customizer.php:146
+#@ generatepress
+msgid "Background Color"
+msgstr ""
+
+#: inc/customizer.php:152
+#@ generatepress
+msgid "Text Color"
+msgstr ""
+
+#: inc/customizer.php:158
+#@ generatepress
+msgid "Link Color"
+msgstr ""
+
+#: inc/customizer.php:164
+#@ generatepress
+msgid "Link Color Hover"
+msgstr ""
+
+#: inc/customizer.php:170
+#@ generatepress
+msgid "Link Color Visited"
+msgstr ""
+
+#: inc/customizer.php:209
+#, php-format
+#@ generatepress
+msgid "Looking to add more color settings?<br /> %s."
+msgstr ""
+
+#: inc/customizer.php:213
+#@ generatepress
+msgid "Check out Generate Colors"
+msgstr ""
+
+#: inc/customizer.php:228
+#@ generatepress
+msgid "Layout"
+msgstr ""
+
+#: inc/customizer.php:238
+#@ generatepress
+msgid "Container"
+msgstr ""
+
+#: inc/customizer.php:261
+#@ generatepress
+msgid "Container Width"
+msgstr ""
+
+#: inc/customizer.php:297
+#@ generatepress
+msgid "Header Width"
+msgstr ""
+
+#: inc/customizer.php:300
+#: inc/customizer.php:365
+#: inc/customizer.php:645
+#@ generatepress
+msgid "Full"
+msgstr ""
+
+#: inc/customizer.php:301
+#: inc/customizer.php:366
+#: inc/customizer.php:646
+#@ generatepress
+msgid "Contained"
+msgstr ""
+
+#: inc/customizer.php:324
+#@ generatepress
+msgid "Header Alignment"
+msgstr ""
+
+#: inc/customizer.php:327
+#: inc/customizer.php:424
+#@ generatepress
+msgid "Left"
+msgstr ""
+
+#: inc/customizer.php:328
+#: inc/customizer.php:425
+#@ generatepress
+msgid "Center"
+msgstr ""
+
+#: inc/customizer.php:329
+#: inc/customizer.php:426
+#@ generatepress
+msgid "Right"
+msgstr ""
+
+#: inc/customizer.php:339
+#@ generatepress
+msgid "Primary Navigation"
+msgstr ""
+
+#: inc/customizer.php:362
+#@ generatepress
+msgid "Navigation Width"
+msgstr ""
+
+#: inc/customizer.php:389
+#@ generatepress
+msgid "Navigation Position"
+msgstr ""
+
+#: inc/customizer.php:392
+#@ generatepress
+msgid "Below Header"
+msgstr ""
+
+#: inc/customizer.php:393
+#@ generatepress
+msgid "Above Header"
+msgstr ""
+
+#: inc/customizer.php:394
+#@ generatepress
+msgid "Float Right"
+msgstr ""
+
+#: inc/customizer.php:395
+#@ generatepress
+msgid "Float Left"
+msgstr ""
+
+#: inc/customizer.php:398
+#@ generatepress
+msgid "No Navigation"
+msgstr ""
+
+#: inc/customizer.php:421
+#@ generatepress
+msgid "Navigation Alignment"
+msgstr ""
+
+#: inc/customizer.php:448
+#@ generatepress
+msgid "Navigation Dropdown"
+msgstr ""
+
+#: inc/customizer.php:451
+#@ generatepress
+msgid "Hover"
+msgstr ""
+
+#: inc/customizer.php:452
+#@ generatepress
+msgid "Click - Menu Item"
+msgstr ""
+
+#: inc/customizer.php:453
+#@ generatepress
+msgid "Click - Arrow"
+msgstr ""
+
+#: inc/customizer.php:475
+#@ generatepress
+msgid "Navigation Search"
+msgstr ""
+
+#: inc/customizer.php:478
+#: inc/customizer.php:701
+#@ generatepress
+msgid "Enabled"
+msgstr ""
+
+#: inc/customizer.php:479
+#: inc/customizer.php:702
+#@ generatepress
+msgid "Disabled"
+msgstr ""
+
+#: inc/customizer.php:502
+#@ generatepress
+msgid "Content Layout"
+msgstr ""
+
+#: inc/customizer.php:505
+#@ generatepress
+msgid "Separate Containers"
+msgstr ""
+
+#: inc/customizer.php:506
+#@ generatepress
+msgid "One Container"
+msgstr ""
+
+#: inc/customizer.php:516
+#@ generatepress
+msgid "Sidebars"
+msgstr ""
+
+#: inc/customizer.php:538
+#: inc/metaboxes.php:25
+#@ generatepress
+msgid "Sidebar Layout"
+msgstr ""
+
+#: inc/customizer.php:541
+#: inc/customizer.php:572
+#: inc/customizer.php:603
+#@ generatepress
+msgid "Sidebar / Content"
+msgstr ""
+
+#: inc/customizer.php:542
+#: inc/customizer.php:573
+#: inc/customizer.php:604
+#@ generatepress
+msgid "Content / Sidebar"
+msgstr ""
+
+#: inc/customizer.php:543
+#: inc/customizer.php:574
+#: inc/customizer.php:605
+#: inc/metaboxes.php:66
+#@ generatepress
+msgid "Content (no sidebars)"
+msgstr ""
+
+#: inc/customizer.php:544
+#: inc/customizer.php:575
+#: inc/customizer.php:606
+#@ generatepress
+msgid "Sidebar / Content / Sidebar"
+msgstr ""
+
+#: inc/customizer.php:545
+#: inc/customizer.php:576
+#: inc/customizer.php:607
+#@ generatepress
+msgid "Sidebar / Sidebar / Content"
+msgstr ""
+
+#: inc/customizer.php:546
+#: inc/customizer.php:577
+#: inc/customizer.php:608
+#@ generatepress
+msgid "Content / Sidebar / Sidebar"
+msgstr ""
+
+#: inc/customizer.php:569
+#@ generatepress
+msgid "Blog Sidebar Layout"
+msgstr ""
+
+#: inc/customizer.php:600
+#@ generatepress
+msgid "Single Post Sidebar Layout"
+msgstr ""
+
+#: inc/customizer.php:619
+#@ generatepress
+msgid "Footer"
+msgstr ""
+
+#: inc/customizer.php:642
+#@ generatepress
+msgid "Footer Width"
+msgstr ""
+
+#: inc/customizer.php:668
+#: inc/metaboxes.php:132
+#@ generatepress
+msgid "Footer Widgets"
+msgstr ""
+
+#: inc/customizer.php:698
+#@ generatepress
+msgid "Back to Top Button"
+msgstr ""
+
+#: inc/customizer.php:713
+#@ generatepress
+msgid "Blog"
+msgstr ""
+
+#: inc/customizer.php:735
+#@ generatepress
+msgid "Blog Post Content"
+msgstr ""
+
+#: inc/customizer.php:738
+#@ generatepress
+msgid "Show full post"
+msgstr ""
+
+#: inc/customizer.php:739
+#@ generatepress
+msgid "Show excerpt"
+msgstr ""
+
+#: inc/customizer.php:758
+#, php-format
+#@ generatepress
+msgid "Looking to add more blog settings?<br /> %s."
+msgstr ""
+
+#: inc/customizer.php:762
+#@ generatepress
+msgid "Check out Generate Blog"
+msgstr ""
+
+#: inc/customizer.php:791
+#@ generatepress
+msgid "Default"
+msgstr ""
+
+#: inc/metaboxes.php:54
+#@ generatepress
+msgid "Global Layout Settings"
+msgstr ""
+
+#: inc/metaboxes.php:58
+#: inc/metaboxes.php:62
+#: inc/metaboxes.php:70
+#: inc/metaboxes.php:74
+#: inc/metaboxes.php:78
+#@ generatepress
+msgid "Content"
+msgstr ""
+
+#: inc/metaboxes.php:58
+#: inc/metaboxes.php:62
+#: inc/metaboxes.php:70
+#: inc/metaboxes.php:74
+#: inc/metaboxes.php:78
+#@ generatepress
+msgid "Sidebar"
+msgstr ""
+
+#: inc/metaboxes.php:64
+#@ generatepress
+msgid "No Sidebars"
+msgstr ""
+
+#: inc/metaboxes.php:68
+#@ generatepress
+msgid "Both Sidebars"
+msgstr ""
+
+#: inc/metaboxes.php:72
+#@ generatepress
+msgid "Both Sidebars on Left"
+msgstr ""
+
+#: inc/metaboxes.php:76
+#@ generatepress
+msgid "Both Sidebars on Right"
+msgstr ""
+
+#: inc/metaboxes.php:159
+#@ generatepress
+msgid "Global Footer Widget Settings"
+msgstr ""
+
+#: inc/metaboxes.php:161
+#: inc/metaboxes.php:163
+#@ generatepress
+msgid "0 Widgets"
+msgstr ""
+
+#: inc/metaboxes.php:165
+#: inc/metaboxes.php:167
+#@ generatepress
+msgid "1 Widget"
+msgstr ""
+
+#: inc/metaboxes.php:169
+#: inc/metaboxes.php:171
+#@ generatepress
+msgid "2 Widgets"
+msgstr ""
+
+#: inc/metaboxes.php:173
+#: inc/metaboxes.php:175
+#@ generatepress
+msgid "3 Widgets"
+msgstr ""
+
+#: inc/metaboxes.php:177
+#: inc/metaboxes.php:179
+#@ generatepress
+msgid "4 Widgets"
+msgstr ""
+
+#: inc/metaboxes.php:181
+#: inc/metaboxes.php:183
+#@ generatepress
+msgid "5 Widgets"
+msgstr ""
+
+#: inc/metaboxes.php:237
+#@ generatepress
+msgid "Page Builder Integration"
+msgstr ""
+
+#: inc/metaboxes.php:263
+#@ generatepress
+msgid "Full Width Content"
+msgstr ""
+
+#: inc/navigation.php:108
+#@ generatepress
+msgid "Menu"
+msgstr ""
+
+#: inc/navigation.php:154
+#: inc/template-tags.php:403
+#: inc/template-tags.php:432
+#: inc/template-tags.php:435
+#: searchform.php:16
+#@ generatepress
+msgctxt "submit button"
+msgid "Search"
+msgstr ""
+
+#: inc/options.php:65
+#: inc/options.php:121
+#@ generatepress
+msgid "Customize"
+msgstr ""
+
+#: inc/options.php:71
+#, php-format
+#@ generatepress
+msgctxt "made with love"
+msgid "Made with %s by Tom Usborne"
+msgstr ""
+
+#: inc/options.php:75
+#: inc/options.php:125
+#@ generatepress
+msgid "Add-ons"
+msgstr ""
+
+#: inc/options.php:77
+#@ generatepress
+msgid "Support"
+msgstr ""
+
+#: inc/options.php:78
+#@ generatepress
+msgid "Knowledgebase"
+msgstr ""
+
+#: inc/options.php:79
+#@ generatepress
+msgid "Please help support the ongoing development of GeneratePress by buying me a coffee :)"
+msgstr ""
+
+#: inc/options.php:79
+#@ generatepress
+msgid "Buy me a coffee :)"
+msgstr ""
+
+#: inc/options.php:87
+#@ generatepress
+msgid "Add-on Updates"
+msgstr ""
+
+#: inc/options.php:99
+#@ generatepress
+msgid "Delete Customizer Settings"
+msgstr ""
+
+#: inc/options.php:101
+#, php-format
+#@ generatepress
+msgid "<strong>Warning:</strong> Deleting your <a href=\"%1$s\">Customizer</a> settings can not be undone."
+msgstr ""
+
+#: inc/options.php:102
+#@ generatepress
+msgid "Consider using our Import/Export add-on to export your settings before deleting them."
+msgstr ""
+
+#: inc/options.php:107
+#@ generatepress
+msgid "Warning: This will delete your settings."
+msgstr ""
+
+#: inc/options.php:109
+#@ generatepress
+msgid "Delete Default Customizer Settings"
+msgstr ""
+
+#: inc/options.php:251
+#@ generatepress
+msgid "Settings saved."
+msgstr ""
+
+#: inc/options.php:255
+#@ generatepress
+msgid "Import successful."
+msgstr ""
+
+#: inc/options.php:259
+#@ generatepress
+msgid "Settings removed."
+msgstr ""
+
+#: inc/template-tags.php:45
+#@ generatepress
+msgid "&larr; Previous"
+msgstr ""
+
+#: inc/template-tags.php:46
+#@ generatepress
+msgid "Next &rarr;"
+msgstr ""
+
+#: inc/template-tags.php:83
+#@ generatepress
+msgid "Post navigation"
+msgstr ""
+
+#: inc/template-tags.php:87
+#: inc/template-tags.php:93
+#@ generatepress
+msgid "Previous"
+msgstr ""
+
+#: inc/template-tags.php:88
+#: inc/template-tags.php:97
+#@ generatepress
+msgid "Next"
+msgstr ""
+
+#: inc/template-tags.php:93
+#@ generatepress
+msgid "Older posts"
+msgstr ""
+
+#: inc/template-tags.php:97
+#@ generatepress
+msgid "Newer posts"
+msgstr ""
+
+#: inc/template-tags.php:124
+#@ generatepress
+msgid "Pingback:"
+msgstr ""
+
+#: inc/template-tags.php:124
+#: inc/template-tags.php:144
+#@ generatepress
+msgid "Edit"
+msgstr ""
+
+#: inc/template-tags.php:141
+#, php-format
+#@ generatepress
+msgctxt "1: date, 2: time"
+msgid "%1$s at %2$s"
+msgstr ""
+
+#: inc/template-tags.php:158
+#@ generatepress
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: inc/template-tags.php:206
+#@ generatepress
+msgid "by"
+msgstr ""
+
+#: inc/template-tags.php:208
+#, php-format
+#@ generatepress
+msgid "View all posts by %s"
+msgstr ""
+
+#: inc/template-tags.php:229
+#: inc/template-tags.php:237
+#@ generatepress
+msgctxt "Used between list items, there is a space after the comma."
+msgid ", "
+msgstr ""
+
+#: inc/template-tags.php:232
+#@ generatepress
+msgctxt "Used before category names."
+msgid "Categories"
+msgstr ""
+
+#: inc/template-tags.php:240
+#@ generatepress
+msgctxt "Used before tag names."
+msgid "Tags"
+msgstr ""
+
+#: inc/template-tags.php:247
+#@ generatepress
+msgid "Leave a comment"
+msgstr ""
+
+#: inc/template-tags.php:247
+#@ generatepress
+msgid "1 Comment"
+msgstr ""
+
+#: inc/template-tags.php:247
+#@ generatepress
+msgid "% Comments"
+msgstr ""
+
+#: inc/template-tags.php:259
+#: inc/template-tags.php:270
+#@ generatepress
+msgid "Read more"
+msgstr ""
+
+#: inc/template-tags.php:377
+#@ generatepress
+msgctxt "label"
+msgid "Search"
+msgstr ""
+
+#: inc/template-tags.php:692
+#@ generatepress
+msgid "Scroll back to top"
+msgstr ""
+
+#: inc/template-tags.php:731
+#, php-format
+#@ generatepress
+msgid "Day: %s"
+msgstr ""
+
+#: inc/template-tags.php:734
+#, php-format
+#@ generatepress
+msgid "Month: %s"
+msgstr ""
+
+#: inc/template-tags.php:737
+#, php-format
+#@ generatepress
+msgid "Year: %s"
+msgstr ""
+
+#: inc/template-tags.php:740
+#@ generatepress
+msgid "Asides"
+msgstr ""
+
+#: inc/template-tags.php:743
+#@ generatepress
+msgid "Images"
+msgstr ""
+
+#: inc/template-tags.php:746
+#@ generatepress
+msgid "Videos"
+msgstr ""
+
+#: inc/template-tags.php:749
+#@ generatepress
+msgid "Quotes"
+msgstr ""
+
+#: inc/template-tags.php:752
+#@ generatepress
+msgid "Links"
+msgstr ""
+
+#: inc/template-tags.php:755
+#: sidebar-left.php:40
+#: sidebar.php:39
+#@ generatepress
+msgid "Archives"
+msgstr ""
+
+#: no-results.php:18
+#@ generatepress
+msgid "Nothing Found"
+msgstr ""
+
+#: no-results.php:25
+#, php-format
+#@ generatepress
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: no-results.php:29
+#@ generatepress
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr ""
+
+#: no-results.php:34
+#@ generatepress
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr ""
+
+#: search.php:19
+#, php-format
+#@ generatepress
+msgid "Search Results for: %s"
+msgstr ""
+
+#: searchform.php:13
+#: searchform.php:14
+#@ generatepress
+msgctxt "label"
+msgid "Search for:"
+msgstr ""
+
+#: searchform.php:14
+#@ generatepress
+msgctxt "placeholder"
+msgid "Search &hellip;"
+msgstr ""
+

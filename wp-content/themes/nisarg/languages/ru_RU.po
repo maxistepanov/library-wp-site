@@ -1,0 +1,385 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Nisarg v10.2.6\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-07-01 20:07+0300\n"
+"Last-Translator: Игорь <dybabiz@ya.ru>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.8.8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"Language: ru\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ nisarg
+#: 404.php:16
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Ой! Это страница не может быть найдена."
+
+# @ nisarg
+#: 404.php:20
+msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgstr "Ничего не было найдено. Может попробовать одну из следующих ссылок или новый поиск?"
+
+# @ nisarg
+#: archive.php:19
+msgid "Browsed by"
+msgstr ""
+
+# @ nisarg
+#: comments.php:27
+#, php-format
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "Один комментарий для &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s комментариев для &ldquo;%2$s&rdquo;"
+
+# @ nisarg
+#: comments.php:47
+msgid "Comment navigation"
+msgstr "Навигация по комментариям"
+
+# @ nisarg
+#: comments.php:50
+msgid "Older Comments"
+msgstr "Старые комментарии"
+
+# @ nisarg
+#: comments.php:54
+msgid "Newer Comments"
+msgstr "Новые Комментарии"
+
+# @ nisarg
+#: comments.php:63 single.php:32
+msgid "Comments are closed."
+msgstr "Комментарии закрыты"
+
+# @ nisarg
+#: functions.php:58
+msgid "Top Primary Menu"
+msgstr "Топ первичного меню"
+
+# @ nisarg
+#: functions.php:122
+msgid "Sidebar"
+msgstr "Сайдбар"
+
+# @ nisarg
+#: functions.php:202 template-parts/content-aside.php:25
+#: template-parts/content-gallery.php:30 template-parts/content-link.php:29
+#: template-parts/content-quote.php:31 template-parts/content-status.php:20
+#: template-parts/content.php:40
+msgid " Read More"
+msgstr " Подробнее"
+
+# @ nisarg
+#: image.php:27
+#, php-format
+msgid "Published <span class=\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\" pubdate>%2$s</time></span> at <a href=\"%3$s\" title=\"Link to full-size image\">%4$s &times; %5$s</a> in <a href=\"%6$s\" title=\"Return to %7$s\" rel=\"gallery\">%7$s</a>"
+msgstr "Опубликовано <span class=\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\" pubdate>%2$s</time></span> - <a href=\"%3$s\" title=\"Link to full-size image\">%4$s &times; %5$s</a> - <a href=\"%6$s\" title=\"Return to %7$s\" rel=\"gallery\">%7$s</a>"
+
+# @ nisarg
+#: image.php:37 image.php:103 template-parts/content-page.php:33
+msgid "Edit"
+msgstr "Изменить"
+
+# @ nisarg
+#: image.php:41
+msgid "&larr; Previous"
+msgstr "&larr; Назад"
+
+# @ nisarg
+#: image.php:42
+msgid "Next &rarr;"
+msgstr "Вперед &rarr;"
+
+# @ nisarg
+#: image.php:89 template-parts/content-aside.php:28
+#: template-parts/content-gallery.php:33 template-parts/content-link.php:32
+#: template-parts/content-page.php:26 template-parts/content-quote.php:34
+#: template-parts/content-status.php:23 template-parts/content.php:45
+msgid "Pages:"
+msgstr "Страницы: "
+
+# @ nisarg
+#: image.php:95
+#, php-format
+msgid "<a class=\"comment-link\" href=\"#respond\" title=\"Post a comment\">Post a comment</a> or leave a trackback: <a class=\"trackback-link\" href=\"%s\" title=\"Trackback URL for your post\" rel=\"trackback\">Trackback URL</a>."
+msgstr "<a class=\"comment-link\" href=\"#respond\" title=\"Post a comment\">Добавить комментарий</a> или оставить trackback: <a class=\"trackback-link\" href=\"%s\" title=\"Trackback URL for your post\" rel=\"trackback\">Trackback URL</a>."
+
+# @ nisarg
+#: image.php:97
+#, php-format
+msgid "Comments are closed, but you can leave a trackback: <a class=\"trackback-link\" href=\"%s\" title=\"Trackback URL for your post\" rel=\"trackback\">Trackback URL</a>."
+msgstr "Комментарии закрыты, но вы можете оставить обратную ссылку: <a class=\"trackback-link\" href=\"%s\" title=\"Trackback URL for your post\" rel=\"trackback\">Адрес трекбек-ссылки</a>."
+
+# @ nisarg
+#: image.php:99
+msgid "Trackbacks are closed, but you can <a class=\"comment-link\" href=\"#respond\" title=\"Post a comment\">post a comment</a>."
+msgstr "Ссылки закрыты, но вы можете <a class=\"comment-link\" href=\"#respond\" title=\"Post a comment\">оставить комментарий</a>."
+
+# @ nisarg
+#: image.php:101
+msgid "Both comments and trackbacks are currently closed."
+msgstr "Комментарии и трекбек-ссылки закрыты."
+
+# @ nisarg
+#: inc/back-compat.php:28 inc/back-compat.php:37 inc/back-compat.php:49
+#, php-format
+msgid "Nisarg requires at least WordPress version 4.2. You are running version %s. Please upgrade and try again."
+msgstr ""
+
+# @ nisarg
+#: inc/custom-header.php:35 inc/custom-header.php:50
+msgctxt "header image description"
+msgid "food"
+msgstr ""
+
+# @ nisarg
+#: inc/custom-header.php:40
+msgctxt "header image description"
+msgid "buildings"
+msgstr ""
+
+# @ nisarg
+#: inc/custom-header.php:45
+msgctxt "header image description"
+msgid "Wood"
+msgstr "Дерево"
+
+# @ nisarg
+#: inc/customizer.php:32
+msgid "Header Background Color"
+msgstr "Цвет фона шапки"
+
+# @ nisarg
+#: inc/customizer.php:33
+msgid "Applied to header background."
+msgstr ""
+
+# @ nisarg
+#: inc/customizer.php:42 inc/customizer.php:71
+msgid "Accent Color"
+msgstr "Основной цвет"
+
+# @ nisarg
+#: inc/customizer.php:55
+msgid "Accent Color Name"
+msgstr ""
+
+# @ nisarg
+#: inc/customizer.php:72
+msgid "Applied to highlight elements."
+msgstr "Применяется для выделения элементов."
+
+# @ nisarg
+#: inc/customizer.php:81
+msgid "Post Options"
+msgstr "Настройки записи"
+
+# @ nisarg
+#: inc/customizer.php:93
+msgid "How would you like to dipaly a post on post listing page?"
+msgstr ""
+
+# @ nisarg
+#: inc/customizer.php:98
+msgid "Post excerpt"
+msgstr "Выдержка"
+
+# @ nisarg
+#: inc/customizer.php:99
+msgid "Full post"
+msgstr "Вся запись"
+
+# @ nisarg
+#: inc/customizer.php:114
+msgid "Default"
+msgstr "По умолчанию"
+
+# @ nisarg
+#: inc/customizer.php:120
+msgid "Pink"
+msgstr "Розовый"
+
+# @ nisarg
+#: inc/customizer.php:126
+msgid "Orange"
+msgstr "Оранжевая"
+
+# @ nisarg
+#: inc/customizer.php:132
+msgid "Green"
+msgstr "Зеленый"
+
+# @ nisarg
+#: inc/customizer.php:138
+msgid "Red"
+msgstr "Красный"
+
+# @ nisarg
+#: inc/customizer.php:144
+msgid "yellow"
+msgstr "желтый"
+
+# @ nisarg
+#: inc/customizer.php:150
+msgid "Blue"
+msgstr "Синий"
+
+# @ nisarg
+#: inc/template-tags.php:24
+msgid "Posts navigation"
+msgstr "Навигация по записям"
+
+# @ nisarg
+#: inc/template-tags.php:31
+msgid "NEWER POSTS"
+msgstr "НОВЫЕ ЗАПИСИ"
+
+# @ nisarg
+#: inc/template-tags.php:41
+msgid "OLDER POST"
+msgstr "СТАРЫЕ ЗАПИСИ"
+
+# @ nisarg
+#: inc/template-tags.php:71
+msgid "Post navigation"
+msgstr "Навигация по записи"
+
+# @ nisarg
+#: inc/template-tags.php:82
+msgid " NEXT"
+msgstr " Вперед"
+
+# @ nisarg
+#: inc/template-tags.php:82
+msgid "Next Post"
+msgstr "Следующая запись"
+
+# @ nisarg
+#: inc/template-tags.php:98
+msgid "PREVIOUS "
+msgstr "Назад"
+
+# @ nisarg
+#: inc/template-tags.php:99
+msgid "Previous Post"
+msgstr "Предыдущая запись"
+
+# @ nisarg
+#: inc/template-tags.php:121
+msgid "View all posts by"
+msgstr "Показать посты"
+
+# @ nisarg
+#: inc/template-tags.php:138
+msgctxt "Used before post author name."
+msgid "Comments"
+msgstr "Комментариев "
+
+# @ nisarg
+#: inc/template-tags.php:139
+msgid "0 Comment"
+msgstr "0 Комментариев"
+
+# @ nisarg
+#: inc/template-tags.php:139
+msgid "1 comment"
+msgstr "1 комментарий"
+
+# @ nisarg
+#: inc/template-tags.php:139
+msgid "% comments"
+msgstr "% комментариев"
+
+# @ nisarg
+#. translators: used between list items, there is a space after the comma
+#: inc/template-tags.php:157 inc/template-tags.php:168
+msgid ", "
+msgstr ""
+
+# @ nisarg
+#: inc/template-tags.php:161
+#, php-format
+msgid "%1$s"
+msgstr ""
+
+# @ nisarg
+#: inc/template-tags.php:170
+#, php-format
+msgid " %1$s"
+msgstr ""
+
+# @ nisarg
+#: inc/template-tags.php:177
+msgid "Edit This Post"
+msgstr "Редактировать запись"
+
+# @ nisarg
+#: search.php:16
+#, php-format
+msgid "Search Results for: %s"
+msgstr "Результат поиска: %s"
+
+# @ nisarg
+#: searchform.php:11 searchform.php:12
+msgctxt "label"
+msgid "Search for:"
+msgstr "Поиск для:"
+
+# @ nisarg
+#: searchform.php:12
+msgctxt "placeholder"
+msgid "Search &hellip;"
+msgstr "Искать &hellip;"
+
+# @ nisarg
+#: searchform.php:14
+msgctxt "submit button"
+msgid "Search"
+msgstr "Поиск"
+
+# @ nisarg
+#: sidebar.php:17
+msgid "Archives"
+msgstr "Архивы"
+
+# @ nisarg
+#: sidebar.php:24
+msgid "Meta"
+msgstr ""
+
+# @ nisarg
+#: template-parts/content-excerpt.php:14 template-parts/content.php:14
+msgid "Featured"
+msgstr "Избранное"
+
+# @ nisarg
+#: template-parts/content-none.php:13 template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr "Ничего не найдено"
+
+# @ nisarg
+#: template-parts/content-none.php:20
+#, php-format
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Готовы опубликовать свою первую запись? <a href=\"%1$s\">Начните здесь</a>."
+
+# @ nisarg
+#: template-parts/content-none.php:24
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "Извините, но по данным критериям поиска ничего не найдено. Пожалуйста, попробуйте другие слова."
+
+# @ nisarg
+#: template-parts/content-none.php:29
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Кажется, мы не можем найти то, что вы ищете. Возможно, поиск сможет помочь."
