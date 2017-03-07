@@ -1,7 +1,7 @@
 
 <?php
 /**
-	Template Name: Шаблон добавление вопросов
+	Template Name: Шаблон просмотров вопросов
  * The template for displaying all pages.
  *
  * This is the template that displays all pages by default.
@@ -45,17 +45,11 @@ get_header(); ?>
 					</header><!-- .entry-header -->
 				
 				<div class="entry-content" itemprop="text">
-<div id="wrapper-request-form">
-	<form  method="post" action="">
-				
-					Ім'я замовника. Сфера діяльності.: <br />
-					<input id="dname" name="dname" type="text" size="25" maxlength="30" /> <br />
-					Питання: <br />
-				<textarea id="dquestion" name="comment" cols="40" rows="3"></textarea></p>
-					 <br />
-					<br>
-					<input id="submit" type="submit"  value="Задати питання" />
-				</form>
+<div id="wrapper-question">
+	<div class="list-question">
+		
+	</div>
+	<div class="other-way"></div>
 </div>
 <!-- loader -->
 <div id="cssload-pgloading">

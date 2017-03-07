@@ -35,7 +35,7 @@
 							<div class="other-way">
 								<input style="margin:10px;" id="update" onClick="window.location.reload()" name="update" type="button" value="Задати нове питання" />
 								<br>
-								<a id="question-last-week" href="/?page_id=156">Список питань та відповідей за останній тиждень</a>
+								<a id="question-last-week" href="/last-week-quesions/">Список питань та відповідей за останній тиждень</a>
 							</div>
 
 

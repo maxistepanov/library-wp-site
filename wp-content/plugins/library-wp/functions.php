@@ -42,8 +42,8 @@ function hneu_scripts() {
 
 
 	
- // response after insert
-
+ // request last questions 
+//
 function my_action_javascript($content) { ?>
 	<script type="text/javascript" >
 	jQuery(document).ready(function($) {
@@ -69,7 +69,7 @@ function my_action_javascript($content) { ?>
 					$('.other-way').html(`
 						<input style="margin:10px;" id="update" onClick="window.location.reload()" name="update" type="button" value="Оновити" />
 						<br>
-						<a id="question-last-week" href="/?page_id=110">Задати нове питання</a>
+						<a id="question-last-week" href="/new_question/">Задати нове питання</a>
 						`);
 
 		 		},
