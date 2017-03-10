@@ -75,23 +75,25 @@
 					 "dnotat":dnotat
 					},
 				beforeSend: function(){
-					jQuery("#wrapper-request-form").fadeOut(300, function(){
+					jQuery("#wrapper-request-udk").fadeOut(300, function(){
 						jQuery("#cssload-pgloading").fadeIn();
+
 
 					});
 				},
 				success: function(data){
+					
 					jQuery("#cssload-pgloading").fadeOut(300, function(){
-						jQuery("#wrapper-request-form").fadeIn();
-						jQuery("#wrapper-request-form").html(`
+						jQuery("#wrapper-request-answer").fadeIn();
+						jQuery("#wrapper-request-answer").html(`
 							<div class="alert alert-success alert-dismissible">
 							 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 								<h2>Запит УДК відправлено успішно</h2>
 							</div>
 							<div class="other-way">
-								<input style="margin:10px;" id="update" onClick="window.location.reload()" name="update" type="button" value="Задати нове питання" />
+								<input style="margin:10px;" id="update" onClick="window.location.reload()" name="update" type="button" value="Створити новый запит УДК" />
 								<br>
-								<a id="question-last-week" href="/last-week-quesions/">Список УДК</a>
+								<a id="last-udk" href="/define-udk/">Список УДК</a>
 							</div>
 
 

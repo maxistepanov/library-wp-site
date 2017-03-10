@@ -51,12 +51,10 @@ function hneu_scripts() {
 function my_action_javascript($content) { ?>
 	<script type="text/javascript" >
 	jQuery(document).ready(function($) {
+		if($("div").is(".list-question")){ 
+				var data = {'action': 'last_week_question'};
 
-		var data = {
-			'action': 'last_week_question'
-		};
-
-		jQuery.ajax({
+				jQuery.ajax({
 		 		type: 'POST',
 		 		url: hneu.url, 
 		 		data,
@@ -82,7 +80,11 @@ function my_action_javascript($content) { ?>
 		 		}
 		 	});
 
+
+		}
 	});
+	
+
 	</script> 
 	<?php
 	return $content;
@@ -134,10 +136,7 @@ function my_action_javascript($content) { ?>
          $kod = $_POST['dkod'];
          $name = $_POST['dname'];
          $notat = $_POST['dnotat'];
-      
-        //$today = date("d/m/y"); 
          $blogtime = current_time( 'mysql' ); 
-         echo $blogtime;
         global $wpdb;
         $wpdb->insert( 
             'library_udk', 
@@ -170,5 +169,126 @@ function my_action_javascript($content) { ?>
 
 
 
+// request all udk
+//
+function action_get_udk($content) { ?>
+	<script type="text/javascript" >
+	jQuery(document).ready(function($) {
+		if($("div").is(".list-udk")){ 
+				var data = {'action': 'get_all_udk'};
+
+				jQuery.ajax({
+		 		type: 'POST',
+		 		url: hneu.url, 
+		 		data,
+		 		beforeSend: function(){
+					jQuery("#wrapper-udk").fadeOut(300, function(){
+						jQuery("#cssload-pgloading").fadeIn();
+					});
+				},
+		 		success: function(response){
+		 			jQuery("#cssload-pgloading").fadeOut(300);
+		 			jQuery("#wrapper-udk").fadeIn();
+					//alert('Got this from the server: ' + response);
+					var obj = jQuery.parseJSON(response);
+					var	table = `
+						 <table class="tg" style="undefined;table-layout: fixed; width: 900px">
+										 <colgroup>
+											 <col style="width: 40px">
+											 <col style="width: 80px">
+											 <col style="width: 250px">
+											 <col style="width: 200px">
+										 </colgroup>
+									 <tr>
+										 <th class="tg-yw4l">№ </th>
+										 <th class="tg-yw4l">Дата подачі заяви</th>
+										 <th class="tg-yw4l">Автор, назва документа</th>
+										 <th class="tg-yw4l">Індекс УДК</th>
+									</tr>
+									<tr>
+
+					`;
+					for (var i = obj.length - 1; i >= 0; i--) {
+						table+="<tr>"
+			  		table+= '<td class="tg-yw4l">' + obj[i].id +'</td>';
+				    table+='<td class="tg-yw4l">' + obj[i].fio +'</td>';
+				    table+='<td class="tg-yw4l">' + obj[i].name +' ,' +obj[i].notat+ '</td>';
+				    table+='<td class="tg-yw4l">' + obj[i].answer_kod+'</td>';
+				    table+="</tr>"
+					}
+					
+					$('.list-udk').html(table);
+				/*	$('.list-udk').html(response);*/
+					$('.other-way').html(`
+						<input style="margin:10px;" id="update" onClick="window.location.reload()" name="update" type="button" value="Оновити" />
+						<br>
+						<a id="question-last-week" href="/new_question/">Задати нове питання</a>
+						`);
+
+		 		},
+		 		error: function(){
+		 			alert("last week error");
+		 		}
+		 	});
+
+
+		}
+	});
+	
+
+	</script> 
+	<?php
+	return $content;
+}
+
+
+
+
+// response with result
+	function get_all_udk() {
+		//access to the database
+		global $wpdb; 
+		$myrows = $wpdb->get_results( "SELECT * FROM library_udk" );
+
+
+echo json_encode($myrows);
+		/*	echo '<table class="tg" style="undefined;table-layout: fixed; width: 758px">';
+				echo '<colgroup>';
+					echo '<col style="width: 50px">';
+					echo '<col style="width: 200px">';
+					echo '<col style="width: 200px">';
+					echo '<col style="width: 100px">';
+					echo '<col style="width: 300px">';
+				echo '</colgroup>';
+			echo '<tr>';
+				echo '<th class="tg-yw4l">№ </th>';
+				echo '<th class="tg-yw4l">ПІБ</th>';
+				echo '<th class="tg-yw4l">ПИТАННЯ</th>';
+				echo '<th class="tg-yw4l">ДАТА</th>';
+				echo '<th class="tg-yw4l">ВІДПОВІДЬ</th>';
+			echo "</tr>"; 
+			  foreach ( $myrows as $page ){
+			  		echo "<tr>";
+			  		echo '<td class="tg-yw4l">'. $page->id .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->fio .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->question .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->date_question .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->answer .'</td>';
+				    echo "</tr>";
+			}
+			echo "</ul>";*/
+			   
+			
+
+		wp_die(); 
+}
+
+// action for WP
+
+  add_action( 'the_content', 'action_get_udk' );
+
+    add_action( 'wp_ajax_get_all_udk', 'get_all_udk' );
     
+ /*=== END ===*/
+
  ?>

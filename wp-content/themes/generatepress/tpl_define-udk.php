@@ -1,7 +1,7 @@
 
 <?php
 /**
-	Template Name: Шаблон УДК
+	Template Name: Шаблон списка УДК
  * The template for displaying all pages.
  *
  * This is the template that displays all pages by default.
@@ -45,33 +45,12 @@ get_header(); ?>
 					</header><!-- .entry-header -->
 				
 				<div class="entry-content" itemprop="text">
-				<div id="wrapper-request-udk">
-					<form  id="request-ukd" method="post" action="">
-				
-
-					ПІБ читача російською мовою (повністю) <br>
-					<input id="dfio"  type="text" /> 
-					<br>
-
-					Номер штрих-коду читача <br>
-					<input id="dkod" type="text" /> 
-					<br>
-
-					Назва документа <br>
-					<input id="dname"  type="text" /> 
-					<br>
-
-					Анотація документа <br>
-					<textarea id="dnotat"  cols="40" rows="3"></textarea>
-					<br>
-					
-					<br>
-					<input id="submitudk" type="submit"  value="Отправить" />
-				</form>
-			</div>
-			<div id="wrapper-request-answer">
-				
-			</div>
+<div id="wrapper-udk">
+	<div class="list-udk">
+		
+	</div>
+	<div class="other-way"></div>
+</div>
 <!-- loader -->
 <div id="cssload-pgloading">
 	<div class="cssload-loadingwrap">
