@@ -15,10 +15,11 @@ function hneu_scripts() {
 
 
 // Insert date to db
-    function wp_ajax_hneu_query(){
+    function wp_ajax_questions_query(){
         $name = $_POST['dname'];
         $question = $_POST['dquestion'];
         //$today = date("d/m/y"); 
+        echo $name;
         global $wpdb;
         $wpdb->insert( 
             'library_question', 
@@ -35,10 +36,13 @@ function hneu_scripts() {
                 '%s'
             ) 
         );
+
+       
+		
+
 		die();
 		return true;
 	}
-
 
 
 	
@@ -124,8 +128,44 @@ function my_action_javascript($content) { ?>
 }
 
 
+// Insert date to db
+    function wp_ajax_udk_query(){
+    	 $fio = $_POST['dfio'];
+         $kod = $_POST['dkod'];
+         $name = $_POST['dname'];
+         $notat = $_POST['dnotat'];
+      
+        //$today = date("d/m/y"); 
+         $blogtime = current_time( 'mysql' ); 
+         echo $blogtime;
+        global $wpdb;
+        $wpdb->insert( 
+            'library_udk', 
+            array( 
+                'fio' => $fio,
+                'name' => $name,
+                'notat' => $notat,
+                'kod' => $kod,
+                'date_udk' => $blogtime
+            ), 
+            array( 
+                '%s',
+                '%s',
+                '%s',
+                '%s',
+                '%s'
+            ) 
+        );
+  
+		
+       
+		die();
+		return true;
+	}
 
 
+// for udk form
+    add_action('wp_ajax_wp_ajax_udk_query', 'wp_ajax_udk_query');
 
 
 
