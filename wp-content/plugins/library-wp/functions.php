@@ -211,8 +211,8 @@ function action_get_udk($content) { ?>
 					for (var i = obj.length - 1; i >= 0; i--) {
 						table+="<tr>"
 			  		table+= '<td class="tg-yw4l">' + obj[i].id +'</td>';
-				    table+='<td class="tg-yw4l">' + obj[i].fio +'</td>';
-				    table+='<td class="tg-yw4l">' + obj[i].name +' ,' +obj[i].notat+ '</td>';
+				    table+='<td class="tg-yw4l">' + obj[i].date_udk +'</td>';
+				    table+='<td class="tg-yw4l">' + obj[i].fio +' ,' +obj[i].name+ '</td>';
 				    table+='<td class="tg-yw4l">' + obj[i].answer_kod+'</td>';
 				    table+="</tr>"
 					}
@@ -222,7 +222,7 @@ function action_get_udk($content) { ?>
 					$('.other-way').html(`
 						<input style="margin:10px;" id="update" onClick="window.location.reload()" name="update" type="button" value="Оновити" />
 						<br>
-						<a id="question-last-week" href="/new_question/">Задати нове питання</a>
+						<a id="question-last-week" href="/add-udk/"> Подати новий запит</a>
 						`);
 
 		 		},
@@ -249,37 +249,8 @@ function action_get_udk($content) { ?>
 		//access to the database
 		global $wpdb; 
 		$myrows = $wpdb->get_results( "SELECT * FROM library_udk" );
-
-
-echo json_encode($myrows);
-		/*	echo '<table class="tg" style="undefined;table-layout: fixed; width: 758px">';
-				echo '<colgroup>';
-					echo '<col style="width: 50px">';
-					echo '<col style="width: 200px">';
-					echo '<col style="width: 200px">';
-					echo '<col style="width: 100px">';
-					echo '<col style="width: 300px">';
-				echo '</colgroup>';
-			echo '<tr>';
-				echo '<th class="tg-yw4l">№ </th>';
-				echo '<th class="tg-yw4l">ПІБ</th>';
-				echo '<th class="tg-yw4l">ПИТАННЯ</th>';
-				echo '<th class="tg-yw4l">ДАТА</th>';
-				echo '<th class="tg-yw4l">ВІДПОВІДЬ</th>';
-			echo "</tr>"; 
-			  foreach ( $myrows as $page ){
-			  		echo "<tr>";
-			  		echo '<td class="tg-yw4l">'. $page->id .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->fio .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->question .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->date_question .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->answer .'</td>';
-				    echo "</tr>";
-			}
-			echo "</ul>";*/
-			   
-			
-
+		echo json_encode($myrows);
+	
 		wp_die(); 
 }
 
@@ -289,6 +260,117 @@ echo json_encode($myrows);
 
     add_action( 'wp_ajax_get_all_udk', 'get_all_udk' );
     
+
+
+
+/*====== MENU ======*/
+
+// Hook for adding admin menus
+add_action('admin_menu', 'lib_add_pages');
+
+// action function for above hook
+function lib_add_pages() {
+    // Add a new submenu under Options:
+    //add_options_page('Test Options', 'Test Options', 8, 'testoptions', 'lib_options_page');
+
+    // Add a new submenu under Manage:
+    //add_management_page('Test Manage', 'Test Manage', 8, 'testmanage', 'lib_manage_page');
+
+    // Add a new top-level menu (ill-advised):
+    add_menu_page('Управление библиотекой ', 'Управление библиотекой', 8, __FILE__, 'lib_toplevel_page');
+
+    // Add a submenu to the custom top-level menu:
+    add_submenu_page(__FILE__, 'Управление УДК', 'Управление УДК', 8, 'sub-page', 'lib_sublevel_page');
+
+    // Add a second submenu to the custom top-level menu:
+    add_submenu_page(__FILE__, 'Ответы на вопросы', 'Ответы на вопросы', 8, 'sub-page2', 'lib_sublevel_page2');
+}
+
+// lib_options_page() displays the page content for the Test Options submenu
+/*function lib_options_page() {
+    echo "<h2>Test Options</h2>";
+}
+
+// lib_manage_page() displays the page content for the Test Manage submenu
+function lib_manage_page() {
+    echo "<h2>Test Manage</h2>";
+}*/
+
+// lib_toplevel_page() displays the page content for the custom Test Toplevel menu
+function lib_toplevel_page() {
+    echo "<h2>Хээй Test Toplevel</h2>";
+
+}
+
+// lib_sublevel_page() displays the page content for the first submenu
+// of the custom Test Toplevel menu
+function lib_sublevel_page() {
+    echo "<h2>Управление УДК</h2>";
+  echo '<div>
+			<button>Запросы без ответа</button>
+  		</div>';
+
+
+
+
+
+}
+
+// lib_sublevel_page2() displays the page content for the second submenu
+// of the custom Test Toplevel menu
+function lib_sublevel_page2() {
+    echo "<h2>Управление вопросами</h2>";
+
+ echo '<div>
+			<button>Вопросы без ответа</button>
+			<br>
+			<br>
+  		</div>';
+     	global $wpdb; 
+		$myrows = $wpdb->get_results( "SELECT * FROM library_question WHERE YEAR(`date_question`) = YEAR(NOW()) AND WEEK(`date_question`, 1) = WEEK(NOW(), 1)" );
+			echo '<table class="tg" style="undefined;table-layout: fixed; width: 850px">';
+				echo '<colgroup>';
+					echo '<col style="width: 50px">';
+					echo '<col style="width: 200px">';
+					echo '<col style="width: 200px">';
+					echo '<col style="width: 100px">';
+					echo '<col style="width: 300px">';
+					echo '<col style="width: 130px">';
+				echo '</colgroup>';
+			echo '<tr>';
+				echo '<th class="tg-yw4l">№ </th>';
+				echo '<th class="tg-yw4l">ПІБ</th>';
+				echo '<th class="tg-yw4l">ПИТАННЯ</th>';
+				echo '<th class="tg-yw4l">ДАТА</th>';
+				echo '<th class="tg-yw4l">ВІДПОВІДЬ</th>';
+				echo '<th class="tg-yw4l"></th>';
+			echo "</tr>"; 
+			  foreach ( $myrows as $page ){
+			  		echo "<tr>";
+			  		echo '<td class="tg-yw4l">'. $page->id .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->fio .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->question .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->date_question .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->answer .'</td>';
+				    echo '<td class="tg-yw4l">
+								
+								<div class="btn-group btn-group-xs">
+					  <button type="button" class="btn btn-primary">Редактировать</button>
+					  <br>
+					  <button type="button" class="btn btn-danger">Удалить</button>
+								</div>
+				    	  </td>';
+				    echo "</tr>";
+			}
+			echo "</ul>";
+}
+
+
+
+
+/*========= END MENU =========*/
+
+
  /*=== END ===*/
 
  ?>

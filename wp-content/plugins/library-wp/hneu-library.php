@@ -33,6 +33,13 @@ require __DIR__ . '/functions.php';
 
 
 
+// Update CSS within in Admin
+function admin_style() {
+  wp_enqueue_style('admin-styles', get_template_directory_uri().'/css/admin.style.unmin.css');
+  wp_enqueue_style('admin-styles-awesome', get_template_directory_uri().'/css/font-awesome-essentials.min.css');
+}
+add_action('admin_enqueue_scripts', 'admin_style');
+
 
   
 
