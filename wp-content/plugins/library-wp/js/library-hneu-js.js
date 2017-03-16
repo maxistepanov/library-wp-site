@@ -137,9 +137,9 @@ var button = jQuery(this);
 						jQuery('.modal-title').data( "id", obj[0].id );
 						jQuery('#user-fio').text(obj[0].fio);
 						jQuery('#question-text').text(obj[0].question);
-						jQuery('#answer-text').text(obj[0].answer);
+						jQuery('#answear-text').text(obj[0].answear);
 						 
-						 jQuery("#deleteQuestionForm").modal('show');
+						 jQuery("#deleteQuestionForm").modal();
 
 
 				}
@@ -205,8 +205,110 @@ console.log(num);
 
     });
 });
+// action for button edit
+jQuery(document).ready(function(){
+    jQuery(".btn-edit").click(function(){
+var button = jQuery(this);
+         var num = button.data('id')
+        
+        jQuery(".success-save").attr("data-id", num); 
+        jQuery.ajax({
+				type: 'POST',
+				url: hneu.url,
+				data: {
+					"action": "wp_ajax_get_question_by_id",
+					 "num":num,
+					},
+				beforeSend: function(){
+					/*jQuery("#editQuestionForm").fadeOut(300, function(){
+						jQuery("#cssload-pgloading").fadeIn();
 
 
+					});*/
+				},
+				success: function(response){
+					jQuery("#cssload-pgloading").fadeOut(300);
+		 			jQuery("#editQuestionForm").fadeIn();
+		 			var modal = jQuery("#editQuestionForm");
+						var obj = jQuery.parseJSON(response);
+						modal.find('.modal-title').text("Вопрос № "+obj[0].id);
+						modal.find('.modal-title').data( "id", obj[0].id );
+						modal.find('#user-fio').text(obj[0].fio);
+						modal.find('#question-text').text(obj[0].question);
+						modal.find('#answear-text').val(obj[0].answear);
+						/*jQuery('#answer-text').val(obj[0].answer);*/
+						  jQuery("#editQuestionForm").modal();
+						
+
+
+				}
+			});
+
+         
+
+    });
+});
+
+
+
+// success button save answer 
+jQuery(document).ready(function(){
+    jQuery(".success-save").click(function(){
+
+var num = jQuery(".success-save").attr("data-id");
+var answear = jQuery('textarea#answear-text').val();
+console.log(answear);
+        jQuery.ajax({
+				type: 'POST',
+				url: hneu.url,
+				data: {
+					"action": "wp_ajax_save_answear_by_id",
+					 "num":num,
+					 "answear":answear
+					},
+				beforeSend: function(){
+					jQuery("#cssload-pgloading").fadeIn();
+				
+				},
+				success: function(response){
+					jQuery("#cssload-pgloading").fadeOut(300);
+		 			
+					
+						 jQuery("#editQuestionForm").modal('hide');
+						 /*inside ajax*/
+									 jQuery.ajax({
+							type: 'POST',
+							url: hneu.url,
+							data: {
+								"action": "wp_ajax_reload_questions",
+								 "num":num,
+								},
+							beforeSend: function(){
+								jQuery("#cssload-pgloading").fadeIn();
+							
+							},
+							success: function(response){
+								jQuery("#cssload-pgloading").fadeOut(300);
+					 			
+									
+
+									 jQuery("#editQuestionForm").modal('hide');
+									window.location.reload(true);
+									 
+
+
+							}
+						});
+						/*end inside ajax*/			 	
+
+
+				}
+			});
+
+         
+
+    });
+});
 /*jQuery('#exampleModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var recipient = button.data('whatever') // Extract info from data-* attributes

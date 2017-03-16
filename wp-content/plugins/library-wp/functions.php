@@ -95,7 +95,7 @@ function my_action_javascript($content) { ?>
 				    table+='<td class="tg-yw4l">' + obj[i].fio +'</td>';
 				    table+='<td class="tg-yw4l">' + obj[i].question + '</td>';
 				    table+='<td class="tg-yw4l">' + obj[i].date_question+'</td>';
-				    table+='<td class="tg-yw4l">' + obj[i].answer+'</td>';
+				    table+='<td class="tg-yw4l">' + obj[i].answear+'</td>';
 
 				    table+="</tr>"
 					}
@@ -312,8 +312,26 @@ add_action( 'wp_ajax_wp_ajax_get_question_by_id', 'wp_ajax_get_question_by_id' )
 }
 add_action( 'wp_ajax_wp_ajax_delete_question_by_id', 'wp_ajax_delete_question_by_id' );
 
+// response with result
+	function wp_ajax_save_answear_by_id() {
+		 $num = $_POST['num'];
+		 $answear = $_POST['answear'];
+		 echo 0;
+		 echo $answear;
+		//access to the database
+		global $wpdb; 
+		$myrows = $wpdb->get_results( "UPDATE library_question SET answear = '". $answear ."' where id = '". $num ."'");
+		
+		/*$myrows = $wpdb->get_results( "SELECT * FROM library_question");*/
+		echo json_encode($myrows);
+			
+			   
+			
 
+		wp_die(); 
+}
 
+add_action( 'wp_ajax_wp_ajax_save_answear_by_id', 'wp_ajax_save_answear_by_id' );
 
 /*====== MENU ======*/
 
@@ -374,60 +392,15 @@ function lib_sublevel_page() {
 // lib_sublevel_page2() displays the page content for the second submenu
 // of the custom Test Toplevel menu
 function lib_sublevel_page2() {
-    echo "<h2>Управление вопросами</h2>";
+   print '  <h2>Управление вопросами</h2>
 
- echo '<div>
+		<div>
 			<button>Вопросы без ответа</button>
 			<br>
 			<br>
   		</div>
-
- 
-  		
-  		';
-  		     	global $wpdb; 
-		$myrows = $wpdb->get_results( "SELECT * FROM library_question" );
-			echo '<div id="questions-wrapper"><table class="tg" style="undefined;table-layout: fixed; width: 850px">';
-				echo '<colgroup>';
-					echo '<col style="width: 50px">';
-					echo '<col style="width: 200px">';
-					echo '<col style="width: 200px">';
-					echo '<col style="width: 100px">';
-					echo '<col style="width: 300px">';
-					echo '<col style="width: 130px">';
-				echo '</colgroup>';
-			echo '<tr>';
-				echo '<th class="tg-yw4l">№ </th>';
-				echo '<th class="tg-yw4l">ПІБ</th>';
-				echo '<th class="tg-yw4l">ПИТАННЯ</th>';
-				echo '<th class="tg-yw4l">ДАТА</th>';
-				echo '<th class="tg-yw4l">ВІДПОВІДЬ</th>';
-				echo '<th class="tg-yw4l"></th>';
-			echo "</tr>"; 
-			  foreach ( $myrows as $page ){
-			  		echo "<tr>";
-			  		echo '<td class="tg-yw4l">'. $page->id .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->fio .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->question .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->date_question .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->answer .'</td>';
-				    echo '<td class="tg-yw4l">
-								
-								<div class="btn-group btn-group-xs">
-					  <button type="button" class="btn btn-primary">Редактировать</button>
-					  <br>
-					  <button  type="button"  class="btn btn-danger btn-del"  data-target="#deleteQuestionForm" data-id="'.$page->id.'">Удалить</button>
-
-					
-								</div>
-				    	  </td>';
-				    echo "</tr> ";
-			}
-			echo "</ul></div>";
-
-		echo '   
-
-<div class="modal fade" id="deleteQuestionForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<!-- delete modal -->
+ 			<div class="modal fade" id="deleteQuestionForm" tabindex="-1"  aria-labelledby="deleteLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -452,12 +425,45 @@ function lib_sublevel_page2() {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Закрить</button>
+       <br> <br>
         <button type="button" class="btn btn-danger success-delete" >Удалить</button>
       </div>
     </div>
   </div>
-
-</div>
+  </div>
+  <!-- end delete modal -->
+<!--  edit modal -->
+<div class="modal fade" id="editQuestionForm" tabindex="-1"  aria-labelledby="editLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="user-fio" class="control-label">ФИО:</label>
+            <p id="user-fio"></p> 
+          </div>
+           <div class="form-group">
+            <label for="user-question" class="control-label">Вопрос:</label>
+           <p id="question-text"></p> 
+          </div>
+          <div class="form-group">
+            <label for="answear-text" class="control-label">Ответ:</label>
+           <textarea name="" id="answear-text" cols="30" rows="10"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрить</button>
+        <button type="button" class="btn btn-success success-save" data-id >Сохранить</button>
+      </div>
+    </div>
+  </div>
+  </div>
+ <!-- end edit modal -->
  <!-- loader -->
 <div id="cssload-pgloading" ">
 	<div class="cssload-loadingwrap">
@@ -470,13 +476,57 @@ function lib_sublevel_page2() {
 	</div>
 </div>
 <!-- end loader -->
+';
+  
+    	global $wpdb; 
+		$myrows = $wpdb->get_results( "SELECT * FROM library_question" );
+			echo '<table class="tg" style="undefined;table-layout: fixed; width: 850px">';
+				echo '<colgroup>';
+					echo '<col style="width: 50px">';
+					echo '<col style="width: 200px">';
+					echo '<col style="width: 200px">';
+					echo '<col style="width: 100px">';
+					echo '<col style="width: 300px">';
+					echo '<col style="width: 130px">';
+				echo '</colgroup>';
+			echo '<tr>';
+				echo '<th class="tg-yw4l">№ </th>';
+				echo '<th class="tg-yw4l">ПІБ</th>';
+				echo '<th class="tg-yw4l">ПИТАННЯ</th>';
+				echo '<th class="tg-yw4l">ДАТА</th>';
+				echo '<th class="tg-yw4l">ВІДПОВІДЬ</th>';
+				echo '<th class="tg-yw4l"></th>';
+			echo "</tr>"; 
+			  foreach ( $myrows as $page ){
+			  		echo "<tr>";
+			  		echo '<td class="tg-yw4l">'. $page->id .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->fio .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->question .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->date_question .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->answear.'</td>';
+				    echo '<td class="tg-yw4l">
+								
+								<div class="btn-group btn-group-xs">
+					  <button  type="button"  class="btn btn-info btn-edit"   data-target="#editQuestionForm" data-id="'.$page->id.'">Редактировать</button>
+					  <br>
+					  <button  type="button"  class="btn btn-danger btn-del"   data-target="#deleteQuestionForm" data-id="'.$page->id.'">Удалить</button>
+
+					
+								</div>
+				    	  </td>';
+				    echo "</tr> ";
+			}
+
+	
 
 
-		';
 
 
 
-			
+
+
+
+
 }
 
 
