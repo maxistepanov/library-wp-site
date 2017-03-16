@@ -8,6 +8,7 @@ function hneu_scripts() {
     wp_enqueue_style( 'hneu-css', plugins_url( '/css/library-hneu-css.css', __FILE__ ) );
     wp_enqueue_style( 'bootstrap-theme', plugins_url( '/css/bootstrap-theme.min.css', __FILE__ ) );
     wp_enqueue_style( 'bootstrap-css', plugins_url( '/css/bootstrap.min.css', __FILE__ ) );
+
     
     wp_localize_script( 'hneu-js', 'hneu', array( 'url' => admin_url( 'admin-ajax.php')));
 
@@ -67,7 +68,41 @@ function my_action_javascript($content) { ?>
 		 			jQuery("#cssload-pgloading").fadeOut(300);
 		 			jQuery("#wrapper-question").fadeIn();
 					//alert('Got this from the server: ' + response);
-					$('.list-question').html(response);
+
+						var obj = jQuery.parseJSON(response);
+					var	table = `
+						 <table class="tg" style="undefined;table-layout: fixed; width: 900px">
+										 <colgroup>
+											 <col style="width: 50px">
+											 <col style="width: 200px">
+											 <col style="width: 200px">
+											 <col style="width: 100px">
+											 <col style="width: 300px">
+										 </colgroup>
+									 <tr>
+										 <th class="tg-yw4l">№ </th>
+										 <th class="tg-yw4l">ПІБ</th>
+										 <th class="tg-yw4l">Питання</th>
+										 <th class="tg-yw4l">Дата</th>
+										 <th class="tg-yw4l">ВІДПОВІДЬ</th>
+									</tr>
+									<tr>
+
+					`;
+					for (var i = obj.length - 1; i >= 0; i--) {
+						table+="<tr>"
+			  		table+= '<td class="tg-yw4l">' + obj[i].id +'</td>';
+				    table+='<td class="tg-yw4l">' + obj[i].fio +'</td>';
+				    table+='<td class="tg-yw4l">' + obj[i].question + '</td>';
+				    table+='<td class="tg-yw4l">' + obj[i].date_question+'</td>';
+				    table+='<td class="tg-yw4l">' + obj[i].answer+'</td>';
+
+				    table+="</tr>"
+					}
+					
+
+					$('.list-question').html(table);
+				
 					$('.other-way').html(`
 						<input style="margin:10px;" id="update" onClick="window.location.reload()" name="update" type="button" value="Оновити" />
 						<br>
@@ -98,31 +133,10 @@ function my_action_javascript($content) { ?>
 		//access to the database
 		global $wpdb; 
 		$myrows = $wpdb->get_results( "SELECT * FROM library_question WHERE YEAR(`date_question`) = YEAR(NOW()) AND WEEK(`date_question`, 1) = WEEK(NOW(), 1)" );
-			echo '<table class="tg" style="undefined;table-layout: fixed; width: 758px">';
-				echo '<colgroup>';
-					echo '<col style="width: 50px">';
-					echo '<col style="width: 200px">';
-					echo '<col style="width: 200px">';
-					echo '<col style="width: 100px">';
-					echo '<col style="width: 300px">';
-				echo '</colgroup>';
-			echo '<tr>';
-				echo '<th class="tg-yw4l">№ </th>';
-				echo '<th class="tg-yw4l">ПІБ</th>';
-				echo '<th class="tg-yw4l">ПИТАННЯ</th>';
-				echo '<th class="tg-yw4l">ДАТА</th>';
-				echo '<th class="tg-yw4l">ВІДПОВІДЬ</th>';
-			echo "</tr>"; 
-			  foreach ( $myrows as $page ){
-			  		echo "<tr>";
-			  		echo '<td class="tg-yw4l">'. $page->id .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->fio .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->question .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->date_question .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->answer .'</td>';
-				    echo "</tr>";
-			}
-			echo "</ul>";
+		
+		/*$myrows = $wpdb->get_results( "SELECT * FROM library_question");*/
+		echo json_encode($myrows);
+			
 			   
 			
 
@@ -262,6 +276,44 @@ function action_get_udk($content) { ?>
     
 
 
+// response with result
+	function wp_ajax_get_question_by_id() {
+		 $num = $_POST['num'];
+		//access to the database
+		global $wpdb; 
+		$myrows = $wpdb->get_results( "SELECT * FROM library_question WHERE id =". $num);
+		
+		/*$myrows = $wpdb->get_results( "SELECT * FROM library_question");*/
+		echo json_encode($myrows);
+			
+			   
+			
+
+		wp_die(); 
+}
+
+add_action( 'wp_ajax_wp_ajax_get_question_by_id', 'wp_ajax_get_question_by_id' );
+
+
+// response with result
+	function wp_ajax_delete_question_by_id() {
+		 $num = $_POST['num'];
+		//access to the database
+		global $wpdb; 
+		$myrows = $wpdb->get_results( "DELETE  FROM library_question WHERE id =". $num);
+		
+		/*$myrows = $wpdb->get_results( "SELECT * FROM library_question");*/
+		echo json_encode($myrows);
+			
+			   
+			
+
+		wp_die(); 
+}
+add_action( 'wp_ajax_wp_ajax_delete_question_by_id', 'wp_ajax_delete_question_by_id' );
+
+
+
 
 /*====== MENU ======*/
 
@@ -308,7 +360,10 @@ function lib_sublevel_page() {
     echo "<h2>Управление УДК</h2>";
   echo '<div>
 			<button>Запросы без ответа</button>
-  		</div>';
+  		</div>
+
+		
+  		';
 
 
 
@@ -325,10 +380,14 @@ function lib_sublevel_page2() {
 			<button>Вопросы без ответа</button>
 			<br>
 			<br>
-  		</div>';
-     	global $wpdb; 
-		$myrows = $wpdb->get_results( "SELECT * FROM library_question WHERE YEAR(`date_question`) = YEAR(NOW()) AND WEEK(`date_question`, 1) = WEEK(NOW(), 1)" );
-			echo '<table class="tg" style="undefined;table-layout: fixed; width: 850px">';
+  		</div>
+
+ 
+  		
+  		';
+  		     	global $wpdb; 
+		$myrows = $wpdb->get_results( "SELECT * FROM library_question" );
+			echo '<div id="questions-wrapper"><table class="tg" style="undefined;table-layout: fixed; width: 850px">';
 				echo '<colgroup>';
 					echo '<col style="width: 50px">';
 					echo '<col style="width: 200px">';
@@ -357,12 +416,67 @@ function lib_sublevel_page2() {
 								<div class="btn-group btn-group-xs">
 					  <button type="button" class="btn btn-primary">Редактировать</button>
 					  <br>
-					  <button type="button" class="btn btn-danger">Удалить</button>
+					  <button  type="button"  class="btn btn-danger btn-del"  data-target="#deleteQuestionForm" data-id="'.$page->id.'">Удалить</button>
+
+					
 								</div>
 				    	  </td>';
-				    echo "</tr>";
+				    echo "</tr> ";
 			}
-			echo "</ul>";
+			echo "</ul></div>";
+
+		echo '   
+
+<div class="modal fade" id="deleteQuestionForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="user-fio" class="control-label">ФИО:</label>
+            <p id="user-fio"></p> 
+          </div>
+           <div class="form-group">
+            <label for="user-question" class="control-label">Вопрос:</label>
+           <p id="question-text"></p> 
+          </div>
+          <div class="form-group">
+            <label for="answear-text" class="control-label">Ответ:</label>
+           <p id="answear-text"></p>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрить</button>
+        <button type="button" class="btn btn-danger success-delete" >Удалить</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+ <!-- loader -->
+<div id="cssload-pgloading" ">
+	<div class="cssload-loadingwrap">
+		<ul class="cssload-bokeh" style="top:220px;">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</div>
+<!-- end loader -->
+
+
+		';
+
+
+
+			
 }
 
 

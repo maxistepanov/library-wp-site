@@ -35,8 +35,24 @@ require __DIR__ . '/functions.php';
 
 // Update CSS within in Admin
 function admin_style() {
-  wp_enqueue_style('admin-styles', get_template_directory_uri().'/css/admin.style.unmin.css');
+  $plugin_url = plugin_dir_url( __FILE__ );
+  
   wp_enqueue_style('admin-styles-awesome', get_template_directory_uri().'/css/font-awesome-essentials.min.css');
+
+  //wp_enqueue_scripts('library-admin-scripts', $plugin_url.'/js/library-admin-panel.js');
+ 
+
+   wp_enqueue_style('admin-styles',$plugin_url.'/css/bootstrap-theme.min.css');
+      wp_enqueue_style('admin-styles',$plugin_url.'/css/bootstrap.min.css');
+
+     wp_enqueue_scripts('library-admin-bootstap-js', $plugin_url.'/js/bootstrap.min.js');
+   
+
+
+  //wp_enqueue_style('admin-popup-css',$plugin_url.'/css/jquery.modal.min.css');
+  //wp_enqueue_scripts('admin-popup-js',$plugin_url.'/js/jquery.modal.min.js');
+
+
 }
 add_action('admin_enqueue_scripts', 'admin_style');
 

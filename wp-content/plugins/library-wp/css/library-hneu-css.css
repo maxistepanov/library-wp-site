@@ -1,3 +1,7 @@
+
+body{
+	color: black!important;
+}
 /* Css loader */
 .active{
 	display: block !important;
@@ -254,5 +258,25 @@
 		79.9% { opacity: 0.60; }
 		84.2% { opacity: 0.75; }
 		91.0% { opacity: 0.87; }
+}
+
+
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
 }
 
