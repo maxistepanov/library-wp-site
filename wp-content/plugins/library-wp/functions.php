@@ -294,6 +294,54 @@ function action_get_udk($content) { ?>
 
 add_action( 'wp_ajax_wp_ajax_get_question_by_id', 'wp_ajax_get_question_by_id' );
 
+// response with result
+	function wp_ajax_reload_questions() {
+		 	global $wpdb; 
+		$myrows = $wpdb->get_results( "SELECT * FROM library_question" );
+			echo '<table class="tg" style="undefined;table-layout: fixed; width: 850px">';
+				echo '<colgroup>';
+					echo '<col style="width: 50px">';
+					echo '<col style="width: 200px">';
+					echo '<col style="width: 200px">';
+					echo '<col style="width: 100px">';
+					echo '<col style="width: 300px">';
+					echo '<col style="width: 130px">';
+				echo '</colgroup>';
+			echo '<tr>';
+				echo '<th class="tg-yw4l">№ </th>';
+				echo '<th class="tg-yw4l">ПІБ</th>';
+				echo '<th class="tg-yw4l">ПИТАННЯ</th>';
+				echo '<th class="tg-yw4l">ДАТА</th>';
+				echo '<th class="tg-yw4l">ВІДПОВІДЬ</th>';
+				echo '<th class="tg-yw4l"></th>';
+			echo "</tr>"; 
+			  foreach ( $myrows as $page ){
+			  		echo "<tr>";
+			  		echo '<td class="tg-yw4l">'. $page->id .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->fio .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->question .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->date_question .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->answear.'</td>';
+				    echo '<td class="tg-yw4l">
+								
+								<div class="btn-group btn-group-xs">
+					  <button  type="button"  class="btn btn-info btn-edit"   data-target="#editQuestionForm" data-id="'.$page->id.'">Редактировать</button>
+					  <br>
+					  <button  type="button"  class="btn btn-danger btn-del"   data-target="#deleteQuestionForm" data-id="'.$page->id.'">Удалить</button>
+
+					
+								</div>
+				    	  </td>';
+				    echo "</tr> ";
+			}
+			
+			   
+			
+
+		wp_die(); 
+}
+
+add_action( 'wp_ajax_wp_ajax_reload_questions', 'wp_ajax_reload_questions' );
 
 // response with result
 	function wp_ajax_delete_question_by_id() {
@@ -425,7 +473,6 @@ function lib_sublevel_page2() {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Закрить</button>
-       <br> <br>
         <button type="button" class="btn btn-danger success-delete" >Удалить</button>
       </div>
     </div>
@@ -478,45 +525,8 @@ function lib_sublevel_page2() {
 <!-- end loader -->
 ';
   
-    	global $wpdb; 
-		$myrows = $wpdb->get_results( "SELECT * FROM library_question" );
-			echo '<table class="tg" style="undefined;table-layout: fixed; width: 850px">';
-				echo '<colgroup>';
-					echo '<col style="width: 50px">';
-					echo '<col style="width: 200px">';
-					echo '<col style="width: 200px">';
-					echo '<col style="width: 100px">';
-					echo '<col style="width: 300px">';
-					echo '<col style="width: 130px">';
-				echo '</colgroup>';
-			echo '<tr>';
-				echo '<th class="tg-yw4l">№ </th>';
-				echo '<th class="tg-yw4l">ПІБ</th>';
-				echo '<th class="tg-yw4l">ПИТАННЯ</th>';
-				echo '<th class="tg-yw4l">ДАТА</th>';
-				echo '<th class="tg-yw4l">ВІДПОВІДЬ</th>';
-				echo '<th class="tg-yw4l"></th>';
-			echo "</tr>"; 
-			  foreach ( $myrows as $page ){
-			  		echo "<tr>";
-			  		echo '<td class="tg-yw4l">'. $page->id .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->fio .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->question .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->date_question .'</td>';
-				    echo '<td class="tg-yw4l">'. $page->answear.'</td>';
-				    echo '<td class="tg-yw4l">
-								
-								<div class="btn-group btn-group-xs">
-					  <button  type="button"  class="btn btn-info btn-edit"   data-target="#editQuestionForm" data-id="'.$page->id.'">Редактировать</button>
-					  <br>
-					  <button  type="button"  class="btn btn-danger btn-del"   data-target="#deleteQuestionForm" data-id="'.$page->id.'">Удалить</button>
-
-					
-								</div>
-				    	  </td>';
-				    echo "</tr> ";
-			}
-
+   
+wp_ajax_reload_questions();
 	
 
 

@@ -110,8 +110,8 @@
 
 
 // action for button delete
-jQuery(document).ready(function(){
-    jQuery(".btn-del").click(function(){
+jQuery(document).on('click','.btn-del',function(){
+   
 var button = jQuery(this);
          var num = button.data('id')
         
@@ -147,12 +147,11 @@ var button = jQuery(this);
 
          console.log(button.data('id'));
 
-    });
+   
 });
 
 // succes button delete qustion
-jQuery(document).ready(function(){
-    jQuery(".success-delete").click(function(){
+jQuery(document).on('click','.success-delete',function(){
 var num =     jQuery('.modal-title').data( "id");
 console.log(num);
         jQuery.ajax({
@@ -189,7 +188,7 @@ console.log(num);
 									
 
 									 jQuery("#deleteQuestionForm").modal('hide');
-									 window.location.reload(true);
+									jQuery(".tg").html(response);
 									 
 
 
@@ -201,13 +200,13 @@ console.log(num);
 				}
 			});
 
-         
 
-    });
 });
+
 // action for button edit
-jQuery(document).ready(function(){
-    jQuery(".btn-edit").click(function(){
+jQuery(document).on('click', '.btn-edit',function(){
+   
+
 var button = jQuery(this);
          var num = button.data('id')
         
@@ -246,15 +245,17 @@ var button = jQuery(this);
 
          
 
-    });
+    
 });
+
+  
 
 
 
 // success button save answer 
-jQuery(document).ready(function(){
-    jQuery(".success-save").click(function(){
-
+jQuery(document).on('click', '.success-save',function(){
+ 
+ 
 var num = jQuery(".success-save").attr("data-id");
 var answear = jQuery('textarea#answear-text').val();
 console.log(answear);
@@ -293,7 +294,8 @@ console.log(answear);
 									
 
 									 jQuery("#editQuestionForm").modal('hide');
-									window.location.reload(true);
+									/*window.location.reload(true);*/
+									jQuery(".tg").html(response);
 									 
 
 
@@ -307,7 +309,7 @@ console.log(answear);
 
          
 
-    });
+   
 });
 /*jQuery('#exampleModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
