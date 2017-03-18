@@ -294,6 +294,24 @@ function action_get_udk($content) { ?>
 
 add_action( 'wp_ajax_wp_ajax_get_question_by_id', 'wp_ajax_get_question_by_id' );
 
+
+// response with result
+	function wp_ajax_get_udk_by_id() {
+		 $num = $_POST['num'];
+		//access to the database
+		global $wpdb; 
+		$myrows = $wpdb->get_results( "SELECT * FROM library_udk WHERE id =". $num);
+		
+		/*$myrows = $wpdb->get_results( "SELECT * FROM library_question");*/
+		echo json_encode($myrows);
+			
+			   
+			
+
+		wp_die(); 
+}
+
+add_action( 'wp_ajax_wp_ajax_get_udk_by_id', 'wp_ajax_get_udk_by_id' );
 // response with result
 	function wp_ajax_reload_questions() {
 		 	global $wpdb; 
@@ -344,6 +362,58 @@ add_action( 'wp_ajax_wp_ajax_get_question_by_id', 'wp_ajax_get_question_by_id' )
 add_action( 'wp_ajax_wp_ajax_reload_questions', 'wp_ajax_reload_questions' );
 
 // response with result
+	function wp_ajax_reload_udk() {
+		 	global $wpdb; 
+		$myrows = $wpdb->get_results( "SELECT * FROM library_udk" );
+			echo '<table class="tg" style="undefined;table-layout: fixed; width: 850px">';
+				echo '<colgroup>';
+					echo '<col style="width: 50px">';
+					echo '<col style="width: 200px">';
+					echo '<col style="width: 200px">';
+					echo '<col style="width: 100px">';
+					echo '<col style="width: 300px">';
+					echo '<col style="width: 130px">';
+					echo '<col style="width: 130px">';
+				echo '</colgroup>';
+			echo '<tr>';
+				echo '<th class="tg-yw4l">№ </th>';
+				echo '<th class="tg-yw4l">Дата запроса</th>';
+				echo '<th class="tg-yw4l">ФИО</th>';
+				echo '<th class="tg-yw4l">Название документа</th>';
+				echo '<th class="tg-yw4l">Анотация</th>';
+				echo '<th class="tg-yw4l">Ответ</th>';
+				echo '<th class="tg-yw4l">Блок управления</th>';
+			echo "</tr>"; 
+			  foreach ( $myrows as $page ){
+			  		echo "<tr>";
+			  		echo '<td class="tg-yw4l">'. $page->id .'</td>';
+			  		echo '<td class="tg-yw4l">'. $page->date_udk .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->fio .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->name .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->notat .'</td>';
+				    echo '<td class="tg-yw4l">'. $page->answear_kod.'</td>';
+				    echo '<td class="tg-yw4l">
+								
+								<div class="btn-group btn-group-xs">
+					  <button  type="button"  class="btn btn-info btn-edit-udk"   data-target="#editUdkForm" data-id="'.$page->id.'">Редактировать</button>
+					  <br>
+					  <button  type="button"  class="btn btn-danger btn-del-udk"   data-target="#deleteUdkForm" data-id="'.$page->id.'">Удалить</button>
+
+					
+								</div>
+				    	  </td>';
+				    echo "</tr> ";
+			}
+			
+			   
+			
+
+		wp_die(); 
+}
+
+add_action( 'wp_ajax_wp_ajax_reload_udk', 'wp_ajax_reload_udk' );
+
+// response with result
 	function wp_ajax_delete_question_by_id() {
 		 $num = $_POST['num'];
 		//access to the database
@@ -360,15 +430,33 @@ add_action( 'wp_ajax_wp_ajax_reload_questions', 'wp_ajax_reload_questions' );
 }
 add_action( 'wp_ajax_wp_ajax_delete_question_by_id', 'wp_ajax_delete_question_by_id' );
 
+
+// response with result
+	function wp_ajax_delete_udk_by_id() {
+		 $num = $_POST['num'];
+		//access to the database
+		global $wpdb; 
+		$myrows = $wpdb->get_results( "DELETE  FROM library_udk WHERE id =". $num);
+		echo "ok delete udk";
+		/*$myrows = $wpdb->get_results( "SELECT * FROM library_question");*/
+		echo json_encode($myrows);
+			
+			   
+			
+
+		wp_die(); 
+}
+add_action( 'wp_ajax_wp_ajax_delete_udk_by_id', 'wp_ajax_delete_udk_by_id' );
+
 // response with result
 	function wp_ajax_save_answear_by_id() {
 		 $num = $_POST['num'];
 		 $answear = $_POST['answear'];
-		 echo 0;
-		 echo $answear;
+		 
+		 $blogtime = current_time( 'mysql' ); 
 		//access to the database
 		global $wpdb; 
-		$myrows = $wpdb->get_results( "UPDATE library_question SET answear = '". $answear ."' where id = '". $num ."'");
+		$myrows = $wpdb->get_results( "UPDATE library_question SET answear = '". $answear ."' , check_answer = '". $blogtime ."' where id = '". $num ."'");
 		
 		/*$myrows = $wpdb->get_results( "SELECT * FROM library_question");*/
 		echo json_encode($myrows);
@@ -380,6 +468,27 @@ add_action( 'wp_ajax_wp_ajax_delete_question_by_id', 'wp_ajax_delete_question_by
 }
 
 add_action( 'wp_ajax_wp_ajax_save_answear_by_id', 'wp_ajax_save_answear_by_id' );
+
+
+// response with result
+	function wp_ajax_save_udk_by_id() {
+		 $num = $_POST['num'];
+		 $answear = $_POST['answear'];
+	 $blogtime = current_time( 'mysql' ); 
+		//access to the database
+		global $wpdb; 
+		$myrows = $wpdb->get_results( "UPDATE library_udk SET answear_kod = '". $answear ."' , date_answear = '". $blogtime . "' where id = '". $num ."'");
+		
+		/*$myrows = $wpdb->get_results( "SELECT * FROM library_question");*/
+		echo json_encode($myrows);
+			
+			   
+			
+
+		wp_die(); 
+}
+
+add_action( 'wp_ajax_wp_ajax_save_udk_by_id', 'wp_ajax_save_udk_by_id' );
 
 /*====== MENU ======*/
 
@@ -427,10 +536,86 @@ function lib_sublevel_page() {
   echo '<div>
 			<button>Запросы без ответа</button>
   		</div>
+<!-- delete modal -->
+ 			<div class="modal fade" id="deleteUdkForm" tabindex="-1"  aria-labelledby="deleteLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="udk-fio" class="control-label">ФИО:</label>
+            <p id="udk-fio"></p> 
+          </div>
+           <div class="form-group">
+            <label for="udk-name" class="control-label">Вопрос:</label>
+           <p id="udk-name"></p> 
+          </div>
+          <div class="form-group">
+            <label for="udk-answear_udk" class="control-label">Ответ:</label>
+           <p id="udk-answear_udk"></p>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрить</button>
+        <button type="button" class="btn btn-danger success-delete-udk" >Удалить</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- end delete modal -->
 
+
+  <!-- edit udk modal -->
+ 			<div class="modal fade" id="editUdkForm" tabindex="-1"  aria-labelledby="deleteLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+			<div class="form-group col-md-8">
+            <label for="udk-fio" class="control-label">ФИО:</label>
+            <p id="udk-fio"></p> 
+          </div>
+          <div class="form-group col-md-4" >
+            <label for="udk-date" class="control-label">Дата запроса:</label>
+            <p id="udk-date"></p> 
+          </div>
+          </div>
+           <div class="form-group">
+            <label for="udk-name" class="control-label">Название документа:</label>
+           <p id="udk-name"></p> 
+          </div>
+          
+           <div class="form-group">
+            <label for="udk-notat" class="control-label">Анотация:</label>
+           <p id="udk-notat"></p> 
+          </div>
+          <div class="form-group">
+            <label for="udk-answear_udk" class="control-label">Ответ:</label>
+           <textarea name="" id="udk-answear_udk" cols="30" rows="10"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрить</button>
+        <button type="button" class="btn btn-success success-save-udk" >Сохранить</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- end edit udk modal -->
 		
   		';
-
+wp_ajax_reload_udk();
 
 
 

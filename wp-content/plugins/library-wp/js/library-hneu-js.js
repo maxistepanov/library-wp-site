@@ -243,9 +243,6 @@ var button = jQuery(this);
 				}
 			});
 
-         
-
-    
 });
 
   
@@ -311,6 +308,201 @@ console.log(answear);
 
    
 });
+
+
+/*======== Udk page ===========*/
+
+jQuery(document).on('click','.btn-del-udk',function(){
+   
+var button = jQuery(this);
+         var num = button.data('id')
+        
+        jQuery.ajax({
+				type: 'POST',
+				url: hneu.url,
+				data: {
+					"action": "wp_ajax_get_udk_by_id",
+					 "num":num,
+					},
+				beforeSend: function(){
+					jQuery("#deleteUdkForm").fadeOut(300, function(){
+						jQuery("#cssload-pgloading").fadeIn();
+
+
+					});
+				},
+				success: function(response){
+					jQuery("#cssload-pgloading").fadeOut(300);
+		 			var modalDelUdk = jQuery("#deleteUdkForm");
+						var obj = jQuery.parseJSON(response);
+						modalDelUdk.find('.modal-title').text("Запрос № "+obj[0].id);
+						modalDelUdk.find('.modal-title').data( "id", obj[0].id );
+						modalDelUdk.find('#udk-fio').text(obj[0].fio);
+						modalDelUdk.find('#udk-name').text(obj[0].name);
+						modalDelUdk.find('#udk-answear_udk').text(obj[0].answear_kod);
+						 
+						 jQuery("#deleteUdkForm").modal();
+
+
+				}
+			});
+});
+
+// succes button delete qustion
+jQuery(document).on('click','.success-delete-udk',function(){
+var num =     jQuery('.modal-title').data( "id");
+console.log(num);
+        jQuery.ajax({
+				type: 'POST',
+				url: hneu.url,
+				data: {
+					"action": "wp_ajax_delete_udk_by_id",
+					 "num":num,
+					},
+				beforeSend: function(){
+					jQuery("#cssload-pgloading").fadeIn();
+				
+				},
+				success: function(response){
+					jQuery("#cssload-pgloading").fadeOut(300);
+		 			
+					
+						 jQuery("#deleteUdkForm").modal('hide');
+						 /*inside ajax*/
+									 jQuery.ajax({
+							type: 'POST',
+							url: hneu.url,
+							data: {
+								"action": "wp_ajax_reload_udk",
+								 "num":num,
+								},
+							beforeSend: function(){
+								jQuery("#cssload-pgloading").fadeIn();
+							
+							},
+							success: function(response){
+								jQuery("#cssload-pgloading").fadeOut(300);
+					 			
+									
+
+									 jQuery("#deleteUdkForm").modal('hide');
+									jQuery(".tg").html(response);
+									 
+
+
+							}
+						});
+						/*end inside ajax*/			 	
+
+
+				}
+			});
+
+
+});
+
+
+// action for button edit
+jQuery(document).on('click', '.btn-edit-udk',function(){
+   
+
+var button = jQuery(this);
+         var num = button.data('id')
+        
+        jQuery(".success-save-udk").attr("data-id", num); 
+        jQuery.ajax({
+				type: 'POST',
+				url: hneu.url,
+				data: {
+					"action": "wp_ajax_get_udk_by_id",
+					 "num":num,
+					},
+				beforeSend: function(){
+					/*jQuery("#editQuestionForm").fadeOut(300, function(){
+						jQuery("#cssload-pgloading").fadeIn();
+
+
+					});*/
+				},
+				success: function(response){
+					jQuery("#cssload-pgloading").fadeOut(300);
+		 			
+		 			var modal = jQuery("#editUdkForm");
+						var obj = jQuery.parseJSON(response);
+						modal.find('.modal-title').text("Запрос № "+obj[0].id);
+						modal.find('.modal-title').data( "id", obj[0].id );
+						modal.find('#udk-fio').text(obj[0].fio);
+						modal.find('#udk-name').text(obj[0].name);
+						modal.find('#udk-notat').text(obj[0].notat);
+						modal.find('#udk-date').text(obj[0].date_udk);
+						modal.find('#udk-answear_udk').val(obj[0].answear_kod);
+						/*jQuery('#answer-text').val(obj[0].answer);*/
+						  jQuery("#editUdkForm").modal();
+						
+
+
+				}
+			});
+
+});
+
+
+// success button save answer 
+jQuery(document).on('click', '.success-save-udk',function(){
+ 
+ 
+var num = jQuery(".success-save-udk").attr("data-id");
+var answear = jQuery('textarea#udk-answear_udk').val();
+console.log(answear);
+        jQuery.ajax({
+				type: 'POST',
+				url: hneu.url,
+				data: {
+					"action": "wp_ajax_save_udk_by_id",
+					 "num":num,
+					 "answear":answear
+					},
+				beforeSend: function(){
+					jQuery("#cssload-pgloading").fadeIn();
+				
+				},
+				success: function(response){
+					jQuery("#cssload-pgloading").fadeOut(300);
+		 			
+					
+						 jQuery("#editUdkForm").modal('hide');
+						 /*inside ajax*/
+									 jQuery.ajax({
+							type: 'POST',
+							url: hneu.url,
+							data: {
+								"action": "wp_ajax_reload_udk",
+								 "num":num,
+								},
+							beforeSend: function(){
+								jQuery("#cssload-pgloading").fadeIn();
+							
+							},
+							success: function(response){
+								jQuery("#cssload-pgloading").fadeOut(300);
+					 			
+									
+
+									 jQuery("#editUdkForm").modal('hide');
+									/*window.location.reload(true);*/
+									jQuery(".tg").html(response);
+									 
+
+
+							}
+						});
+						/*end inside ajax*/			 
+				}
+			});
+
+});
+/*======== END Udk page ===========*/
+
 /*jQuery('#exampleModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var recipient = button.data('whatever') // Extract info from data-* attributes
