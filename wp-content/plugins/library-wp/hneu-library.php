@@ -46,6 +46,8 @@ function admin_style() {
       wp_enqueue_style('admin-styles',$plugin_url.'/css/bootstrap.min.css');
 
      wp_enqueue_scripts('library-admin-bootstap-js', $plugin_url.'/js/bootstrap.min.js');
+
+   
    
 
 

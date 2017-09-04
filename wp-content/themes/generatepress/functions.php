@@ -371,6 +371,9 @@ function generate_scripts()
 	// Get the minified suffix.
 	$suffix = generate_get_min_suffix();
 	
+
+
+
 	// Enqueue our CSS.
 	wp_enqueue_style( 'generate-style-grid', get_template_directory_uri() . "/css/unsemantic-grid{$suffix}.css", false, GENERATE_VERSION, 'all' );
 	wp_enqueue_style( 'generate-style', get_template_directory_uri() . '/style.unmin.css', array( 'generate-style-grid' ), false, 'all' );
@@ -393,6 +396,8 @@ function generate_scripts()
 	// Add jQuery
 	wp_enqueue_script( 'jquery' );
 	
+
+
 	// Add our mobile navigation
 	wp_enqueue_script( 'generate-navigation', get_template_directory_uri() . "/js/navigation{$suffix}.js", array( 'jquery' ), GENERATE_VERSION, true );
 	
@@ -561,7 +566,7 @@ add_action('generate_copyright_line','generate_add_login_attribution');
 function generate_add_login_attribution()
 {
 	?>
-	&#x000B7; <a href="<?php echo esc_url('http://library.hneu.edu.ua/');?>" target="_blank" title="" itemprop="url">GeneratePress</a>
+	&#x000B7; <a href="<?php echo esc_url('http://library.hneu.edu.ua/');?>" target="_blank" title="" itemprop="url">Library</a>
 	<?php
 }
 endif;
@@ -705,8 +710,8 @@ function generate_smart_content_width()
 	);
 	
 	// Get sidebar widths
-	$right_sidebar_width = apply_filters( 'generate_right_sidebar_width', '25' );
-	$left_sidebar_width = apply_filters( 'generate_left_sidebar_width', '25' );
+	$right_sidebar_width = apply_filters( 'generate_right_sidebar_width', '20' );
+	$left_sidebar_width = apply_filters( 'generate_left_sidebar_width', '20' );
 	
 	// Get the layout
 	$layout = generate_get_layout();
@@ -868,3 +873,5 @@ function generate_update_logo_setting()
 	endif;
 }
 endif;
+
+

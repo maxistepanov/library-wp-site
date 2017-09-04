@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 get_header(); ?>
 
-	<div id="primary" <?php generate_content_class();?>>
+	<div id="primary" <?php generate_content_class('test');?>>
 		<main id="main" <?php generate_main_class(); ?>>
 		<?php do_action( 'generate_before_main_content' ); ?>
 		<?php if ( have_posts() ) : ?>
@@ -31,6 +31,7 @@ get_header(); ?>
 					 */
 					get_template_part( 'content', get_post_format() );
 				?>
+
 
 			<?php endwhile; ?>
 

@@ -38,8 +38,8 @@ get_header(); ?>
 
 			<?php do_action('generate_after_main_content'); ?>
 			<!--   my custom code block-->
-
-			<article id="post-158" class="post-158 page type-page status-publish" itemtype="http://schema.org/CreativeWork" itemscope="itemscope">
+			<?php if( is_user_logged_in()) : ?>
+				<article id="post-158" class="post-158 page type-page status-publish" itemtype="http://schema.org/CreativeWork" itemscope="itemscope">
 	<div class="inside-article">
 					<header class="entry-header">
 					</header><!-- .entry-header -->
@@ -89,6 +89,31 @@ get_header(); ?>
 						</div><!-- .entry-content -->
 			</div><!-- .inside-article -->
 </article>
+<?php else: ?>
+				<article id="post-158" class="post-158 page type-page status-publish" itemtype="http://schema.org/CreativeWork" itemscope="itemscope">
+	<div class="inside-article">
+					<header class="entry-header">
+					</header><!-- .entry-header -->
+				
+				<div class="entry-content" itemprop="text">
+				<div id="wrapper">
+
+<h2>Для користування даною послугою необхідно авторизуватись в системі</h2>
+<form action="/wp-admin">
+    <input type="submit" value="Авторизація" />
+</form>
+			</div>
+		
+
+
+				
+						</div><!-- .entry-content -->
+			</div><!-- .inside-article -->
+</article>
+<?php endif ?>
+
+
+		
 
 <!-- end  my custom code block-->
 		</main><!-- #main -->

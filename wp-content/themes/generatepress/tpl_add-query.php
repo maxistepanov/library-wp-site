@@ -54,7 +54,7 @@ get_header(); ?>
 				<textarea id="dquestion" name="comment" cols="40" rows="3"></textarea></p>
 					 <br />
 					<br>
-					<input id="submit" type="submit"  value="Задати питання" />
+					<input id="submit_questions" type="submit"  value="Задати питання" />
 				</form>
 </div>
 <!-- loader -->

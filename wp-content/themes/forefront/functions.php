@@ -207,7 +207,7 @@ function forefront_custom_css()
  */
 add_action( 'wp_enqueue_scripts', 'forefront_scripts', 50 );
 function forefront_scripts() {
-	wp_add_inline_style( 'generate-style', forefront_custom_css() );
+	//wp_add_inline_style( 'generate-style', forefront_custom_css() );
 }
 
 /**

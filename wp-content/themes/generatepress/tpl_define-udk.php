@@ -46,7 +46,21 @@ get_header(); ?>
 				
 				<div class="entry-content" itemprop="text">
 <div id="wrapper-udk">
+	 <div class="dropdown">
+	    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Кількість результатів на сторінку
+	    <span class="caret"></span></button>
+	    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+	      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">10</a></li>
+	      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">20</a></li>
+	      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">50</a></li>
+	    
+	    </ul>
+	  </div>
+	 <br>
 	<div class="list-udk">
+		
+	</div>
+	<div class="pagination-wrapper">
 		
 	</div>
 	<div class="other-way"></div>

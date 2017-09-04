@@ -244,7 +244,7 @@ function generate_entry_meta()
 
 	if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) && $comments ) {
 		echo '<span class="comments-link">';
-		comments_popup_link( __( 'Leave a comment', 'generatepress' ), __( '1 Comment', 'generatepress' ), __( '% Comments', 'generatepress' ) );
+		comments_popup_link( __( 'Залишити коментар', 'generatepress' ), __( '1 Comment', 'generatepress' ), __( '% Comments', 'generatepress' ) );
 		echo '</span>';
 	}
 }
@@ -256,7 +256,7 @@ if ( ! function_exists( 'generate_excerpt_more' ) ) :
  */
 add_filter( 'excerpt_more', 'generate_excerpt_more' );
 function generate_excerpt_more( $more ) {
-	return ' ... <a title="' . esc_attr( get_the_title() ) . '" class="read-more" href="'. esc_url( get_permalink( get_the_ID() ) ) . '">' . __('Read more', 'generatepress') . '</a>';
+	return ' ... <a title="' . esc_attr( get_the_title() ) . '" class="read-more" href="'. esc_url( get_permalink( get_the_ID() ) ) . '">' . __('Докладніше', 'generatepress') . '</a>';
 }
 endif;
 
@@ -267,7 +267,7 @@ if ( ! function_exists( 'generate_content_more' ) ) :
 add_filter( 'the_content_more_link', 'generate_content_more' );
 function generate_content_more( $more ) {
 	$more_jump = apply_filters( 'generate_more_jump','#more-' . get_the_ID() );
-	return '<p class="read-more-container"><a title="' . esc_attr( get_the_title() ) . '" class="read-more content-read-more" href="'. esc_url( get_permalink( get_the_ID() ) . $more_jump ) . '">' . __('Read more', 'generatepress') . '</a></p>';
+	return '<p class="read-more-container"><a title="' . esc_attr( get_the_title() ) . '" class="read-more content-read-more" href="'. esc_url( get_permalink( get_the_ID() ) . $more_jump ) . '">' . __('Докладніше', 'generatepress') . '</a></p>';
 }
 endif;
 

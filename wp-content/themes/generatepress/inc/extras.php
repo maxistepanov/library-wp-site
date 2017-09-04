@@ -112,8 +112,8 @@ add_filter( 'generate_right_sidebar_class', 'generate_right_sidebar_classes');
 function generate_right_sidebar_classes( $classes )
 {
 
-	$right_sidebar_width = apply_filters( 'generate_right_sidebar_width', '25' );
-	$left_sidebar_width = apply_filters( 'generate_left_sidebar_width', '25' );
+	$right_sidebar_width = apply_filters( 'generate_right_sidebar_width', '20' );
+	$left_sidebar_width = apply_filters( 'generate_left_sidebar_width', '20' );
 	
 	$right_sidebar_tablet_width = apply_filters( 'generate_right_sidebar_tablet_width', $right_sidebar_width );
 	$left_sidebar_tablet_width = apply_filters( 'generate_left_sidebar_tablet_width', $left_sidebar_width );
@@ -152,8 +152,8 @@ if ( ! function_exists( 'generate_left_sidebar_classes' ) ) :
 add_filter( 'generate_left_sidebar_class', 'generate_left_sidebar_classes');
 function generate_left_sidebar_classes( $classes )
 {
-	$right_sidebar_width = apply_filters( 'generate_right_sidebar_width', '25' );
-	$left_sidebar_width = apply_filters( 'generate_left_sidebar_width', '25' );
+	$right_sidebar_width = apply_filters( 'generate_right_sidebar_width', '20' );
+	$left_sidebar_width = apply_filters( 'generate_left_sidebar_width', '20' );
 	$total_sidebar_width = $left_sidebar_width + $right_sidebar_width;
 	
 	$right_sidebar_tablet_width = apply_filters( 'generate_right_sidebar_tablet_width', $right_sidebar_width );
@@ -198,8 +198,8 @@ if ( ! function_exists( 'generate_content_classes' ) ) :
 add_filter( 'generate_content_class', 'generate_content_classes');
 function generate_content_classes( $classes )
 {
-	$right_sidebar_width = apply_filters( 'generate_right_sidebar_width', '25' );
-	$left_sidebar_width = apply_filters( 'generate_left_sidebar_width', '25' );
+	$right_sidebar_width = apply_filters( 'generate_right_sidebar_width', '20' );
+	$left_sidebar_width = apply_filters( 'generate_left_sidebar_width', '20' );
 	$total_sidebar_width = $left_sidebar_width + $right_sidebar_width;
 	
 	$right_sidebar_tablet_width = apply_filters( 'generate_right_sidebar_tablet_width', $right_sidebar_width );

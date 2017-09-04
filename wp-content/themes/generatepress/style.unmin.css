@@ -500,8 +500,7 @@ input[type="file"] {
 }
 .site-header {
 	position:relative;
-	background: url(http://www.ei.hneu.edu.ua/sites/all/themes/zen/HneuEi/images/blue_big.jpg);
-	background-size:80%;
+	
 }
 .header-aligned-left .site-header {
 	text-align: left;
@@ -1524,14 +1523,15 @@ footer.entry-meta .byline {
 
 .main-title {
 	margin: 0;
-	font-size: 36px !important;
-	line-height: 1.3em;
+	font-size: 24px !important;
+	line-height: 1.2em;
  	float: left;
 	max-width: 80%;
 	padding:15px;
 }
 .main-title a{
 	color: white !important;
+	text-decoration: none;
 }
 .serchheder{
 	background: #073ea2 !important;
@@ -1550,9 +1550,8 @@ footer.entry-meta .byline {
 	display: inline-block;
 	*display: inline;
 	*zoom: 1;
-	max-width: 15%;
+	max-width: 14%;
 	float: left;
-	margin-top: 2%;
 }
 .top-search{
 	position: absolute;
@@ -1941,7 +1940,9 @@ footer.entry-meta .byline {
         color: #FFFFFF;
     }
     .inside-header {
-        padding: 40px 40px 40px 40px;
+      
+	padding: 0!important;
+	height: 227px;        
     }
     .separate-containers .inside-article,
     .separate-containers .comments-area,
@@ -2216,3 +2217,5 @@ div.bbp-topic-tags {
 .site-branding{
 	max-width: 90%!important;
 }
+.inside-header-main {
+    padding: 10px 60px 10px 60px;}
