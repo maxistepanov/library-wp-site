@@ -622,7 +622,7 @@ jQuery(document).on('click', '.submit-search, .page-link',function(e){
 				success: function(response){
 				 
 				 var bookList = jQuery.parseJSON(response);
-				 var title = '<h2 id="start-result">Результати пошуку </h2> <h3> Результати 1 - '+ bookList.data.length +' від загального числа '+ bookList.data[0]['total_count'] +'</h3>';
+				 var title = '<h2 id="start-result">Результати пошуку </h2> <h3> Результати 1 - '+ bookList.data.length +' від загального числа '+ 1 +'</h3>';
 				var fullList =title;
 				
 				for (var i = 0; i < bookList.data.length; i++) {
@@ -670,7 +670,7 @@ var paggination = `
 					   
 					    `;
 					    var min = Math.max(+bookList.current_page - 5,1);
-					    var max = Math.min(+bookList.current_page + 8,bookList.data[0]['total_count']/ bookList.per_page);
+					    var max = Math.min(+bookList.current_page + 8,100/ bookList.per_page);
 					    console.log(min+" = =" + max);
 	for (var i = min; i < max; i++) {
 					paggination+= ` <li class="page-item"><a class="page-link" data-page="`+ (i) +`" href="#">`+ (i) +`</a></li>`;
@@ -686,7 +686,7 @@ paggination+= `
 				
 
 
-				if (!bookList.data) fullList = `
+				if (!bookList.data.length) fullList = `
 						<h2>Результати пошуку: </h2>
 						<div class="card card-inverse card-danger text-center">
 						  <div class="card-block">

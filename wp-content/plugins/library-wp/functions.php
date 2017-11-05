@@ -27,15 +27,15 @@ function hneu_scripts() {
     }
 function get_connection()
 {
-	$serverName = "DESKTOP-IJOBITJ\SQLEXPRESS"; 
-	$connectionInfo = array( "Database"=>"library", "CharacterSet" => "UTF-8");
-	$conn = sqlsrv_connect( $serverName, $connectionInfo);
+	// $serverName = "DESKTOP-IJOBITJ\SQLEXPRESS"; 
+	// $connectionInfo = array( "Database"=>"library", "CharacterSet" => "UTF-8");
+	// $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
-	/*
+	
 $serverName = "10.2.81.252";
 $connectionInfo = array( "Database"=>"library",'UID'=>'Chitatel', 'PWD'=>'katalog', "CharacterSet" => "UTF-8");
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
-	*/
+	
 	return $conn;
 }
  
@@ -660,12 +660,13 @@ AND (@Page * @PageSize)";
 
 	if( $stmt === false) {
 	    echo sqlsrv_errors();
-	    echo "error";
+	    echo "error000000";
 	}
 	$res_arr_values = array();
 	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC)) {
 		array_push($res_arr_values, $row);
 	}
+
 	$obj->data = $res_arr_values;
 	echo json_encode($obj);
 
