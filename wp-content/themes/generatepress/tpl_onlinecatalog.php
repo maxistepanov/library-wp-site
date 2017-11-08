@@ -46,7 +46,9 @@ get_header(); ?>
 				
 				<div class="entry-content" itemprop="text">
 					<?php 
-		$serverName = "DESKTOP-IJOBITJ\SQLEXPRESS"; 
+		// $serverName = "DESKTOP-IJOBITJ\SQLEXPRESS"; 
+$serverName = "10.2.81.252";
+    
 $connectionInfo = array( "Database"=>"library", "CharacterSet" => "UTF-8");
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
 if( $conn === false ) {
