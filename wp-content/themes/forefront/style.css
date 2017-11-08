@@ -28,3 +28,11 @@
 	padding-bottom: 20px;
 	margin-bottom: 20px;
 }
+
+.site-info{
+color: #ffffff;
+    background-color: #004a8a;
+}
+main-navigation, .main-navigation ul ul {
+    background-color: #004a8a!important;
+}

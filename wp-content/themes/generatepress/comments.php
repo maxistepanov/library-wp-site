@@ -18,19 +18,40 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * the visitor has not yet entered the password we will
  * return early without loading the comments.
  */
-if ( post_password_required() )
+if ( post_password_required() ) {
 	return;
-?>
+}
 
-	<div id="comments">
+do_action( 'generate_before_comments' ); 
+?>
+<div id="comments">
 
 	<?php do_action( 'generate_inside_comments' ); ?>
 
 	<?php if ( have_comments() ) : ?>
 		<h3 class="comments-title">
-			<?php
-				printf( _nx( 'One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title', 'generatepress' ),
-					number_format_i18n( get_comments_number() ), '<span>' . get_the_title() . '</span>' );
+			<?php					
+				$comments_number = get_comments_number();
+				if ( 1 === $comments_number ) {
+					printf(
+						/* translators: %s: post title */
+						esc_html_x( 'One thought on &ldquo;%s&rdquo;', 'comments title', 'generatepress' ),
+						'<span>' . get_the_title() . '</span>'
+					);
+				} else {
+					printf( // WPCS: XSS OK.
+						/* translators: 1: number of comments, 2: post title */
+						esc_html( _nx(
+							'%1$s thought on &ldquo;%2$s&rdquo;',
+							'%1$s thoughts on &ldquo;%2$s&rdquo;',
+							$comments_number,
+							'comments title',
+							'generatepress'
+						) ),
+						number_format_i18n( $comments_number ),
+						'<span>' . get_the_title() . '</span>'
+					);
+				}
 			?>
 		</h3>
 		
@@ -90,7 +111,7 @@ if ( post_password_required() )
 		'comment_notes_after'  => null,
 		'id_form'              => 'commentform',
 		'id_submit'            => 'submit',
-		'title_reply'          => apply_filters( 'generate_leave_comment', __( 'Залишити коментар','generatepress' ) ),
+		'title_reply'          => apply_filters( 'generate_leave_comment', __( 'Leave a Comment','generatepress' ) ),
 		'title_reply_to'       => apply_filters( 'generate_leave_reply', __( 'Leave a Reply to %s','generatepress' ) ),
 		'cancel_reply_link'    => apply_filters( 'generate_cancel_reply', __( 'Cancel reply','generatepress' ) ),
 		'label_submit'         => apply_filters( 'generate_post_comment', __( 'Post Comment','generatepress' ) ),

@@ -10,6 +10,10 @@
 			// Get the clicked element
 			var _this = $( this );
 			
+			// Bail if we're clicking a mega menu sub-menu item
+			if ( _this.closest( '.sub-menu' ).closest( '.menu-item-has-children' ).hasClass( 'mega-menu' ) )
+				return;
+			
 			// Get clicked parent
 			var _parent = _this.closest( 'nav' );
 			
@@ -98,16 +102,20 @@ jQuery(document).ready(function($) {
 	
 	// Close the search area on click outside of area
 	$( document ).click( function( event ) { 
-		if ( $( event.target ).closest('ul.toggled-on').length ) {
-			// do nothing
-		} else {
-			$( 'ul.toggled-on' ).generateDropdownClick.close();
+		if ( $( 'ul.toggled-on' ).is( ':visible' ) ) {
+			if ( $( event.target ).closest('ul.toggled-on').length ) {
+				// do nothing
+			} else {
+				$( 'ul.toggled-on' ).generateDropdownClick.close();
+			}
 		}
 	});
 	
 	// Close the dropdown menus when we click the navigation search or slideout button
 	$( '.search-item a, .slideout-toggle a' ).on( 'click', function() {
-		$( 'ul.toggled-on' ).generateDropdownClick.close();
+		if ( $( 'ul.toggled-on' ).is( ':visible' ) ) {
+			$( 'ul.toggled-on' ).generateDropdownClick.close();
+		}
 	});
 	
 });

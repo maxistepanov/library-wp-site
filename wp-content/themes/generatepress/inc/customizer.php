@@ -16,7 +16,7 @@ if ( ! function_exists( 'generate_customize_register' ) ) :
  */
 add_action( 'customize_register', 'generate_customize_register' );
 function generate_customize_register( $wp_customize ) {
-
+	// Get our default values
 	$defaults = generate_get_defaults();
 
 	// Load custom controls
@@ -34,18 +34,36 @@ function generate_customize_register( $wp_customize ) {
 	}
 	
 	// Add control types so controls can be built using JS
-	if ( method_exists( $wp_customize,'register_control_type' ) ) {
+	if ( method_exists( $wp_customize, 'register_control_type' ) ) {
 		$wp_customize->register_control_type( 'Generate_Customize_Misc_Control' );
-		$wp_customize->register_control_type( 'Generate_Customize_Width_Slider_Control' );
+		$wp_customize->register_control_type( 'Generate_Range_Slider_Control' );
+	}
+	
+	// Add upsell section type
+	if ( method_exists( $wp_customize, 'register_section_type' ) ) {
 		$wp_customize->register_section_type( 'GeneratePress_Upsell_Section' );
 	}
 	
-	if ( generate_addons_available() ) {
+	// Add selective refresh to site title and description
+	if ( isset( $wp_customize->selective_refresh ) ) {
+		$wp_customize->selective_refresh->add_partial( 'blogname', array(
+			'selector' => '.main-title a',
+			'render_callback' => 'generate_customize_partial_blogname',
+		) );
+		
+		$wp_customize->selective_refresh->add_partial( 'blogdescription', array(
+			'selector' => '.site-description',
+			'render_callback' => 'generate_customize_partial_blogdescription',
+		) );
+	}
+	
+	// Add our upsell section
+	if ( ! defined( 'GP_PREMIUM_VERSION' ) ) {
 		$wp_customize->add_section( 
 			new GeneratePress_Upsell_Section( $wp_customize, 'generatepress_upsell_section',
 				array(
 					'pro_text' => __( 'Add-ons Available! Take a look', 'generatepress' ),
-					'pro_url' => 'https://generatepress.com/add-ons',
+					'pro_url' => generate_get_premium_url( 'https://generatepress.com/premium' ),
 					'capability' => 'edit_theme_options',
 					'priority' => 0,
 					'type' => 'gp-upsell-section'
@@ -74,6 +92,7 @@ function generate_customize_register( $wp_customize ) {
 		)
 	);
 	
+	// Remove tagline
 	$wp_customize->add_setting( 
 		'generate_settings[hide_tagline]', 
 		array(
@@ -204,16 +223,17 @@ function generate_customize_register( $wp_customize ) {
 					'section'     => 'body_section',
 					'type'        => 'addon',
 					'label'			=> __( 'More Settings','generatepress' ),
-					'url' => 'https://generatepress.com/downloads/generate-colors/',
+					'url' => generate_get_premium_url( 'https://generatepress.com/downloads/generate-colors/' ),
 					'description' => sprintf(
 						__( 'Looking to add more color settings?<br /> %s.', 'generatepress' ),
 						sprintf(
 							'<a href="%1$s" target="_blank">%2$s</a>',
-							esc_url( 'https://generatepress.com/downloads/generate-colors/' ),
+							generate_get_premium_url( 'https://generatepress.com/downloads/generate-colors/' ),
 							__( 'Check out Generate Colors', 'generatepress' )
 						)
 					),
-					'priority'    => 30
+					'priority'    => 30,
+					'settings' => ( isset( $wp_customize->selective_refresh ) ) ? array() : 'blogname'
 				)
 			)
 		);
@@ -252,22 +272,129 @@ function generate_customize_register( $wp_customize ) {
 			'transport' => 'postMessage'
 		)
 	);
-		
-	$wp_customize->add_control( 
-		new Generate_Customize_Width_Slider_Control( 
-			$wp_customize, 
+	
+	$wp_customize->add_control(
+		new Generate_Range_Slider_Control(
+			$wp_customize,
 			'generate_settings[container_width]', 
 			array(
-				'label' => __('Container Width','generatepress'),
+				'type' => 'generatepress-range-slider',
+				'label' => __( 'Container Width', 'generatepress' ), 
 				'section' => 'generate_layout_container',
-				'settings' => 'generate_settings[container_width]',
+				'settings' => array( 
+					'desktop' => 'generate_settings[container_width]',
+				),
+				'choices' => array(
+					'desktop' => array(
+						'min' => 700,
+						'max' => 2000,
+						'step' => 5,
+						'edit' => true,
+						'unit' => 'px',
+					),
+				),
 				'priority' => 0,
-				'type' => 'gp-width-slider'
 			)
 		)
 	);
 	
-	// Add Layout section
+	// Add Top Bar section
+	$wp_customize->add_section(
+		'generate_top_bar',
+		array(
+			'title' => __( 'Top Bar', 'generatepress' ),
+			'capability' => 'edit_theme_options',
+			'priority' => 15,
+			'panel' => 'generate_layout_panel',
+		)
+	);
+	
+	// Add Top Bar width
+	$wp_customize->add_setting(
+		'generate_settings[top_bar_width]',
+		array(
+			'default' => $defaults['top_bar_width'],
+			'type' => 'option',
+			'sanitize_callback' => 'generate_sanitize_choices',
+			'transport' => 'postMessage'
+		)
+	);
+	
+	// Add Top Bar width control
+	$wp_customize->add_control(
+		'generate_settings[top_bar_width]',
+		array(
+			'type' => 'select',
+			'label' => __( 'Top Bar Width', 'generatepress' ),
+			'section' => 'generate_top_bar',
+			'choices' => array(
+				'full' => __( 'Full', 'generatepress' ),
+				'contained' => __( 'Contained', 'generatepress' )
+			),
+			'settings' => 'generate_settings[top_bar_width]',
+			'priority' => 5,
+			'active_callback' => 'generate_is_top_bar_active',
+		)
+	);
+	
+	// Add Top Bar inner width
+	$wp_customize->add_setting(
+		'generate_settings[top_bar_inner_width]',
+		array(
+			'default' => $defaults['top_bar_inner_width'],
+			'type' => 'option',
+			'sanitize_callback' => 'generate_sanitize_choices',
+			'transport' => 'postMessage'
+		)
+	);
+	
+	// Add Top Bar width control
+	$wp_customize->add_control(
+		'generate_settings[top_bar_inner_width]',
+		array(
+			'type' => 'select',
+			'label' => __( 'Top Bar Inner Width', 'generatepress' ),
+			'section' => 'generate_top_bar',
+			'choices' => array(
+				'full' => __( 'Full', 'generatepress' ),
+				'contained' => __( 'Contained', 'generatepress' )
+			),
+			'settings' => 'generate_settings[top_bar_inner_width]',
+			'priority' => 10,
+			'active_callback' => 'generate_is_top_bar_active',
+		)
+	);
+	
+	// Add top bar alignment
+	$wp_customize->add_setting(
+		'generate_settings[top_bar_alignment]',
+		array(
+			'default' => $defaults['top_bar_alignment'],
+			'type' => 'option',
+			'sanitize_callback' => 'generate_sanitize_choices',
+			'transport' => 'postMessage'
+		)
+	);
+	
+	// Add navigation control
+	$wp_customize->add_control(
+		'generate_settings[top_bar_alignment]',
+		array(
+			'type' => 'select',
+			'label' => __( 'Top Bar Alignment', 'generatepress' ),
+			'section' => 'generate_top_bar',
+			'choices' => array(
+				'left' => __( 'Left', 'generatepress' ),
+				'center' => __( 'Center', 'generatepress' ),
+				'right' => __( 'Right', 'generatepress' )
+			),
+			'settings' => 'generate_settings[top_bar_alignment]',
+			'priority' => 15,
+			'active_callback' => 'generate_is_top_bar_active',
+		)
+	);
+	
+	// Add Header section
 	$wp_customize->add_section(
 		'generate_layout_header',
 		array(
@@ -302,6 +429,33 @@ function generate_customize_register( $wp_customize ) {
 			),
 			'settings' => 'generate_settings[header_layout_setting]',
 			'priority' => 5
+		)
+	);
+	
+	// Add Inside Header Layout setting
+	$wp_customize->add_setting(
+		'generate_settings[header_inner_width]',
+		array(
+			'default' => $defaults['header_inner_width'],
+			'type' => 'option',
+			'sanitize_callback' => 'generate_sanitize_choices',
+			'transport' => 'postMessage'
+		)
+	);
+	
+	// Add Header Layout control
+	$wp_customize->add_control(
+		'generate_settings[header_inner_width]',
+		array(
+			'type' => 'select',
+			'label' => __( 'Inner Header Width', 'generatepress' ),
+			'section' => 'generate_layout_header',
+			'choices' => array(
+				'contained' => __( 'Contained', 'generatepress' ),
+				'full-width' => __( 'Full', 'generatepress' )
+			),
+			'settings' => 'generate_settings[header_inner_width]',
+			'priority' => 6
 		)
 	);
 	
@@ -372,6 +526,33 @@ function generate_customize_register( $wp_customize ) {
 	
 	// Add navigation setting
 	$wp_customize->add_setting(
+		'generate_settings[nav_inner_width]',
+		array(
+			'default' => $defaults['nav_inner_width'],
+			'type' => 'option',
+			'sanitize_callback' => 'generate_sanitize_choices',
+			'transport' => 'postMessage'
+		)
+	);
+	
+	// Add navigation control
+	$wp_customize->add_control(
+		'generate_settings[nav_inner_width]',
+		array(
+			'type' => 'select',
+			'label' => __( 'Inner Navigation Width', 'generatepress' ),
+			'section' => 'generate_layout_navigation',
+			'choices' => array(
+				'contained' => __( 'Contained', 'generatepress' ),
+				'full-width' => __( 'Full', 'generatepress' )
+			),
+			'settings' => 'generate_settings[nav_inner_width]',
+			'priority' => 16
+		)
+	);
+	
+	// Add navigation setting
+	$wp_customize->add_setting(
 		'generate_settings[nav_position_setting]',
 		array(
 			'default' => $defaults['nav_position_setting'],
@@ -386,7 +567,7 @@ function generate_customize_register( $wp_customize ) {
 		'generate_settings[nav_position_setting]',
 		array(
 			'type' => 'select',
-			'label' => __( 'Navigation Position', 'generatepress' ),
+			'label' => __( 'Navigation Location', 'generatepress' ),
 			'section' => 'generate_layout_navigation',
 			'choices' => array(
 				'nav-below-header' => __( 'Below Header', 'generatepress' ),
@@ -475,8 +656,8 @@ function generate_customize_register( $wp_customize ) {
 			'label' => __( 'Navigation Search', 'generatepress' ),
 			'section' => 'generate_layout_navigation',
 			'choices' => array(
-				'enable' => __( 'Enabled', 'generatepress' ),
-				'disable' => __( 'Disabled', 'generatepress' )
+				'enable' => __( 'Enable', 'generatepress' ),
+				'disable' => __( 'Disable', 'generatepress' )
 			),
 			'settings' => 'generate_settings[nav_search]',
 			'priority' => 23
@@ -546,8 +727,7 @@ function generate_customize_register( $wp_customize ) {
 				'both-right' => __( 'Content / Sidebar / Sidebar', 'generatepress' )
 			),
 			'settings' => 'generate_settings[layout_setting]',
-			'priority' => 30,
-			'active_callback' => 'generate_is_page'
+			'priority' => 30
 		)
 	);
 	
@@ -577,8 +757,7 @@ function generate_customize_register( $wp_customize ) {
 				'both-right' => __( 'Content / Sidebar / Sidebar', 'generatepress' )
 			),
 			'settings' => 'generate_settings[blog_layout_setting]',
-			'priority' => 35,
-			'active_callback' => 'generate_is_posts_page'
+			'priority' => 35
 		)
 	);
 	
@@ -608,8 +787,7 @@ function generate_customize_register( $wp_customize ) {
 				'both-right' => __( 'Content / Sidebar / Sidebar', 'generatepress' )
 			),
 			'settings' => 'generate_settings[single_layout_setting]',
-			'priority' => 36,
-			'active_callback' => 'generate_is_single'
+			'priority' => 36
 		)
 	);
 	
@@ -650,6 +828,33 @@ function generate_customize_register( $wp_customize ) {
 		)
 	);
 	
+	// Add footer setting
+	$wp_customize->add_setting(
+		'generate_settings[footer_inner_width]',
+		array(
+			'default' => $defaults['footer_inner_width'],
+			'type' => 'option',
+			'sanitize_callback' => 'generate_sanitize_choices',
+			'transport' => 'postMessage'
+		)
+	);
+	
+	// Add content control
+	$wp_customize->add_control(
+		'generate_settings[footer_inner_width]',
+		array(
+			'type' => 'select',
+			'label' => __( 'Inner Footer Width', 'generatepress' ),
+			'section' => 'generate_layout_footer',
+			'choices' => array(
+				'contained' => __( 'Contained', 'generatepress' ),
+				'full-width' => __( 'Full', 'generatepress' )
+			),
+			'settings' => 'generate_settings[footer_inner_width]',
+			'priority' => 41
+		)
+	);
+	
 	// Add footer widget setting
 	$wp_customize->add_setting(
 		'generate_settings[footer_widget_setting]',
@@ -680,6 +885,35 @@ function generate_customize_register( $wp_customize ) {
 		)
 	);
 	
+	// Add footer widget setting
+	$wp_customize->add_setting(
+		'generate_settings[footer_bar_alignment]',
+		array(
+			'default' => $defaults['footer_bar_alignment'],
+			'type' => 'option',
+			'sanitize_callback' => 'generate_sanitize_choices',
+			'transport' => 'postMessage'
+		)
+	);
+	
+	// Add footer widget control
+	$wp_customize->add_control(
+		'generate_settings[footer_bar_alignment]',
+		array(
+			'type' => 'select',
+			'label' => __( 'Footer Bar Alignment', 'generatepress' ),
+			'section' => 'generate_layout_footer',
+			'choices' => array(
+				'left' => __( 'Left','generatepress' ),
+				'center' => __( 'Center','generatepress' ),
+				'right' => __( 'Right','generatepress' )
+			),
+			'settings' => 'generate_settings[footer_bar_alignment]',
+			'priority' => 47,
+			'active_callback' => 'generate_is_footer_bar_active'
+		)
+	);
+	
 	// Add back to top setting
 	$wp_customize->add_setting(
 		'generate_settings[back_to_top]',
@@ -698,8 +932,8 @@ function generate_customize_register( $wp_customize ) {
 			'label' => __( 'Back to Top Button', 'generatepress' ),
 			'section' => 'generate_layout_footer',
 			'choices' => array(
-				'enable' => __( 'Enabled', 'generatepress' ),
-				'' => __( 'Disabled', 'generatepress' )
+				'enable' => __( 'Enable', 'generatepress' ),
+				'' => __( 'Disable', 'generatepress' )
 			),
 			'settings' => 'generate_settings[back_to_top]',
 			'priority' => 50
@@ -753,16 +987,17 @@ function generate_customize_register( $wp_customize ) {
 					'section'     => 'blog_section',
 					'type'        => 'addon',
 					'label'			=> __( 'More Settings','generatepress' ),
-					'url' => 'https://generatepress.com/downloads/generate-blog/',
+					'url' => generate_get_premium_url( 'https://generatepress.com/downloads/generate-blog/' ),
 					'description' => sprintf(
 						__( 'Looking to add more blog settings?<br /> %s.', 'generatepress' ),
 						sprintf(
 							'<a href="%1$s" target="_blank">%2$s</a>',
-							esc_url( 'https://generatepress.com/downloads/generate-blog/' ),
+							generate_get_premium_url( 'https://generatepress.com/downloads/generate-blog/' ),
 							__( 'Check out Generate Blog', 'generatepress' )
 						)
 					),
-					'priority'    => 30
+					'priority'    => 30,
+					'settings' => ( isset( $wp_customize->selective_refresh ) ) ? array() : 'blogname'
 				)
 			)
 		);
@@ -771,177 +1006,66 @@ function generate_customize_register( $wp_customize ) {
 endif;
 
 if ( ! function_exists( 'generate_customizer_live_preview' ) ) :
-add_action( 'customize_preview_init', 'generate_customizer_live_preview' );
+/**
+ * Add our live preview scripts
+ *
+ * @since 0.1
+ */
+add_action( 'customize_preview_init', 'generate_customizer_live_preview', 100 );
 function generate_customizer_live_preview()
 {
-	wp_enqueue_script( 'generate-themecustomizer', get_template_directory_uri().'/inc/js/customizer.js', array( 'customize-preview' ), GENERATE_VERSION, true );
+	wp_enqueue_script( 'generate-themecustomizer', trailingslashit( get_template_directory_uri() ) . 'inc/js/customizer.js', array( 'customize-preview' ), GENERATE_VERSION, true );
 }
 endif;
 
+if ( ! function_exists( 'generate_customizer_controls_css' ) ) :
 /**
- * Heading area
+ * Add CSS for our controls
  *
- * Since 0.1
- **/
-if ( class_exists( 'WP_Customize_Control' ) && ! class_exists( 'GenerateLabelControl' ) ) {
-    # Adds textarea support to the theme customizer
-    class GenerateLabelControl extends WP_Customize_Control {
-        public $type = 'label';
-        public function __construct( $manager, $id, $args = array() ) {
-            $this->statuses = array( '' => __( 'Default', 'generatepress' ) );
-            parent::__construct( $manager, $id, $args );
-        }
- 
-        public function render_content() {
-            echo '<span class="generate_customize_label">' . esc_html( $this->label ) . '</span>';
-        }
-    }
- 
-}
-
-if ( ! function_exists( 'generate_customize_preview_css' ) ) :
-add_action('customize_controls_print_styles', 'generate_customize_preview_css');
-function generate_customize_preview_css() {
-	?>
-	<style>
-		.customize-control-line {
-			display: none !important;
-		}
-		#accordion-section-secondary_bg_images_section li.customize-section-description-container {
-			float: none;
-			width: 100%;
-		}
-		#customize-control-blogname,
-		#customize-control-blogdescription {
-			margin-bottom: 0;
-		}
-		
-		.customize-control-title.addon {
-			display:inline;
-		}
-
-		.get-addon a {
-			background: #D54E21;
-			color:#FFF;
-			text-transform: uppercase;
-			font-size:11px;
-			padding: 3px 5px;
-			font-weight: bold;
-		}
-		
-		.customize-control-addon {
-			margin-top: 10px;
-		}
-		
-		.slider-input {
-			width: 60px !important;
-			font-size: 12px;
-			padding: 2px;
-			text-align: center;
-			height: auto !important;
-		}
-		
-		span.value {
-			display: inline-block;
-			float: right;
-			width: 35%;
-			text-align: right;
-		}
-		
-		span.typography-size-label {
-			display: inline-block;
-			width: 65%;
-		}
-		
-		div.slider {
-			margin-top: 8px;
-		}
-		
-		span.px {
-			background: #FAFAFA;
-			line-height: 18px;
-			display: inline-block;
-			padding: 2px 5px;
-			font-style: normal;
-			font-weight: bold;
-			border-right: 1px solid #DDD;
-			border-top: 1px solid #DDD;
-			border-bottom: 1px solid #DDD;
-			font-size: 12px;
-		}
-		li#accordion-section-generatepress_upsell_section {
-			border-top: 1px solid #D54E21;
-			border-bottom: 1px solid #D54E21;
-		}
-		.generate-upsell-accordion-section a {
-			background: #FFF;
-			display: block;
-			padding: 10px 10px 11px 14px;
-			line-height: 21px;
-			color: #D54E21;
-			text-decoration: none;
-		}
-		
-		.generate-upsell-accordion-section a:hover {
-			background:#FAFAFA;
-		}
-		
-		.generate-upsell-accordion-section h3 {
-			margin: 0;
-			position: relative;
-		}
-		
-		.generate-upsell-accordion-section h3 a:after {
-			content: "\f345";
-			color: #D54E21;
-			position: absolute;
-			top: 11px;
-			right: 10px;
-			z-index: 1;
-			float: right;
-			border: none;
-			background: none;
-			font: normal 20px/1 dashicons;
-			speak: none;
-			display: block;
-			padding: 0;
-			text-indent: 0;
-			text-align: center;
-			-webkit-font-smoothing: antialiased;
-			-moz-osx-font-smoothing: grayscale;
-		}
-		.customize-control-addon a {
-			text-decoration: none;
-		}
-	</style>
-	<?php
+ * @since 1.3.41
+ */
+add_action( 'customize_controls_enqueue_scripts', 'generate_customizer_controls_css' );
+function generate_customizer_controls_css()
+{
+	wp_enqueue_style( 'generate-customizer-controls-css', get_template_directory_uri().'/inc/css/customizer.css', array(), GENERATE_VERSION );
+	wp_enqueue_script( 'generatepress-upsell', trailingslashit( get_template_directory_uri() ) . 'inc/js/upsell-control.js', array( 'customize-controls' ), false, true );
 }
 endif;
 
 if ( ! function_exists( 'generate_is_posts_page' ) ) :
+/**
+ * Check to see if we're on a posts page
+ *
+ * @since 1.3.39
+ */
 function generate_is_posts_page()
 {
 	return ( is_home() || is_archive() || is_tax() ) ? true : false;
 }
 endif;
 
-if ( ! function_exists( 'generate_is_single' ) ) :
-function generate_is_single()
+if ( ! function_exists( 'generate_is_footer_bar_active' ) ) :
+/**
+ * Check to see if we're using our footer bar widget
+ *
+ * @since 1.3.42
+ */
+function generate_is_footer_bar_active() 
 {
-	// Set up BuddyPress variable
-	$buddypress = false;
-	if ( function_exists( 'is_buddypress' ) ) :
-		$buddypress = ( is_buddypress() ) ? true : false;
-	endif;
-	
-	return ( is_single()  && ! $buddypress ) ? true : false;
+	return ( is_active_sidebar( 'footer-bar' ) ) ? true : false;
 }
 endif;
 
-if ( ! function_exists( 'generate_is_page' ) ) :
-function generate_is_page()
+if ( ! function_exists( 'generate_is_top_bar_active' ) ) :
+/**
+ * Check to see if the top bar is active
+ *
+ * @since 1.3.45
+ */
+function generate_is_top_bar_active()
 {
-	return ( ! generate_is_posts_page() && ! generate_is_single() ) ? true : false;
+	$top_bar = is_active_sidebar( 'top-bar' ) ? true : false;
+	return apply_filters( 'generate_is_top_bar_active', $top_bar );
 }
 endif;
 
@@ -949,6 +1073,8 @@ if ( ! function_exists( 'generate_hidden_navigation' ) && function_exists( 'is_c
 /**
  * Adds a hidden navigation if no navigation is set
  * This allows us to use postMessage to position the navigation when it doesn't exist
+ *
+ * @since 1.3.40
  */
 add_action( 'wp_footer','generate_hidden_navigation' );
 function generate_hidden_navigation()
@@ -960,5 +1086,27 @@ function generate_hidden_navigation()
 		</div>
 		<?php
 	}
+}
+endif;
+
+if ( ! function_exists( 'generate_customize_partial_blogname' ) ) :
+/**
+ * Render the site title for the selective refresh partial.
+ *
+ * @since 1.3.41
+ */
+function generate_customize_partial_blogname() {
+	bloginfo( 'name' );
+}
+endif;
+
+if ( ! function_exists( 'generate_customize_partial_blogdescription' ) ) :
+/**
+ * Render the site tagline for the selective refresh partial.
+ *
+ * @since 1.3.41
+ */
+function generate_customize_partial_blogdescription() {
+	bloginfo( 'description' );
 }
 endif;

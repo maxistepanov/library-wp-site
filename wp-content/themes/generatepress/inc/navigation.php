@@ -2,6 +2,18 @@
 // No direct access, please
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+if ( ! function_exists( 'generate_get_navigation_location' ) ) :
+/**
+ * Get the location of the navigation and filter it
+ * @since 1.3.41
+ */
+function generate_get_navigation_location()
+{
+	$location = generate_get_setting( 'nav_position_setting' );
+	return apply_filters( 'generate_navigation_location', $location );
+}
+endif;
+
 if ( ! function_exists( 'generate_add_navigation_after_header' ) ) :
 /**
  * Generate the navigation based on settings
@@ -10,31 +22,19 @@ if ( ! function_exists( 'generate_add_navigation_after_header' ) ) :
 add_action( 'generate_after_header', 'generate_add_navigation_after_header', 5 );
 function generate_add_navigation_after_header()
 {
-	$generate_settings = wp_parse_args( 
-		get_option( 'generate_settings', array() ), 
-		generate_get_defaults() 
-	);
-	
-	if ( 'nav-below-header' == $generate_settings['nav_position_setting'] ) :
+	if ( 'nav-below-header' == generate_get_navigation_location() ) {
 		generate_navigation_position();
-	endif;
-	
+	}
 }
 endif;
 
 if ( ! function_exists( 'generate_add_navigation_before_header' ) ) :
 add_action( 'generate_before_header', 'generate_add_navigation_before_header', 5 );
 function generate_add_navigation_before_header()
-{
-	$generate_settings = wp_parse_args( 
-		get_option( 'generate_settings', array() ), 
-		generate_get_defaults() 
-	);
-	
-	if ( 'nav-above-header' == $generate_settings['nav_position_setting'] ) :
+{	
+	if ( 'nav-above-header' == generate_get_navigation_location() ) {
 		generate_navigation_position();
-	endif;
-	
+	}
 }
 endif;
 
@@ -42,15 +42,9 @@ if ( ! function_exists( 'generate_add_navigation_float_right' ) ) :
 add_action( 'generate_after_header_content', 'generate_add_navigation_float_right', 5 );
 function generate_add_navigation_float_right()
 {
-	$generate_settings = wp_parse_args( 
-		get_option( 'generate_settings', array() ), 
-		generate_get_defaults() 
-	);
-	
-	if ( 'nav-float-right' == $generate_settings['nav_position_setting'] || 'nav-float-left' == $generate_settings[ 'nav_position_setting' ] ) :
+	if ( 'nav-float-right' == generate_get_navigation_location() || 'nav-float-left' == generate_get_navigation_location() ) {
 		generate_navigation_position();
-	endif;
-	
+	}
 }
 endif;
 
@@ -58,17 +52,11 @@ if ( ! function_exists( 'generate_add_navigation_before_right_sidebar' ) ) :
 add_action( 'generate_before_right_sidebar_content', 'generate_add_navigation_before_right_sidebar', 5 );
 function generate_add_navigation_before_right_sidebar()
 {
-	$generate_settings = wp_parse_args( 
-		get_option( 'generate_settings', array() ), 
-		generate_get_defaults() 
-	);
-	
-	if ( 'nav-right-sidebar' == $generate_settings['nav_position_setting'] ) :
+	if ( 'nav-right-sidebar' == generate_get_navigation_location() ) {
 		echo '<div class="gen-sidebar-nav">';
 			generate_navigation_position();
 		echo '</div>';
-	endif;
-	
+	}
 }
 endif;
 
@@ -76,17 +64,11 @@ if ( ! function_exists( 'generate_add_navigation_before_left_sidebar' ) ) :
 add_action( 'generate_before_left_sidebar_content', 'generate_add_navigation_before_left_sidebar', 5 );
 function generate_add_navigation_before_left_sidebar()
 {
-	$generate_settings = wp_parse_args( 
-		get_option( 'generate_settings', array() ), 
-		generate_get_defaults() 
-	);
-	
-	if ( 'nav-left-sidebar' == $generate_settings['nav_position_setting'] ) :
+	if ( 'nav-left-sidebar' == generate_get_navigation_location() ) {
 		echo '<div class="gen-sidebar-nav">';
 			generate_navigation_position();
 		echo '</div>';
-	endif;
-	
+	}
 }
 endif;
 
@@ -101,7 +83,7 @@ function generate_navigation_position()
 {
 	?>
 	<nav itemtype="http://schema.org/SiteNavigationElement" itemscope="itemscope" id="site-navigation" <?php generate_navigation_class(); ?>>
-		<div class="inside-navigation grid-container grid-parent">
+		<div <?php generate_inside_navigation_class(); ?>>
 			<?php do_action( 'generate_inside_navigation' ); ?>
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
 				<?php do_action( 'generate_inside_mobile_menu' ); ?>
@@ -151,7 +133,7 @@ function generate_menu_fallback( $args )
 			);
 			wp_list_pages( $args );
 			if ( 'enable' == $generate_settings['nav_search'] ) :
-				echo '<li class="search-item" title="' . _x( 'Search', 'submit button', 'generatepress' ) . '"><a href="#"><i class="fa fa-fw fa-search" aria-hidden="true"></i><span class="screen-reader-text">' . _x( 'Search', 'submit button', 'generatepress' ) . '</span></a></li>';
+				echo '<li class="search-item" title="' . esc_attr_x( 'Search', 'submit button', 'generatepress' ) . '"><a href="#"><i class="fa fa-fw fa-search" aria-hidden="true"></i><span class="screen-reader-text">' . _x( 'Search', 'submit button', 'generatepress' ) . '</span></a></li>';
 			endif;
 			?>
 		</ul>
@@ -211,27 +193,31 @@ class Generate_Page_Walker extends Walker_Page
 }
 endif;
 
-if ( ! function_exists( 'generate_nav_dropdown' ) ) :
+if ( ! function_exists( 'generate_dropdown_icon_to_menu_link' ) ) :
 /**
+ * Add dropdown icon if menu item has children.
  *
- * Build the dropdown arrow
- * @since 1.3.24
- *
+ * @since 1.3.42
  */
-add_filter( 'walker_nav_menu_start_el', 'generate_nav_dropdown', 10, 4 );
-function generate_nav_dropdown( $item_output, $item, $depth, $args ) 
-{
-	// If we're working with the primary or secondary theme locations
-	if ( 'primary' == $args->theme_location || 'secondary' == $args->theme_location || 'slideout' == $args->theme_location ) {
-		// If a dropdown menu is detected
-		$dropdown = ( in_array( 'menu-item-has-children', $item->classes ) ) ? true : false;
-		if ( $dropdown ) :
-			// Add our arrow icon
-			$item_output = str_replace( $args->link_after . '</a>', $args->link_after . '<span role="button" class="dropdown-menu-toggle" aria-expanded="false"></span></a>', $item_output );
-		endif;
-	}
+add_filter( 'nav_menu_item_title', 'generate_dropdown_icon_to_menu_link', 10, 4 );
+function generate_dropdown_icon_to_menu_link( $title, $item, $args, $depth ) {
+	// Build an array with our theme location
+	$theme_locations = array(
+		'primary',
+		'secondary',
+		'slideout'
+	);
 	
-	// Return the output
-	return $item_output;
+	// Loop through our menu items and add our dropdown icons
+	if ( in_array( $args->theme_location, apply_filters( 'generate_menu_arrow_theme_locations', $theme_locations ) ) ) {
+		foreach ( $item->classes as $value ) {
+			if ( 'menu-item-has-children' === $value  ) {
+				$title = $title . '<span role="button" class="dropdown-menu-toggle" aria-expanded="false"></span>';
+			}
+		}
+	}
+
+	// Return our title
+	return $title;
 }
 endif;
