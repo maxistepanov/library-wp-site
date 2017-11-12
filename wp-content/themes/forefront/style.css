@@ -33,6 +33,40 @@
 color: #ffffff;
     background-color: #004a8a;
 }
-main-navigation, .main-navigation ul ul {
+.main-navigation, .main-navigation ul ul {
     background-color: #004a8a!important;
+}
+
+.header-logo{
+	    width: 1200px;
+    margin: 0 auto;
+}
+
+.header-logo img{
+	width: 100%;
+}
+
+.main-navigation .main-nav ul li[class*="current-menu-"] > a {
+    color: #FFFFFF;
+    background-color: #0f31c3;
+}
+
+.main-navigation .main-nav ul li[class*="current-menu-"] > a:hover{
+    color: #FFFFFF;
+    background-color: #2A4EE9;
+}
+
+navigation .main-nav ul li.sfHover > a {
+    color: #FFFFFF;
+    background-color: #2A4EE9;
+}
+
+.main-navigation .main-nav ul li > a:hover, .main-navigation .main-nav ul li > a:focus, .main-navigation .main-nav ul li.sfHover > a {
+    color: #FFFFFF;
+    background-color: #2A4EE9;
+}
+
+.main-navigation .main-nav ul ul li a:hover {
+    color: #FFFFFF;
+     background-color: #2A4EE9;
 }

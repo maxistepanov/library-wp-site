@@ -25,19 +25,21 @@ function hneu_scripts() {
     wp_localize_script( 'hneu-js', 'hneu', array( 'url' => admin_url( 'admin-ajax.php')));
 
     }
-function get_connection()
-{
-	// $serverName = "DESKTOP-IJOBITJ\SQLEXPRESS"; 
-	// $connectionInfo = array( "Database"=>"library", "CharacterSet" => "UTF-8");
-	// $conn = sqlsrv_connect( $serverName, $connectionInfo);
+
+  include 'bdconnectionconfig.php';
+// function get_connection()
+// {
+// 	// $serverName = "DESKTOP-IJOBITJ\SQLEXPRESS"; 
+// 	// $connectionInfo = array( "Database"=>"library", "CharacterSet" => "UTF-8");
+// 	// $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
 	
-$serverName = "10.2.81.252";
-$connectionInfo = array( "Database"=>"library",'UID'=>'Chitatel', 'PWD'=>'katalog', "CharacterSet" => "UTF-8");
-$conn = sqlsrv_connect( $serverName, $connectionInfo);
+// // $serverName = "10.2.81.252";
+// // $connectionInfo = array( "Database"=>"library",'UID'=>'Chitatel', 'PWD'=>'katalog', "CharacterSet" => "UTF-8");
+// $conn = sqlsrv_connect( $serverName, $connectionInfo);
 	
-	return $conn;
-}
+// 	return $conn;
+// }
  
 function custom_echo($x, $length)
 {

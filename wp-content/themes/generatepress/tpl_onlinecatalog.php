@@ -12,6 +12,7 @@
  * @package GeneratePress
  */
  
+
 // No direct access, please
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -46,10 +47,10 @@ get_header(); ?>
 				
 				<div class="entry-content" itemprop="text">
 					<?php 
-    // $serverName = "DESKTOP-IJOBITJ\SQLEXPRESS"; 
-// $connectionInfo = array( "Database"=>"library", "CharacterSet" => "UTF-8");
-$serverName = "10.2.81.252";
-$connectionInfo = array( "Database"=>"library",'UID'=>'Chitatel', 'PWD'=>'katalog', "CharacterSet" => "UTF-8");
+    $serverName = "DESKTOP-IJOBITJ\SQLEXPRESS"; 
+$connectionInfo = array( "Database"=>"library", "CharacterSet" => "UTF-8");
+// $serverName = "10.2.81.252";
+// $connectionInfo = array( "Database"=>"library",'UID'=>'Chitatel', 'PWD'=>'katalog', "CharacterSet" => "UTF-8");
 $conn = sqlsrv_connect( $serverName, $connectionInfo);
 if( $conn === false ) {
     die( print_r( sqlsrv_errors(), true));
@@ -260,7 +261,7 @@ template: {
     return data;
   },
 
-  requestDelay: 100
+  requestDelay: 10
 };
 
 	jQuery("#name").easyAutocomplete(options_title);
