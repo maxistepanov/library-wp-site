@@ -33,9 +33,9 @@
 color: #ffffff;
     background-color: #004a8a;
 }
-.main-navigation, .main-navigation ul ul {
+/*.main-navigation, .main-navigation ul ul {
     background-color: #004a8a!important;
-}
+}*/
 
 .header-logo{
 	    width: 1200px;
@@ -46,7 +46,7 @@ color: #ffffff;
 	width: 100%;
 }
 
-.main-navigation .main-nav ul li[class*="current-menu-"] > a {
+/*.main-navigation .main-nav ul li[class*="current-menu-"] > a {
     color: #FFFFFF;
     background-color: #0f31c3;
 }
@@ -69,4 +69,18 @@ navigation .main-nav ul li.sfHover > a {
 .main-navigation .main-nav ul ul li a:hover {
     color: #FFFFFF;
      background-color: #2A4EE9;
+}
+
+.main-navigation .main-nav ul ul li[class*="current-menu-"] > a:hover, .main-navigation .main-nav ul ul li[class*="current-menu-"].sfHover > a {
+    color: #FFFFFF;
+     background-color: #2A4EE9;
+}*/
+
+th,th{
+	    padding: 7px;
+    border-width: 0 1px 1px 0;
+}
+
+.entry-content, .entry-summary, .page-content {
+     margin: 0; 
 }

@@ -23,7 +23,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 	<a class="screen-reader-text skip-link" href="#content" title="<?php esc_attr_e( 'Skip to content', 'generatepress' ); ?>"><?php _e( 'Skip to content', 'generatepress' ); ?></a>
 	<?php do_action( 'generate_before_header' ); ?>
 	<div class="header-logo">
-		<img src="/img/single.jpg" alt="">
+		<a href="/">
+			<img src="/img/single.jpg" alt="">
+		</a>
 	</div>
 	<?php //do_action( 'generate_header' ); ?> 
 	<?php do_action( 'generate_after_header' ); ?>

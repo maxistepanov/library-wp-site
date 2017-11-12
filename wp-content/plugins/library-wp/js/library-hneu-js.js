@@ -503,7 +503,7 @@ console.log(answear);
 });
 
 // action for button delete
-jQuery(document).on('click','.btn-page',function(e){
+jQuery(document).on('click','.btn-page-udk',function(e){
    e.preventDefault();
 var button = jQuery(this);
          var page = button.data('page');
@@ -533,16 +533,16 @@ var button = jQuery(this);
 					var obj = jQuery.parseJSON(response);
 					console.log(obj);
 					var	table = `
-						 <table class="tg" style="undefined;table-layout: fixed; width: 900px">
+						 <table class="tg table table-striped" style="undefined;table-layout: fixed; width: 100%">
 										 <colgroup>
-											 <col style="width: 40px">
-											 <col style="width: 80px">
+											 <col style="width: 5%">
+											 <col style="width: 15%">
 											 <col style="width: 250px">
 											 <col style="width: 200px">
 										 </colgroup>
 									 <tr>
 										 <th class="tg-yw4l">№ </th>
-										 <th class="tg-yw4l">Дата подачі заяви</th>
+										 <th class="tg-yw4l">Дата</th>
 										 <th class="tg-yw4l">Автор, назва документа</th>
 										 <th class="tg-yw4l">Індекс УДК</th>
 									</tr>
@@ -573,12 +573,20 @@ var button = jQuery(this);
 					
 					$page_list+='<ul class="pagination">';
 					for( $i = 1; $i <= $num_pages; $i++) {
-  						$page_list+= '<li><a class="btn-page" href="'+ $i 	+'" data-page="' + $i +'">' + $i  +'</a></li> \n';
+  						$page_list+= '<li class="page-item"><a class="page-link btn-page-udk" href="'+ $i 	+'" data-page="' + $i +'">' + $i  +'</a></li> \n';
   					}
   					$page_list+='</ul>';
 					jQuery('.pagination-wrapper').html($page_list);
 
-
+// 					<nav aria-label="Page navigation example">
+//   <ul class="pagination">
+//     <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+//     <li class="page-item"><a class="page-link" href="#">1</a></li>
+//     <li class="page-item"><a class="page-link" href="#">2</a></li>
+//     <li class="page-item"><a class="page-link" href="#">3</a></li>
+//     <li class="page-item"><a class="page-link" href="#">Next</a></li>
+//   </ul>
+// </nav>
 
 				}
 			});

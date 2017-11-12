@@ -4,7 +4,7 @@ body{
 }
 /* Css loader */
 .active{
-	display: block !important;
+	/*display: block !important;*/
 }
 .hide {
 	display: none !important;

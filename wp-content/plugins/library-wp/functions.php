@@ -109,13 +109,13 @@ function my_action_javascript($content) { ?>
 
 						var obj = jQuery.parseJSON(response);
 					var	table = `
-						 <table class="tg" style="undefined;table-layout: fixed; width: 900px">
+						 <table class="tg table table-striped" style="undefined;table-layout: fixed; width: 100%">
 										 <colgroup>
-											 <col style="width: 50px">
-											 <col style="width: 200px">
-											 <col style="width: 200px">
-											 <col style="width: 100px">
-											 <col style="width: 300px">
+											 <col style="width: 5%">
+											 <col style="width: 15%">
+											 <col style="width: 20%">
+											 <col style="width: 20%">
+											 <col style="width: 20%">
 										 </colgroup>
 									 <tr>
 										 <th class="tg-yw4l">№ </th>
@@ -253,16 +253,16 @@ function action_get_udk($content) { ?>
 					var obj = jQuery.parseJSON(response);
 					console.log(obj);
 					var	table = `
-						 <table class="tg" style="undefined;table-layout: fixed; width: 900px">
+						 <table class="tg table table-striped" style="undefined;table-layout: fixed; width: 100%">
 										 <colgroup>
-											 <col style="width: 40px">
-											 <col style="width: 80px">
+											 <col style="width: 5%">
+											 <col style="width: 15%">
 											 <col style="width: 250px">
 											 <col style="width: 200px">
 										 </colgroup>
 									 <tr>
 										 <th class="tg-yw4l">№ </th>
-										 <th class="tg-yw4l">Дата подачі заяви</th>
+										 <th class="tg-yw4l">Дата</th>
 										 <th class="tg-yw4l">Автор, назва документа</th>
 										 <th class="tg-yw4l">Індекс УДК</th>
 									</tr>
@@ -293,7 +293,7 @@ function action_get_udk($content) { ?>
 					
 					$page_list+='<ul class="pagination">';
 					for( $i = 1; $i <= $num_pages; $i++) {
-  						$page_list+= '<li><a class="btn-page" href="'+ $i 	+'" data-page="' + $i +'">' + $i  +'</a></li> \n';
+  						$page_list+= '<li class="page-item"><a class="page-link btn-page-udk" href="'+ $i 	+'" data-page="' + $i +'">' + $i  +'</a></li> \n';
   					}
   					$page_list+='</ul>';
 					jQuery('.pagination-wrapper').html($page_list);

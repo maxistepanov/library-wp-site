@@ -237,7 +237,7 @@ function generate_excerpt_more( $more ) {
 	return apply_filters( 'generate_excerpt_more_output', sprintf( ' ... <a title="%1$s" class="read-more" href="%2$s">%3$s</a>',
 		the_title_attribute( 'echo=0' ),
 		esc_url( get_permalink( get_the_ID() ) ),
-		__( 'Read more', 'generatepress' )
+		__( 'Детальніше', 'generatepress' )
 	) );
 }
 endif;
@@ -251,7 +251,7 @@ function generate_content_more( $more ) {
 	return apply_filters( 'generate_content_more_link_output', sprintf( '<p class="read-more-container"><a title="%1$s" class="read-more content-read-more" href="%2$s">%3$s</a></p>',
 		the_title_attribute( 'echo=0' ),
 		esc_url( get_permalink( get_the_ID() ) . apply_filters( 'generate_more_jump','#more-' . get_the_ID() ) ),
-		__( 'Read more', 'generatepress' )
+		__( 'Детальніше', 'generatepress' )
 	) );
 }
 endif;
