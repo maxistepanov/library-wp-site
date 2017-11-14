@@ -688,6 +688,7 @@ AND (@Page * @PageSize)";
 }
 
 add_action( 'wp_ajax_wp_ajax_get_search_result', 'wp_ajax_get_search_result' );
+add_action( 'wp_ajax_nopriv_wp_ajax_get_search_result', 'wp_ajax_get_search_result' );
 /*
 
 */
@@ -728,6 +729,7 @@ if( $conn ) {
 }
 
 add_action( 'wp_ajax_wp_ajax_get_title', 'wp_ajax_get_title' );
+add_action( 'wp_ajax_nopriv_wp_ajax_get_title', 'wp_ajax_get_title' );
 
 // response with result
 	function wp_ajax_get_author() {
@@ -768,6 +770,7 @@ if( $conn ) {
 }
 
 add_action( 'wp_ajax_wp_ajax_get_author', 'wp_ajax_get_author' );
+add_action( 'wp_ajax_nopriv_wp_ajax_get_author', 'wp_ajax_get_author' );
 
 // response with result
 	function wp_ajax_save_udk_by_id() {
