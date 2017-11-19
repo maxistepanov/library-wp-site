@@ -630,7 +630,10 @@ jQuery(document).on('click', '.submit-search, .page-link',function(e){
 				success: function(response){
 				 
 				 var bookList = jQuery.parseJSON(response);
-				 var title = '<h2 id="start-result">Результати пошуку </h2> <h3> Результати 1 - '+ bookList.data.length +' від загального числа '+ 1 +'</h3>';
+				 var title = '';
+				 if (Array.isArray(bookList.data) && bookList.data.length){
+				 	title = '<h2 id="start-result">Результати пошуку </h2> <h3> Результати 1 - '+ bookList.data.length +' від загального числа '+ bookList.data[0].total_count +'</h3>';
+				 }
 				var fullList =title;
 				
 				for (var i = 0; i < bookList.data.length; i++) {

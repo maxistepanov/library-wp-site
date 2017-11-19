@@ -661,16 +661,17 @@ AND (@Page * @PageSize)";
 	$stmt = sqlsrv_query( $conn, $sql2 );
 
 	if( $stmt === false) {
-	    echo sqlsrv_errors();
-	    echo "error000000";
+	    echo [];
 	}
-	$res_arr_values = array();
-	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC)) {
-		array_push($res_arr_values, $row);
-	}
+	else {	
+		$res_arr_values = array();
+		while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC)) {
+			array_push($res_arr_values, $row);
+		}
 
-	$obj->data = $res_arr_values;
-	echo json_encode($obj);
+		$obj->data = $res_arr_values;
+		echo json_encode($obj);
+	}
 
 	
 		
