@@ -9,7 +9,7 @@ wp-content/upgrade/
 wp-content/uploads/
 wp-content/wp-cache-config.php
 wp-content/plugins/hello.php
-bdconnectionconfig.php
+wp-content/plugins/library-wp/bdconnectionconfig.php
 /.htaccess
 /license.txt
 /readme.html
