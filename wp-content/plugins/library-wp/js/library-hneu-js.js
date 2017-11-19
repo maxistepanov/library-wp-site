@@ -187,7 +187,7 @@ console.log(num);
 					 			
 									
 
-									 jQuery("#deleteQuestionForm").modal('hide');
+									 // jQuery("#deleteQuestionForm").modal('hide');
 									jQuery(".tg").html(response);
 									 
 
@@ -290,7 +290,7 @@ console.log(answear);
 					 			
 									
 
-									 jQuery("#editQuestionForm").modal('hide');
+									 // jQuery("#editQuestionForm").modal('hide');
 									/*window.location.reload(true);*/
 									jQuery(".tg").html(response);
 									 
@@ -386,7 +386,7 @@ console.log(num);
 					 			
 									
 
-									 jQuery("#deleteUdkForm").modal('hide');
+									 // jQuery("#deleteUdkForm").modal('hide');
 									jQuery(".tg").html(response);
 									 
 
@@ -437,7 +437,6 @@ var button = jQuery(this);
 						modal.find('#udk-notat').text(obj[0].notat);
 						modal.find('#udk-date').text(obj[0].date_udk);
 						modal.find('#udk-answear_udk').val(obj[0].answear_kod);
-						/*jQuery('#answer-text').val(obj[0].answer);*/
 						  jQuery("#editUdkForm").modal();
 						
 
@@ -470,7 +469,7 @@ console.log(answear);
 					jQuery("#cssload-pgloading").fadeOut(300);
 		 			
 					
-						 jQuery("#editUdkForm").modal('hide');
+						 jQuery("#editUdkForm").modal('toggle');
 						 /*inside ajax*/
 									 jQuery.ajax({
 							type: 'POST',
@@ -488,7 +487,7 @@ console.log(answear);
 					 			
 									
 
-									 jQuery("#editUdkForm").modal('hide');
+									 // jQuery("#editUdkForm").modal('hide');
 									/*window.location.reload(true);*/
 									jQuery(".tg").html(response);
 									 
@@ -677,19 +676,16 @@ var paggination = `
 
 					<nav aria-label="Page navigation example">
 					  <ul class="pagination">
-					    <li class="page-item "><a class="page-link" data-page="0" href="#">Попередня</a></li>
-					   
 					    `;
-					    var min = Math.max(+bookList.current_page - 5,1);
-					    var max = Math.min(+bookList.current_page + 8,100/ bookList.per_page);
+					    var min = Math.max(+bookList.current_page - 8,1);
+					    var max = Math.min(+bookList.current_page + 8,bookList.total/ bookList.per_page);
 					    console.log(min+" = =" + max);
-	for (var i = min; i < max; i++) {
+	for (var i = min; i <= Math.round(max); i++) {
 					paggination+= ` <li class="page-item"><a class="page-link" data-page="`+ (i) +`" href="#">`+ (i) +`</a></li>`;
 				}
 
 
 paggination+= `
-					    <li class="page-item"><a class="page-link" data-page="4" href="#">Наступна</a></li>
 					  </ul>
 					</nav>
 				`;

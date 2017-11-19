@@ -667,6 +667,7 @@ AND (@Page * @PageSize)";
 		$res_arr_values = array();
 		while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC)) {
 			array_push($res_arr_values, $row);
+			$obj->total = $row['total_count'];
 		}
 
 		$obj->data = $res_arr_values;
