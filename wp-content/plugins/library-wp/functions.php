@@ -488,8 +488,21 @@ add_action( 'wp_ajax_wp_ajax_reload_questions', 'wp_ajax_reload_questions' );
 
 // response with result
 	function wp_ajax_reload_udk() {
+		
+
+		$cur_page = 1;
+		$per_page = 10;
+		if (isset($_POST["page"]) && !empty($_POST["page"])) {
+			$cur_page = $_POST["page"]; }
+		if (isset($_POST["per_page"]) && !empty($_POST["per_page"])) {
+			$per_page = $_POST["per_page"]; }
+		
+		$start = ($cur_page - 1) * $per_page;
+
 		 	global $wpdb; 
-		$myrows = $wpdb->get_results( "SELECT * FROM library_udk LIMIT 0,5" );
+		$myrows = $wpdb->get_results( "SELECT * FROM library_udk LIMIT $start,$per_page" );
+		$count = $wpdb->get_results( "SELECT COUNT(*) as total FROM library_udk" );
+
 			echo '<table class="tg wp-list-table widefat fixed striped posts">';
 				
 			echo '<tr>';
@@ -519,32 +532,24 @@ add_action( 'wp_ajax_wp_ajax_reload_questions', 'wp_ajax_reload_questions' );
 				    echo "</tr> ";
 	    
 			}
-			 echo wp_ajax_get_pagintaion($start = 1, $end = 1);
+			 echo get_pagintaion($count[0]->total, $per_page,$cur_page);
 }
 
 add_action( 'wp_ajax_wp_ajax_reload_udk', 'wp_ajax_reload_udk' );
 
 
-function wp_ajax_get_pagintaion($start, $end){
+function get_pagintaion($count, $per_page, $current){
 
-		 return  '<nav aria-label="Page navigation example">
-  <ul class="pagination">
 
-    <li class="page-item">
- 		<a class="page-link btn-page-udk" href="1" data-page="1">1</a>
-    </li>
-    <li class="page-item">
- 		<a class="page-link btn-page-udk" href="2" data-page="2">2</a>
-    </li>
-    <li class="page-item">
- 		<a class="page-link btn-page-udk" href="3" data-page="3">3</a>
-    </li>
-
-  </ul>
-</nav>';
+		 $pages =  '<nav aria-label="Page navigation example">
+		  <ul class="pagination">';
+		 for ($i=1; $i <= ceil(intval($count)/$per_page); $i++) { 
+    		$pages.=	'<li class="page-item ' . ($current == $i ? 'active': '')  .'"><a class="page-link btn-page-udk-admin" href="1" data-page="' . $i . '">' . $i . '</a> </li>';
+		 }
+  return $pages .=' </ul></nav>';
 }
 
-add_action( 'wp_ajax_wp_ajax_get_pagintaion', 'wp_ajax_get_pagintaion');
+// add_action( 'wp_ajax_wp_ajax_get_pagintaion', 'wp_ajax_get_pagintaion');
 
 // response with result
 	function wp_ajax_delete_question_by_id() {
@@ -949,12 +954,7 @@ function lib_sublevel_page() {
 
   		';
 
-  		wp_ajax_reload_udk();
-  		
-
-
-
-
+  		wp_ajax_reload_udk();	
 
 }
 

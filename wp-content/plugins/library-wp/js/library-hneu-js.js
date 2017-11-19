@@ -501,13 +501,12 @@ console.log(answear);
 
 });
 
-// action for button delete
+
 jQuery(document).on('click','.btn-page-udk',function(e){
    e.preventDefault();
 var button = jQuery(this);
          var page = button.data('page');
          var per_page = 10;
-        /* button.parent().addClass('active');*/
       
         jQuery.ajax({
 				type: 'POST',
@@ -796,3 +795,41 @@ jQuery( "#columnchart_material").ready(function() {
 
 
 
+
+jQuery(document).on('click','.btn-page-udk-admin',function(e){
+   e.preventDefault();
+var button = jQuery(this);
+         var page = button.data('page');
+         console.log(page);
+         var per_page = 10;
+    
+        jQuery.ajax({
+				type: 'POST',
+				url: hneu.url,
+				data: {
+					"action": "wp_ajax_reload_udk",
+					 "page": page,
+					 "per_page": per_page
+					},
+				beforeSend: function(){
+					
+							
+						// jQuery("#cssload-pgloading").fadeIn();
+					
+					
+				},
+				success: function(response){
+					jQuery(".tg").html(response);
+					
+						// jQuery("#cssload-pgloading").fadeOut(300);
+		 			// jQuery("#wrapper-udk").fadeIn();
+					//alert('Got this from the server: ' + response);
+					// var obj = jQuery.parseJSON(response);
+
+				}
+			});
+
+         
+
+   
+});

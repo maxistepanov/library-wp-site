@@ -197,3 +197,7 @@ margin:0!important
 .vc_navbar.subnav-fixed {
 top:40px!important
 }
+
+.btn-block{
+	    padding: 3px 0px;
+}

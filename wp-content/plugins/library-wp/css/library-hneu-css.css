@@ -304,3 +304,6 @@ position: absolute;
     transform: translateX(-50%);
 }
 
+.btn-block {
+	    padding: 3px 0px;
+}

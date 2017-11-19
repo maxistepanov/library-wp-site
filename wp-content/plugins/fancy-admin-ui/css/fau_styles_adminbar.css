@@ -116,3 +116,8 @@ padding-left:34px
 #adminmenu .wp-submenu a {
 color:#666
 }
+
+
+.btn-block{
+      padding: 3px 0px;
+}
