@@ -875,7 +875,7 @@ function lib_sublevel_page() {
   		</div>
 <!-- delete modal -->
  			<div class="modal fade" id="deleteUdkForm" tabindex="-1"  aria-labelledby="deleteLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -909,7 +909,7 @@ function lib_sublevel_page() {
 
   <!-- edit udk modal -->
  			<div class="modal fade" id="editUdkForm" tabindex="-1"  aria-labelledby="deleteLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -938,7 +938,7 @@ function lib_sublevel_page() {
           </div>
           <div class="form-group">
             <label for="udk-answear_udk" class="control-label">Відповідь:</label>
-           <textarea name="" id="udk-answear_udk" cols="30" rows="10"></textarea>
+           <textarea name="" id="udk-answear_udk" cols="70" rows="15"></textarea>
           </div>
         </form>
       </div>
@@ -969,7 +969,7 @@ function lib_sublevel_page2() {
   		</div>
 <!-- delete modal -->
  			<div class="modal fade" id="deleteQuestionForm" tabindex="-1"  aria-labelledby="deleteLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -1001,7 +1001,7 @@ function lib_sublevel_page2() {
   <!-- end delete modal -->
 <!--  edit modal -->
 <div class="modal fade" id="editQuestionForm" tabindex="-1"  aria-labelledby="editLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -1019,7 +1019,7 @@ function lib_sublevel_page2() {
           </div>
           <div class="form-group">
             <label for="answear-text" class="control-label">Ответ:</label>
-           <textarea name="" id="answear-text" cols="30" rows="10"></textarea>
+           <textarea name="" id="answear-text" cols="70" rows="15"></textarea>
           </div>
         </form>
       </div>
