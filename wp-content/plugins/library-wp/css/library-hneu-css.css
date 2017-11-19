@@ -291,3 +291,16 @@ details{
     padding: 10px;
     background-color: #e4e5e6;
 }
+
+
+#wpbody-content{
+	position: relative;
+}
+
+.pagination{
+position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+

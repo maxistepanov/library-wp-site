@@ -102,6 +102,7 @@ padding:6px 4px 0 0
 #adminmenu .wp-submenu,
 #adminmenu .wp-has-current-submenu .wp-submenu {
 background:#FFF!important
+z-index: 1000;
 }
 
 #adminmenu li.wp-has-current-submenu a.wp-has-current-submenu {

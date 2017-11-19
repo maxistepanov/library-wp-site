@@ -448,7 +448,7 @@ add_action( 'wp_ajax_wp_ajax_get_udk_stat', 'wp_ajax_get_udk_stat' );
 // response with result
 	function wp_ajax_reload_questions() {
 		 	global $wpdb; 
-		$myrows = $wpdb->get_results( "SELECT * FROM library_question" );
+		$myrows = $wpdb->get_results( "SELECT * FROM library_question LIMIT 0,20" );
 			echo '<table class="tg wp-list-table widefat fixed striped posts">';
 			echo '<tr>';
 				echo '<th scope="col" style="text-align: center" id="title" class=" manage-column column-cb check-column sortable desc">№ </th>';
@@ -489,7 +489,7 @@ add_action( 'wp_ajax_wp_ajax_reload_questions', 'wp_ajax_reload_questions' );
 // response with result
 	function wp_ajax_reload_udk() {
 		 	global $wpdb; 
-		$myrows = $wpdb->get_results( "SELECT * FROM library_udk" );
+		$myrows = $wpdb->get_results( "SELECT * FROM library_udk LIMIT 0,5" );
 			echo '<table class="tg wp-list-table widefat fixed striped posts">';
 				
 			echo '<tr>';
@@ -517,15 +517,34 @@ add_action( 'wp_ajax_wp_ajax_reload_questions', 'wp_ajax_reload_questions' );
 								</div>
 				    	  </td>';
 				    echo "</tr> ";
+	    
 			}
-			
-			   
-			
-
-		wp_die(); 
+			 echo wp_ajax_get_pagintaion($start = 1, $end = 1);
 }
 
 add_action( 'wp_ajax_wp_ajax_reload_udk', 'wp_ajax_reload_udk' );
+
+
+function wp_ajax_get_pagintaion($start, $end){
+
+		 return  '<nav aria-label="Page navigation example">
+  <ul class="pagination">
+
+    <li class="page-item">
+ 		<a class="page-link btn-page-udk" href="1" data-page="1">1</a>
+    </li>
+    <li class="page-item">
+ 		<a class="page-link btn-page-udk" href="2" data-page="2">2</a>
+    </li>
+    <li class="page-item">
+ 		<a class="page-link btn-page-udk" href="3" data-page="3">3</a>
+    </li>
+
+  </ul>
+</nav>';
+}
+
+add_action( 'wp_ajax_wp_ajax_get_pagintaion', 'wp_ajax_get_pagintaion');
 
 // response with result
 	function wp_ajax_delete_question_by_id() {
@@ -927,8 +946,12 @@ function lib_sublevel_page() {
   </div>
   <!-- end edit udk modal -->
 		
+
   		';
-wp_ajax_reload_udk();
+
+  		wp_ajax_reload_udk();
+  		
+
 
 
 

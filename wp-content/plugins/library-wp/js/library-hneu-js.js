@@ -597,7 +597,7 @@ var button = jQuery(this);
 
 
 // success button save answer 
-jQuery(document).on('click', '.submit-search, .page-link',function(e){
+jQuery(document).on('click', '.submit-search, .search-page',function(e){
 		e.preventDefault();
 		 var dt =  jQuery("#search-form").serialize();
 		 console.log(dt);
@@ -631,7 +631,7 @@ jQuery(document).on('click', '.submit-search, .page-link',function(e){
 				 var bookList = jQuery.parseJSON(response);
 				 var title = '';
 				 if (Array.isArray(bookList.data) && bookList.data.length){
-				 	title = '<h2 id="start-result">Результати пошуку </h2> <h3> Результати 1 - '+ bookList.data.length +' від загального числа '+ bookList.data[0].total_count +'</h3>';
+				 	title = '<h2 id="start-result">Результати пошуку </h2> <h3> Результати ' + bookList.data[0]['row_id'] + ' - '+ bookList.data[bookList.data.length-1]['row_id'] +' від загального числа '+ bookList.data[0].total_count +'</h3>';
 				 }
 				var fullList =title;
 				
@@ -681,7 +681,9 @@ var paggination = `
 					    var max = Math.min(+bookList.current_page + 8,bookList.total/ bookList.per_page);
 					    console.log(min+" = =" + max);
 	for (var i = min; i <= Math.round(max); i++) {
-					paggination+= ` <li class="page-item"><a class="page-link" data-page="`+ (i) +`" href="#">`+ (i) +`</a></li>`;
+						var active = '';
+					paggination+= ` <li class="page-item `+ (i == +bookList.current_page ? 'active': '') +`"><a class="page-link search-page " data-page="`+ (i) +`" href="#">`+ (i) +`</a></li>`;
+					
 				}
 
 
