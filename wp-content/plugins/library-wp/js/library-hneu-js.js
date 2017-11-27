@@ -638,7 +638,8 @@ jQuery(document).on('click', '.submit-search, .search-page',function(e){
 				
 var item = `
 <div class="card">
-  <h3 class="card-header">`+ bookList.data[i]['row_id']+'. ' + bookList.data[i]['name'] +`</h3>
+  <h3 class="card-header">`+ bookList.data[i]['row_id']+'. ' +  bookList.data[i]['name'] +`</h3>
+
   <div class="card-block">
     <h4 class="card-title">`+ bookList.data[i]['author'] +`</h4>
     <p class="card-text">
@@ -653,7 +654,7 @@ var item = `
    if (bookList.data[i]['author_mark']) item+= ` Авторський знак: `+ bookList.data[i]['author_mark'];
    item+=`</p>`;
 	
-	item+= `<a href="#" class="btn btn-link">Докладно</a>`
+	item+= `<a href="/detail/?id=` + bookList.data[i]['doc_id'] + ` " target="blank" class="btn btn-link">Докладно</a>`;
    if (bookList.data[i]['long_filename']) 
    item+= `
    	<a href="`+ bookList.data[i]['long_filename'] +`" class="btn btn-primary">Електронна версія</a>`;
