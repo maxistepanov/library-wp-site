@@ -638,20 +638,24 @@ jQuery(document).on('click', '.submit-search, .search-page',function(e){
 				
 var item = `
 <div class="card">
-  <h3 class="card-header">`+ bookList.data[i]['row_id']+'. ' +  bookList.data[i]['name'] +`</h3>
+  <h3 class="card-header">`+ bookList.data[i]['row_id']+'. ' +  bookList.data[i]['author'] +`</h3>
 
   <div class="card-block">
-    <h4 class="card-title">`+ bookList.data[i]['author'] +`</h4>
+    <h4 class="card-title">`+ bookList.data[i]['name'] +`</h4>
     <p class="card-text">
 
     `
    if (bookList.data[i]['col009']) item+= `  `+ bookList.data[i]['col009'];    
-   if (bookList.data[i]['publisher']) item+= `  `+ bookList.data[i]['publisher'];    
-   if (bookList.data[i]['publ_year']) item+= `  `+ bookList.data[i]['publ_year'];    
+   if (bookList.data[i]['publisher']) item+= `  `+ bookList.data[i]['publisher'] + `,`;    
+   if (bookList.data[i]['publ_year']) item+= `  `+ bookList.data[i]['publ_year'] + `.–`;    
    if (bookList.data[i]['sizem']) item+= `  `+ bookList.data[i]['sizem'];
-   if (bookList.data[i]['col018']) item+= `  `+ bookList.data[i]['col018'];
    if (bookList.data[i]['cipher']) item+= ` Шифр: `+ bookList.data[i]['cipher'];
    if (bookList.data[i]['author_mark']) item+= ` Авторський знак: `+ bookList.data[i]['author_mark'];
+   // if (bookList.data[i]['col018']) item+= `  `+ bookList.data[i]['col018'];
+   // if (bookList.data[i]['isbn']) item+= ` ISBN: `+ bookList.data[i]['isbn'];
+   // if (bookList.data[i]['bbk']) item+= ` ББК: `+ bookList.data[i]['bbk'];
+   // if (bookList.data[i]['issn']) item+= ` ISSN: `+ bookList.data[i]['issn'];
+   // if (bookList.data[i]['publ_place']) item+= ` Місце видання: `+ bookList.data[i]['publ_place'];
    item+=`</p>`;
 	
 	item+= `<a href="/detail/?id=` + bookList.data[i]['doc_id'] + ` " target="blank" class="btn btn-link">Докладно</a>`;
@@ -659,7 +663,23 @@ var item = `
    item+= `
    	<a href="`+ bookList.data[i]['long_filename'] +`" class="btn btn-primary">Електронна версія</a>`;
    
+/*
+('doc_id')
+('doc_type')
+('author_mark')
+('author')
+('name')
+('publ_place')
+('publisher')
+('publ_year')
+('sizem')
+('isbn')
+('issn')
+('cipher')
+('device_kod')
+('long_filename')
 
+*/
 
    var end =  `
    
