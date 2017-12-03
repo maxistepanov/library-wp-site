@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+
+    <script src="source/standard.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" type="text/css" href="source/captivate.css" />
+    <title>Електронні підручники</title>
+</head>
+<body>
+    <div id="CaptivateContent">
+    </div>
+    <a href="#" onclick="show()">Ссылка</a> 
+    <a id="Lnk" href="books/1.swf" target="_blank" onClick="popupWin = window.open(this.href, 'contacts', 'location,width=800,height=600,top=0'); popupWin.focus(); return false;">Клик</a>
+
+  <!--
+    <script>
+var link = document.getElementById('Lnk')
+link.setAttribute("onclick","popupWin = window.open(this.href,'contacts','location,width=800,height=600,top=0'); popupWin.focus(); return false")
+    </script>
+-->
+    <!--
+	<script type="text/javascript">
+	   var so = new SWFObject("books/12.swf", "Captivate", "1056", "769", "11.0", "#CCCCCC");
+		so.addParam("quality", "high");
+		so.addParam("name", "Captivate");
+		so.addParam("id", "Captivate");
+		so.addParam("wmode", "window");
+		so.addParam("bgcolor","#ffffff");
+		so.addParam("menu", "false");
+		so.addParam("AllowScriptAccess","always");
+		so.addVariable("variable1", "value1");
+		so.setAttribute("redirectUrl", "http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash");
+		so.write("CaptivateContent");
+	</script>
+      
+
+	<script type="text/javascript">
+		document.getElementById('Captivate').focus();
+		document.Captivate.focus();
+	</script>
+	-->
+
+<!--
+    <script type="text/javascript">
+	
+	function show(){
+	var so = new SWFObject("books/1.swf", "Captivate", "1056", "769", "11.0", "#CCCCCC");
+		so.addParam("quality", "high");
+		so.addParam("name", "Captivate");
+		so.addParam("id", "Captivate");
+		so.addParam("wmode", "window");
+		so.addParam("bgcolor","#ffffff");
+		so.addParam("menu", "false");
+		so.addParam("AllowScriptAccess","always");
+		so.addVariable("variable1", "value1");
+		so.setAttribute("redirectUrl", "http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash");
+		so.write("CaptivateContent");
+		
+		document.getElementById('Captivate').focus();
+		document.Captivate.focus();
+	}
+	
+	
+    </script>
+    -->
+
+</body>
+</html>
