@@ -3,8 +3,9 @@ Contributors: libinvbabu
 Donate link: https://www.paypal.me/LibinVBabu/25
 Tags: login, customisation, admin, dashboard, customise, erident, custom login, form, logo, customize, branding, login customizer, CSS, admin login, white label, login background, custom login page
 Requires at least: 3.0.0
-Tested up to: 4.7.3
-Stable tag: 3.5.4
+Tested up to: 4.9
+Stable tag: 3.5.5
+Requires PHP: 5.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,7 +21,7 @@ TOP RATED PLUGIN for Login Page Customization!!! Customize completely your WordP
 * New*: Now supports opacity on login form background!
 * New*: Import/Export Settings feature available!
 
-Fastest support for the plugin. If you have any queries, 
+Fastest support for the plugin. If you have any queries,
 visit the WordPress [support forum](http://wordpress.org/support/plugin/erident-custom-login-and-dashboard).
 
 https://www.youtube.com/watch?v=Cou5UA2c_z8
@@ -131,6 +132,10 @@ You can achieve it by either using a transparent png/gif image or you can use th
 
 == Changelog ==
 
+= 3.5.5 (29 Nov 2017) =
+* Option to add Login button's text color
+* Removed conflicting css
+
 = 3.5.4 (9 Mar 2017) =
 * Fixed the function names which may conflict with other plugins
 
@@ -238,5 +243,5 @@ You can achieve it by either using a transparent png/gif image or you can use th
 
 == Upgrade Notice ==
 
-= 3.5.4 =
-Fixed the function names which may conflict with other plugins
+= 3.5.5 =
+Option to add Login button's text color and removed css conflicts.

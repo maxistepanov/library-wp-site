@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Erident Custom Login and Dashboard
-Plugin URI: http://www.eridenttech.com/wp-plugins/erident-custom-login-and-dashboard
+Plugin URI: http://www.libin.in/
 Description: Customize completely your WordPress Login Screen and Dashboard. Add your company logo to login screen, change background colors, styles, button color etc. Customize your Dashboard footer text also for complete branding.
 Text Domain: erident-custom-login-and-dashboard
 Domain Path: /languages
-Version: 3.5.4
+Version: 3.5.5
 Author: Libin V Babu
 Author URI: http://www.libin.in/
 License: GPL
@@ -47,6 +47,19 @@ function er_add_settings_link($links, $file) {
 	return $links;
 }
 add_filter('plugin_action_links', 'er_add_settings_link', 10, 2 );
+
+/* Add Support link to plugin */
+function er_add_support_link($links, $file) {
+	static $this_plugin;
+	if (!$this_plugin) $this_plugin = plugin_basename(__FILE__);
+
+	if ($file == $this_plugin){
+		$support_link = '<a href="https://wordpress.org/support/plugin/erident-custom-login-and-dashboard/" target="_blank">'.__("Support", "erident-custom-login-and-dashboard").'</a>';
+		array_unshift($links, $support_link);
+	}
+	return $links;
+}
+add_filter('plugin_action_links', 'er_add_support_link', 9, 2 );
 
 add_filter('admin_footer_text', 'left_admin_footer_text_output'); //left side
 function left_admin_footer_text_output($er_left) {
@@ -168,6 +181,7 @@ function er_login_logo() {
 		}
 		body.login #loginform p.submit .button-primary, body.wp-core-ui .button-primary {
 			background: <?php echo $er_options['dashboard_button_color'] ?> !important;
+      color: <?php echo isset($er_options['dashboard_button_text_color']) ? $er_options['dashboard_button_text_color'] : '#ffffff' ; ?> !important;
 			border: none !important;
             text-shadow: <?php echo $er_login_link_shadow ?>;
 		}
@@ -309,6 +323,7 @@ function wp_erident_dashboard_install() {
         'dashboard_check_backtoblog' => 'No',
         'dashboard_form_shadow' => '#C8C8C8',
         'dashboard_button_color' => '#5E5E5E',
+        'dashboard_button_text_color' => '#FFFFFF',
         'top_bg_color' => '#f9fad2',
         'top_bg_image' => plugins_url('images/top_bg.jpg', __FILE__),
         'top_bg_repeat' => 'repeat',
@@ -382,6 +397,7 @@ if( isset($_POST['er_update_settings']) ) {
 } ?>
 <?php /*Get all options from db */
 $er_options = get_option('plugin_erident_settings');
+
 
 ?>
 <div class="postbox">
@@ -820,6 +836,17 @@ value="<?php echo $er_options['login_bg_ypos']; ?>" />
     </td>
   </tr>
 
+  <!-- Login Button Text Color -->
+  <tr valign="top">
+    <th scope="row"><?php _e( 'Login Button Text Color', 'erident-custom-login-and-dashboard' ); ?></th>
+    <td>
+    <input class="er-textfield-small" type="text" id="wp_erident_dashboard_button_text_color" name="er_options_up[dashboard_button_text_color]" value="<?php echo isset($er_options['dashboard_button_text_color']) ? $er_options['dashboard_button_text_color'] : '#ffffff' ; ?>" />
+    <div id="ilctabscolorpicker10"></div>
+    <br />
+    <span class="description"><?php _e( 'Click the box to select a color.', 'erident-custom-login-and-dashboard' ); ?></span>
+    </td>
+  </tr>
+
   <!-- Lost Password -->
   <tr valign="top">
     <th scope="row"><?php _e( 'Hide Register | Lost your password link', 'erident-custom-login-and-dashboard' ); ?></th>
@@ -951,10 +978,11 @@ value="<?php echo $er_options['login_bg_ypos']; ?>" />
     <a href="https://www.paypal.me/LibinVBabu/25" class="button-primary" target="_blank">Donate Now</a>
 	</div>
   <div class="clearfix"></div>
-	<div class="er_notice">
+  <div class="er_notice">
 		<h3><?php _e( 'Hire Me', 'erident-custom-login-and-dashboard' ); ?></h3>
 		<p><?php _e( 'Hey, I\'m Libin, a professional Front End Engineer/WordPress Developer. You can hire me for freelancing projects.<br/><br/>Email me: <a href="mailto:libin@libin.in">libin@libin.in</a> <br/>Online Portfolio: <a href="http://www.libin.in" target="_blank">www.libin.in</a>', 'erident-custom-login-and-dashboard' ); ?></p>
-
+  </div>
+	<div class="er_notice2 orange">
 		<h3><?php _e( 'Translation Credits', 'erident-custom-login-and-dashboard'); ?></h3>
 		<ul>
 			<li><?php _e( 'Spanish by <a href="http://www.linkedin.com/in/adrifolio" target="_blank">Adriana De La Cuadra</a>', 'erident-custom-login-and-dashboard'); ?></li>
@@ -1016,6 +1044,11 @@ value="<?php echo $er_options['login_bg_ypos']; ?>" />
 	jQuery('#ilctabscolorpicker9').farbtastic("#wp_erident_dashboard_button_color");
     jQuery("#wp_erident_dashboard_button_color").click(function(){jQuery('#ilctabscolorpicker9').slideDown()});
 	jQuery("#wp_erident_dashboard_button_color").blur(function(){jQuery('#ilctabscolorpicker9').slideUp()});
+
+  jQuery('#ilctabscolorpicker10').hide();
+	jQuery('#ilctabscolorpicker10').farbtastic("#wp_erident_dashboard_button_text_color");
+    jQuery("#wp_erident_dashboard_button_text_color").click(function(){jQuery('#ilctabscolorpicker10').slideDown()});
+	jQuery("#wp_erident_dashboard_button_text_color").blur(function(){jQuery('#ilctabscolorpicker10').slideUp()});
 
 	jQuery( ".postbox .hndle" ).on( "mouseover", function() {
 		jQuery( this ).css( "cursor", "pointer" );
