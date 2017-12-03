@@ -46,6 +46,10 @@ color: #ffffff;
 	width: 100%;
 }
 
+.footer-widgets, .widget-area .widget {
+    padding: 30px 20px;
+}
+
 /*.main-navigation .main-nav ul li[class*="current-menu-"] > a {
     color: #FFFFFF;
     background-color: #0f31c3;
