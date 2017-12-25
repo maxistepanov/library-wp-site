@@ -677,7 +677,7 @@ if ($get_array['el_copy']!=null) $sql2.=$el_copy;
 if ($get_array['lang']!=0) $sql2.=$lang;
 if ($get_array['doctype']!=0) $sql2.=$doc_type;
 if ($get_array['discipline']!=0) $sql2.=$discipline;
-if ($get_array['theme_id']!=0) $sql2.=$theme;
+if ($get_array['theme_id']!=0 && $get_array['theme']) $sql2.=$theme;
 
 $sql2.= ")
 SELECT  *

@@ -206,6 +206,7 @@ if( $stmt === false) {
 <script>
 jQuery(document).ready(function(){
 
+
 	var options_title = {
 
   url: function(phrase) {
@@ -311,6 +312,11 @@ template: {
 	jQuery("#name").easyAutocomplete(options_title);
 	jQuery("#author").easyAutocomplete(options_author);
   jQuery("#theme").easyAutocomplete(options_theme);
+  jQuery("#theme").keydown(function() {
+  if (jQuery("#theme").val() == ''){
+    jQuery("#theme_id").val(0);
+  }
+});
 
 })
 </script>
