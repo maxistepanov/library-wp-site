@@ -91,6 +91,14 @@ if( $stmt === false) {
   </div>
  
  <div class="form-group">
+    <label for="theme" class=" control-label">Пошук темы</label>
+    <div class="">
+      <input type="text" class="form-control" id="theme" name="theme">
+      <input type="text" class="form-control" id="theme_id" style="display: none;" name="theme_id">
+    </div>
+  </div>
+
+ <div class="form-group">
     <label for="publish-year" class=" control-label">Рік видання</label>
     <div class="">
 	     <div class="form-inline">
@@ -263,8 +271,46 @@ template: {
   requestDelay: 10
 };
 
+  var options_theme = {
+
+  url: function(phrase) {
+    return hneu.url;
+  },
+
+  getValue: function(element) {
+    return element.name;
+  },
+  list: {
+    onSelectItemEvent: function() {
+      var value = jQuery("#theme").getSelectedItemData().card_id;
+            jQuery("#theme_id").val(value).trigger("change");
+
+    },
+    maxNumberOfElements: 10,
+    match: {
+      enabled: true
+    }
+  },
+  
+
+  ajaxSettings: {
+    method: "POST",
+    data: {
+      "action": "wp_ajax_get_theme",
+    }
+  },
+
+  preparePostData: function(data) {
+    data.phrase = jQuery("#theme").val();
+    return data;
+  },
+
+  requestDelay: 10
+};
+
 	jQuery("#name").easyAutocomplete(options_title);
 	jQuery("#author").easyAutocomplete(options_author);
+  jQuery("#theme").easyAutocomplete(options_theme);
 
 })
 </script>

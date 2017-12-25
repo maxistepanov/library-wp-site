@@ -612,6 +612,8 @@ jQuery(document).on('click', '.submit-search, .search-page',function(e){
 					"current_page": page,
 					},
 				beforeSend: function(){
+					jQuery('body').animate({ scrollTop: 1000 });
+
 					  jQuery('.search-result').html(`			Завантаження...
 					<div id="cssload-pgloading" style="display: block; position: relative; height: 132px; top: -90px;">
 	<div class="cssload-loadingwrap">
@@ -626,6 +628,7 @@ jQuery(document).on('click', '.submit-search, .search-page',function(e){
 					
 				},
 				success: function(response){
+					
 				 
 				 var bookList = jQuery.parseJSON(response);
 				 var title = '';

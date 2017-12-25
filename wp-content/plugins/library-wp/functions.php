@@ -670,12 +670,14 @@ $el_copy = " and  long_filename IS NOT NULL and long_filename !=''";
 $lang = " and lang_kod = '" . $get_array['lang'] . "'";
 $doc_type = " and doc_type  = '" . $get_array['doctype'] . "'"; 
 $discipline = " and '". $get_array['discipline'] ."' in (select dscp_id from [library].[dbo].[doc_dscp] where doc_id = document.doc_id)"; 
+$theme = " and '". $get_array['theme_id'] ."' in (select card_id from [library].[dbo].[ref_doc] where doc_id = document.doc_id)"; 
 
 if ($get_array['dateFrom']!=null) $sql2.=$date;
 if ($get_array['el_copy']!=null) $sql2.=$el_copy;
 if ($get_array['lang']!=0) $sql2.=$lang;
 if ($get_array['doctype']!=0) $sql2.=$doc_type;
 if ($get_array['discipline']!=0) $sql2.=$discipline;
+if ($get_array['theme_id']!=0) $sql2.=$theme;
 
 $sql2.= ")
 SELECT  *
@@ -797,6 +799,45 @@ if( $conn ) {
 
 add_action( 'wp_ajax_wp_ajax_get_author', 'wp_ajax_get_author' );
 add_action( 'wp_ajax_nopriv_wp_ajax_get_author', 'wp_ajax_get_author' );
+
+// response with result
+	function wp_ajax_get_theme() {
+		$dt = $_POST['phrase'];
+$conn = get_connection();
+
+if( $conn ) {
+    /* echo "Connection established.<br />";*/
+
+  $sql2 = "SELECT TOP 20 name, card_id
+  FROM [library].[dbo].[cards]
+  WHERE name like '%". $dt ."%' 
+  " ;
+
+
+
+  			
+	$stmt = sqlsrv_query( $conn, $sql2 );
+	if( $stmt === false) {
+	    echo sqlsrv_errors();
+	    echo " error ";
+	}
+	$res_arr_values = array();
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC)) {
+		array_push($res_arr_values, $row);
+	}
+	echo json_encode($res_arr_values);
+
+}else{
+     echo "Connection could not be established.<br />";
+     die( print_r( sqlsrv_errors(), true));
+     echo sqlsrv_errors();
+}
+	
+		wp_die(); 
+}
+
+add_action( 'wp_ajax_wp_ajax_get_theme', 'wp_ajax_get_theme' );
+add_action( 'wp_ajax_nopriv_wp_ajax_get_theme', 'wp_ajax_get_theme' );
 
 // response with result
 	function wp_ajax_save_udk_by_id() {

@@ -7,8 +7,8 @@ function get_connection()
 	
 
 //rds
-//$serverName = "library.ch5bf5k9ozoc.us-east-2.rds.amazonaws.com";
-//$connectionInfo = array( "Database"=>"library",'UID'=>'maxi', 'PWD'=>'novatel720', "CharacterSet" => "UTF-8");
+// $serverName = "library.ch5bf5k9ozoc.us-east-2.rds.amazonaws.com";
+// $connectionInfo = array( "Database"=>"library",'UID'=>'maxi', 'PWD'=>'novatel720', "CharacterSet" => "UTF-8");
 	
 	// live
  $serverName = "10.2.81.252";
