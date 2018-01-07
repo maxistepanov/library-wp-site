@@ -17,7 +17,11 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 get_header(); ?>
-
+ <style>
+   .btn-theme{
+    cursor: pointer;
+   }
+ </style>
 	<div id="primary" <?php generate_content_class();?>>
 		<main id="main" <?php generate_main_class(); ?>>
 			
@@ -50,7 +54,6 @@ get_header(); ?>
 
   $conn = get_connection();      
 
-
 if( $conn === false ) {
     die( print_r( sqlsrv_errors(), true));
 }
@@ -58,6 +61,14 @@ if( $conn === false ) {
 $sql = "SELECT code, name FROM doctype order by name	";
 $stmt = sqlsrv_query( $conn, $sql );
 $discipline = sqlsrv_query( $conn, "SELECT id, name from discipline order by name" );
+
+$theme_sql = "select distinct C.card_id, C.name 
+  from [library].[dbo].[cards] C, [library].[dbo].[master_cards] MC 
+  where MC.master_id = C.card_id and MC.group_kod in ( -1,11 )
+   order by name";
+  $theme = sqlsrv_query( $conn,$theme_sql); 
+
+
 if( $stmt === false) {
     die( print_r( sqlsrv_errors(), true) );
 }
@@ -96,6 +107,31 @@ if( $stmt === false) {
       <input type="text" class="form-control" id="theme" name="theme">
       <input type="text" class="form-control" id="theme_id" style="display: none;" name="theme_id">
     </div>
+  </div>
+
+   <div class="form-group">
+   
+  
+  
+
+  
+  <!-- // echo "<li> <span class=\"btn-theme\" data-children=\"{$row['card_id']}\">{$row['name']}</span></li>"; -->
+
+<ul>
+    <?php
+    $index = 0;
+     while( $row = sqlsrv_fetch_array( $theme, SQLSRV_FETCH_ASSOC) ) {
+      ?>
+    <li >
+      <span class="btn-theme" data-children="<?php echo $row['card_id']  ?>">
+        <?php echo $row['name'] ?>
+      </span></li>
+   
+  <?php
+  $index++;
+          }
+           ?>
+   </ul>      
   </div>
 
  <div class="form-group">
@@ -172,6 +208,8 @@ if( $stmt === false) {
 			</select>
 		</div>
 	</div>
+
+ 
 	   <div class="form-group">
     <label for="per_page" class=" control-label">Кількість результатів на сторінку</label>
     <div class="">
@@ -321,6 +359,50 @@ template: {
 })
 </script>
 <script>
+
+jQuery(document).on('click','.btn-theme',function(e){
+  e.preventDefault();
+var link = jQuery(this);
+link.css('font-weight','600');
+         var id = link.data('children');
+         // link.parent().append( "<p>Test</p>" );
+        // link.css('font-weight','800');
+        console.log(id);
+         if (link.parent().children().length == 2) {
+            link.parent().find('ul').remove();
+          return;
+
+        };
+        // if (link.parent().children().length > 0) return;
+        // link.parent.children().remove();
+        jQuery.ajax({
+        type: 'POST',
+        url: hneu.url,
+        data: {
+          "action": "wp_ajax_get_children",
+           "id": id,
+          },
+        beforeSend: function(){
+        },
+        success: function(response){
+
+ 
+          var obj = jQuery.parseJSON(response);
+          var ul = document.createElement("ul");
+            obj.forEach( function(element, index) {
+              // statements
+              var li =  document.createElement("li");
+               li.innerHTML = '<span class="btn-theme" data-children="' + element.card_id +'" > '+ element.name +'</span> ';
+              console.log(element, index);
+              ul.appendChild(li);
+            });
+
+              link.parent().append(ul);
+
+        }
+      });
+
+});
 	jQuery('#sandbox-container .input-daterange').datepicker({
     endDate: "today",
     format: 'yyyy',

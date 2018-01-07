@@ -1296,4 +1296,56 @@ add_filter( 'login_redirect', function( $url, $query, $user ) {
 	return '/';
 }, 10, 3 );
 
+
+
+
+
+/*
+query to get klass
+
+  
+  select distinct C.card_id, C.name 
+  from [library].[dbo].[cards] C, [library].[dbo].[master_cards] MC 
+  where MC.master_id = C.card_id and MC.group_kod in ( -1,11 )
+   order by name
+
+*/
+
+// response with result
+	function wp_ajax_get_children() {
+		$id = $_POST['id'];
+		
+$conn = get_connection();
+
+if( $conn ) {
+  $sql2 = "select C.card_id, C.name 
+   from [library].[dbo].[cards] C, [library].[dbo].[ref_card] ref_card
+    where C.card_id = ref_card.card_ref and ref_card.card_id = ". intval($id) . "
+     order by C.name
+  " ;
+
+	$stmt = sqlsrv_query( $conn, $sql2 );
+	if( $stmt === false) {
+	    echo sqlsrv_errors();
+	    echo "error";
+	}
+	$res_arr_values = array();
+	while ($row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC)) {
+		array_push($res_arr_values, $row);
+	}
+	echo json_encode($res_arr_values);
+
+}else{
+     echo "Connection could not be established.<br />";
+     die( print_r( sqlsrv_errors(), true));
+     echo sqlsrv_errors();
+}
+	
+		wp_die(); 
+}
+
+add_action( 'wp_ajax_wp_ajax_get_children', 'wp_ajax_get_children' );
+add_action( 'wp_ajax_nopriv_wp_ajax_get_children', 'wp_ajax_get_children' );
+
+
  ?>
