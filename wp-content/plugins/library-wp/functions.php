@@ -661,24 +661,52 @@ SELECT  @PageSize = ". $per_page .",
       ,[col018]
   FROM [library].[dbo].[document]
   INNER JOIN [library].[dbo].[docxfield_value] ON [library].[dbo].[document].[doc_id] = [library].[dbo].[docxfield_value].[doc_id]
-  WHERE author like '%". $get_array['author'] ."%' 
-  			and name like '%". $get_array['namedoc'] ."%'
+ 
+  			
   			" ;
   		/*  */
-$date = "and publ_year >= '". $get_array['dateFrom'] ."' and publ_year <= '". $get_array['dateTo'] ."'";
-$el_copy = " and  long_filename IS NOT NULL and long_filename !=''";
-$lang = " and lang_kod = '" . $get_array['lang'] . "'";
-$doc_type = " and doc_type  = '" . $get_array['doctype'] . "'"; 
-$discipline = " and '". $get_array['discipline'] ."' in (select dscp_id from [library].[dbo].[doc_dscp] where doc_id = document.doc_id)"; 
-$theme = " and '". $get_array['theme_id'] ."' in (select card_id from [library].[dbo].[ref_doc] where doc_id = document.doc_id)"; 
+$where = ' WHERE ';
+$author = "author like '%" . $get_array['author'] . "%' ";
+$name = " name like '%" . $get_array['namedoc'] ."%'";
+$dateFrom = " publ_year >= '". $get_array['dateFrom'] ."' and publ_year <= '". $get_array['dateTo'] ."'";
+$el_copy = "   long_filename IS NOT NULL and long_filename !=''";
+$lang = "  lang_kod = '" . $get_array['lang'] . "'";
+$doctype = " doc_type  = '" . $get_array['doctype'] . "'"; 
+$discipline =  "'".$get_array['discipline'] ."' in (select dscp_id from [library].[dbo].[doc_dscp] where doc_id = document.doc_id)"; 
+$theme =  "'" .$get_array['theme_id'] ."' in (select card_id from [library].[dbo].[ref_doc] where doc_id = document.doc_id)"; 
 
-if ($get_array['dateFrom']!=null) $sql2.=$date;
-if ($get_array['el_copy']!=null) $sql2.=$el_copy;
-if ($get_array['lang']!=0) $sql2.=$lang;
-if ($get_array['doctype']!=0) $sql2.=$doc_type;
-if ($get_array['discipline']!=0) $sql2.=$discipline;
-if ($get_array['theme_id']!=0 && $get_array['theme']) $sql2.=$theme;
 
+$fillable = [
+	'name' => 'name',
+	'author' => 'author',
+	'dateFrom' => 'dateFrom',
+	'el_copy' => 'el_copy',
+	'lang' => 'lang',
+	'doctype' => 'doctype',
+	'discipline' => 'discipline',
+	'theme_id' => 'theme'
+];
+
+$whereStatment = '';
+foreach ($fillable as $key => $value) {
+	if (isset($get_array[$key]) && $get_array[$key] ) 
+	{
+		if (!empty($whereStatment)) $whereStatment.= ' and ';
+		$whereStatment.= ${$value};
+	}
+}
+// var_dump($whereStatment);
+if (!empty($whereStatment)){
+	$sql2.= $where . $whereStatment;
+}
+// if ($get_array['name']) $sql2.=$name;
+// if ($get_array['author']) $sql2.=$author;
+// if ($get_array['dateFrom']!=null) $sql2.=$dateFrom;
+// if ($get_array['el_copy']!=null) $sql2.=$el_copy;
+// if ($get_array['lang']!=0) $sql2.=$lang;
+// if ($get_array['doctype']!=0) $sql2.=$doctype;
+// if ($get_array['discipline']!=0) $sql2.=$discipline;
+// if ($get_array['theme_id']!=0 && $get_array['theme']) $sql2.=$theme;
 $sql2.= ")
 SELECT  *
 FROM    PageNumbers
@@ -1263,4 +1291,8 @@ function str2url($str) {
  /*=== END ===*/
 add_filter('pre_site_transient_update_core',create_function('$a', "return null;"));
 wp_clear_scheduled_hook('wp_version_check');
+
+add_filter( 'login_redirect', function( $url, $query, $user ) {
+	return home_url();
+}, 10, 3 );
  ?>
