@@ -1295,4 +1295,5 @@ wp_clear_scheduled_hook('wp_version_check');
 add_filter( 'login_redirect', function( $url, $query, $user ) {
 	return home_url();
 }, 10, 3 );
+
  ?>
