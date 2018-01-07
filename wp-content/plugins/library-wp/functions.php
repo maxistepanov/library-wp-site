@@ -1293,7 +1293,7 @@ add_filter('pre_site_transient_update_core',create_function('$a', "return null;"
 wp_clear_scheduled_hook('wp_version_check');
 
 add_filter( 'login_redirect', function( $url, $query, $user ) {
-	return home_url();
+	return '/';
 }, 10, 3 );
 
  ?>
