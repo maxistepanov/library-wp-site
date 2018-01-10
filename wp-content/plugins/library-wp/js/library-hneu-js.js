@@ -75,15 +75,11 @@
 					},
 				beforeSend: function(){
 					jQuery("#wrapper-request-udk").fadeOut(300, function(){
-						jQuery("#cssload-pgloading").fadeIn();
-
-
 					});
 				},
 				success: function(data){
-					
-					jQuery("#cssload-pgloading").fadeOut(300, function(){
-						jQuery("#wrapper-request-answer").fadeIn();
+	
+					jQuery("#wrapper-request-answer").fadeIn();
 						jQuery("#wrapper-request-answer").html(`
 							<div class="alert alert-success alert-dismissible">
 							 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -98,8 +94,7 @@
 
 							`
 
-															)
-					});
+															);
 
 				}
 			});
@@ -528,7 +523,6 @@ var button = jQuery(this);
 		 			jQuery("#wrapper-udk").fadeIn();
 					//alert('Got this from the server: ' + response);
 					var obj = jQuery.parseJSON(response);
-					console.log(obj);
 					var	table = `
 						 <table class="tg table table-striped" style="undefined;table-layout: fixed; width: 100%">
 										 <colgroup>
@@ -570,7 +564,8 @@ var button = jQuery(this);
 					
 					$page_list+='<ul class="pagination">';
 					for( $i = 1; $i <= $num_pages; $i++) {
-  						$page_list+= '<li class="page-item"><a class="page-link btn-page-udk" href="'+ $i 	+'" data-page="' + $i +'">' + $i  +'</a></li> \n';
+						$active = (page == $i) ? 'active' : '';
+  						$page_list+= '<li class="page-item '+ $active +'"><a class="page-link btn-page-udk" href="'+ $i 	+'" data-page="' + $i +'">' + $i  +'</a></li> \n';
   					}
   					$page_list+='</ul>';
 					jQuery('.pagination-wrapper').html($page_list);

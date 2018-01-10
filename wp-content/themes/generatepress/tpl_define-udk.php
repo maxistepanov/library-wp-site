@@ -66,7 +66,7 @@ get_header(); ?>
 	<div class="other-way"></div>
 </div>
 <!-- loader -->
-<div id="cssload-pgloading">
+<div style="visibility: hidden;" id="cssload-pgloading">
 	<div class="cssload-loadingwrap">
 		<ul class="cssload-bokeh">
 			<li></li>
