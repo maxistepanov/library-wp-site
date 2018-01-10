@@ -370,6 +370,7 @@ console.log(num);
 							data: {
 								"action": "wp_ajax_reload_udk",
 								 "num":num,
+								 "page": window.page,
 								},
 							beforeSend: function(){
 								jQuery("#cssload-pgloading").fadeIn();
@@ -465,12 +466,14 @@ console.log(answear);
 					
 						 jQuery("#editUdkForm").modal('toggle');
 						 /*inside ajax*/
+						 console.log('save and reload');
 									 jQuery.ajax({
 							type: 'POST',
 							url: hneu.url,
 							data: {
 								"action": "wp_ajax_reload_udk",
-								 "num":num,
+					 			"page": window.page
+
 								},
 							beforeSend: function(){
 								// jQuery("#cssload-pgloading").fadeIn();
@@ -523,6 +526,7 @@ var button = jQuery(this);
 		 			jQuery("#wrapper-udk").fadeIn();
 					//alert('Got this from the server: ' + response);
 					var obj = jQuery.parseJSON(response);
+					console.log(obj);
 					var	table = `
 						 <table class="tg table table-striped" style="undefined;table-layout: fixed; width: 100%">
 										 <colgroup>
@@ -818,7 +822,12 @@ jQuery(document).on('click','.btn-page-udk-admin',function(e){
    e.preventDefault();
 var button = jQuery(this);
          var page = button.data('page');
+         params = jQuery.param({page: page});
          console.log(page);
+
+         window.page = page;
+         console.log(window.page);
+
          var per_page = 10;
     
         jQuery.ajax({
