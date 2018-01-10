@@ -16,4 +16,6 @@ wp-content/plugins/library-wp/bdconnectionconfig.php
 /sitemap.xml
 /sitemap.xml.gz
 /el_books
+wp-config.php
+/wp-config.php
 
