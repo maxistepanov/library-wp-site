@@ -170,7 +170,7 @@ function my_action_javascript($content) { ?>
 	function last_week_question() {
 		//access to the database
 		global $wpdb; 
-		$myrows = $wpdb->get_results( "SELECT * FROM library_question WHERE YEAR(`date_question`) = YEAR(NOW()) AND WEEK(`date_question`, 1) = WEEK(NOW(), 1)" );
+		$myrows = $wpdb->get_results( "SELECT * FROM library_question WHERE YEAR(`date_question`) = YEAR(NOW()) AND WEEK(`date_question`, 1) = WEEK(NOW(), 1) "  );
 		
 		/*$myrows = $wpdb->get_results( "SELECT * FROM library_question");*/
 		echo json_encode($myrows);
@@ -362,7 +362,7 @@ function action_get_udk($content) { ?>
 		$start = ($cur_page - 1) * $per_page;
 
 		global $wpdb; 
-		$myrows = $wpdb->get_results( "SELECT * FROM library_udk LIMIT $start, $per_page"  );
+		$myrows = $wpdb->get_results( "SELECT * FROM library_udk order by id desc LIMIT $start, $per_page "  );
 /*		echo json_encode($myrows);
 */		$count = $wpdb->get_results( "SELECT COUNT(library_udk.id) as count FROM library_udk" );
 /*		echo json_encode($count);
