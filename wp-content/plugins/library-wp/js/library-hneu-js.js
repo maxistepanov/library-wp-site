@@ -25,8 +25,8 @@
 					});
 				},
 				success: function(data){
-					jQuery("#cssload-pgloading").fadeOut(300, function(){
-						jQuery("#wrapper-request-form").fadeIn();
+					jQuery("#cssload-pgloading").fadeOut(300);
+					jQuery("#wrapper-request-form").fadeIn();
 						jQuery("#wrapper-request-form").html(`
 							<div class="alert alert-success alert-dismissible">
 							 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -42,7 +42,6 @@
 							`
 
 															)
-					});
 
 				}
 			});
@@ -479,11 +478,11 @@ console.log(answear);
 								 "num":num,
 								},
 							beforeSend: function(){
-								jQuery("#cssload-pgloading").fadeIn();
+								// jQuery("#cssload-pgloading").fadeIn();
 							
 							},
 							success: function(response){
-								jQuery("#cssload-pgloading").fadeOut(300);
+								// jQuery("#cssload-pgloading").fadeOut(300);
 					 			
 									
 
@@ -519,13 +518,13 @@ var button = jQuery(this);
 				beforeSend: function(){
 					
 							
-						jQuery("#cssload-pgloading").fadeIn();
+						// jQuery("#cssload-pgloading").fadeIn();
 					
 					
 				},
 				success: function(response){
 					
-						jQuery("#cssload-pgloading").fadeOut(300);
+						// jQuery("#cssload-pgloading").fadeOut(300);
 		 			jQuery("#wrapper-udk").fadeIn();
 					//alert('Got this from the server: ' + response);
 					var obj = jQuery.parseJSON(response);
