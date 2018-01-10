@@ -101,14 +101,6 @@ if( $stmt === false) {
     </div>
   </div>
  
- <div class="form-group">
-    <label for="theme" class=" control-label">Пошук темы</label>
-    <div class="">
-      <input type="text" class="form-control" id="theme" name="theme">
-      <input type="text" class="form-control" id="theme_id" style="display: none;" name="theme_id">
-    </div>
-  </div>
-
    <div class="form-group">
    
   
